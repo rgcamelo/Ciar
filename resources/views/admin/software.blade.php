@@ -26,19 +26,24 @@
                                     {!! csrf_field() !!}
                                 <div style="margin-bottom: 25px" class="input-group {{ $errors->has('titulo') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">Titulo</span>
-                                <input id="titulo" type="text" class="form-control" name="titulo" value="{{old('titulo')}}">                                   
+                                <input id="titulo" type="text" class="form-control" required name="titulo" value="{{old('titulo')}}">                                   
                                         </div>
                                 
+                                <div style="margin-bottom: 25px" class="input-group">
+                                            <span class="input-group-addon">Numero de Autores</span>
+                                <input id="noautores" type="number" class="form-control" requireds name="noautores" value="{{old('noautores')}}">
                                 
+                                        </div>
+
                                 <div style="margin-bottom: 25px" class="input-group">
                                             <span class="input-group-addon">Autores</span>
-                                <input id="autores" type="text" class="form-control" name="autores" value="{{old('autores')}}">
+                                <input id="autores" type="text" class="form-control" required name="autores" value="{{old('autores')}}">
                                 
                                         </div>
 
                                 <div style="margin-bottom: 25px" class="input-group">
                                             <span class="input-group-addon">Titulares del software</span>
-                                            <input id="titulares" type="text" class="form-control" name="titulares" value="{{old('titulares')}}">                                          
+                                            <input id="titulares" type="text" required class="form-control" name="titulares" value="{{old('titulares')}}">                                          
                                 </div>
                                 
                                 <div style="margin-bottom: 25px" class="input-group">

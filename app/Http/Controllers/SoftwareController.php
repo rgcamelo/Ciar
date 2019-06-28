@@ -8,6 +8,9 @@ use App\Soporte_Software;
 use App\Productividad;
 use Illuminate\Support\Facades\Auth;
 use App\Solicitud;
+//use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Redirect;
 
 class SoftwareController extends Controller
 {
@@ -23,12 +26,14 @@ class SoftwareController extends Controller
         //$data=request()->all();
         $data=request()->validate([
             'titulo' => 'required',
+            'noautores' => 'required',
             'autores' => 'required',
             'titulares' => 'required',
             'credito' => '',
             'impacto' => '', 
         ],[
             'titulo.required' => 'Titulo es un campo requerido',
+            'noautores.required' => 'No. Autores es un campo requerido', 
             'autores.required' => 'Autores es un campo requerido',
             'titulares.required' => 'Titulares es un campo requerido'
         ]);
@@ -47,6 +52,7 @@ class SoftwareController extends Controller
 
         $software=Software::create([
             'autores' => $data['autores'],
+            'noautores' => $data['noautores'],
             'titulares' => $data['titulares'],
             'creditoUpc' => $data['credito'],
             'impactanivelU' =>$data['impacto'],
@@ -108,7 +114,7 @@ class SoftwareController extends Controller
 
         $soporte = Software::all()->last();
         Soporte_Software::create([
-            'id_software' => $soporte->id,
+            'id_software' => $soporte->idsoftware,
             'instrucciones' => $namei,
             'manualusuario' => $namem,
             'ejecutable' => $namee,
@@ -125,19 +131,48 @@ class SoftwareController extends Controller
             'id_docente' => $d->id,
             'titulo' => $data['titulo'],
         ]); 
-        
+
+        if($data['noautores'] <= 3){
+            $pa=15;
+        }
+        elseif($data['noautores'] <= 5){
+            $pa=15/2;
+        }
+        else{
+            $pa=15/($data['noautores']/2);
+        }
+
+    
         $solicitud = Productividad::all()->last();
         Solicitud::create([
-            'productividad_id' => $solicitud->id,
+            'productividad_id' => $solicitud->idproductividad,
             'estado' => 'Enviado',
-            'puntos_aprox' => '15',
+            'puntos_aprox' => round($pa),
 
         ]);
-        
+
+        /*$data='Hola';
+        $pdf = PDF::loadView('pdf.formulariosoftware',compact('data'));
+        $pdf->stream('invoice.pdf');
+        */
         return redirect()->route('dashboard');
 
         //$data=request()->all();
         //dd($data);
         //return view('admin.prueba');
     }
+
+    public function pares(Solicitud $solicitud){
+        $e=([
+            'estado'=> 'Enviado a Pares'
+        ]);
+        $solicitud->update($e);
+        
+        //Crear notificacion
+        //dd($solicitud);
+        //$solicitud->estado='Enviado a Pares';
+        
+        return redirect()->route('revisarsolicitudes');
+    }
+
 }

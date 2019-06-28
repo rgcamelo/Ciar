@@ -12,10 +12,17 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $docente= Docente::find(1);
         User::create([
-            'id_docente' => $docente->id,
+            'id_docente' =>1,
+            'tipo' => 'Administrador',
             'email'=> 'rafaelguillermock@gmail.com',
+            'password'=> bcrypt('laravel'),
+        ]);
+
+        User::create([
+            'id_docente' =>2,
+            'tipo' => 'Docente',
+            'email'=> 'rafaelguillermo@gmail.com',
             'password'=> bcrypt('laravel'),
         ]);
     }

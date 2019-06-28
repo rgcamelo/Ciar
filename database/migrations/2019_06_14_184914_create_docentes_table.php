@@ -19,6 +19,8 @@ class CreateDocentesTable extends Migration
             $table->unsignedBigInteger('tipoidentificacion_id');
             $table->foreign('tipoidentificacion_id')->references('id')->on('tipo_identificacions');
             $table->string('Identificacion');
+            $table->unsignedBigInteger('dedicacion_id');
+            $table->foreign('dedicacion_id')->references('id')->on('dedicacions');
             $table->unsignedBigInteger('Departamento');
             $table->foreign('Departamento')->references('id')->on('departamentos');
             $table->unsignedBigInteger('grupoInvestigacion_id');

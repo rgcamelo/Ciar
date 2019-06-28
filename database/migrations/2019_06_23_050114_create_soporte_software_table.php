@@ -14,9 +14,9 @@ class CreateSoporteSoftwareTable extends Migration
     public function up()
     {
         Schema::create('soporte_software', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('idsoporte');
             $table->unsignedBigInteger('id_software');
-            $table->foreign('id_software')->references('id')->on('software');
+            $table->foreign('id_software')->references('idsoftware')->on('software');
             $table->string('instrucciones');
             $table->string('manualusuario');
             $table->string('ejecutable');

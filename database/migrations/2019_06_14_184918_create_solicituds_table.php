@@ -14,9 +14,9 @@ class CreateSolicitudsTable extends Migration
     public function up()
     {
         Schema::create('solicituds', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('idsolicitud');
             $table->unsignedBigInteger('productividad_id');
-            $table->foreign('productividad_id')->references('id')->on('productividads');
+            $table->foreign('productividad_id')->references('idproductividad')->on('productividads');
             $table->string('estado');
             $table->integer('puntos_aprox');
             $table->integer('puntos_asignados')->nullable();

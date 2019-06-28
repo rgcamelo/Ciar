@@ -17,6 +17,7 @@
                             <th>estado</th>
                             <th>puntos_aproximados</th>
                             <th>puntos_asignados</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,6 +27,8 @@
                                 <td>{{$sol->estado}}</td>
                                 <td>{{$sol->puntos_aprox}}</td>
                                 <td>{{$sol->puntos_asignados}}</td>
+                                <td><button class="btn btn-danger btn-sm">x</button>
+                                <button class="btn btn-warning btn-sm">R</button><br><br></td>
                             </tr>   
                         @endforeach
                                                 

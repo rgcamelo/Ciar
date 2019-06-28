@@ -18,8 +18,9 @@ Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-
+Route::post('enviarpares/{solicitud}', "SoftwareController@pares");
 Route::get('solicitudes','DashboardController@solicitudes')->name('solicitudes');
+Route::get('revisarsolicitudes','DashboardController@solicitudes2')->name('revisarsolicitudes');
 Route::get('productividad','DashboardController@productividades')->name('productividades');
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/Docente/{docente}',"DocenteController@consultar")->name('docente.consultar');

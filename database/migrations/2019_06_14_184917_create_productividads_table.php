@@ -14,7 +14,7 @@ class CreateProductividadsTable extends Migration
     public function up()
     {
         Schema::create('productividads', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('idproductividad');
             $table->unsignedBigInteger('id_docente');
             $table->foreign('id_docente')->references('id')->on('docentes');
             $table->string('titulo');

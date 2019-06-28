@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use Barryvdh\DomPDF\ServiceProvider;
 use App\Docente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Solicitud;
+use Dompdf\Dompdf;
 
 class DashboardController extends Controller
 {
@@ -19,20 +21,41 @@ class DashboardController extends Controller
 
     public function solicitudes(){
         $solicitudes = DB::table('solicituds')
-            ->join('productividads', 'solicituds.id', '=', 'productividads.id')
+            ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->select('solicituds.*', 'productividads.titulo')->where('productividads.id_docente','=',auth()->user()->docente()->id )
             ->get();
+
+    
         return view ('admin.missolicitudes',compact('solicitudes'));
+
+        
+        
     }
 
     public function productividades(){
         $productividades = DB::table('productividads')
-            ->join('solicituds', 'solicituds.id', '=', 'productividads.id')
-            ->join('software', 'software.id', '=', 'productividads.productividadable_id')
-            ->join('soporte_software', 'soporte_software.id_software','=','software.id')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('software', 'software.idsoftware', '=', 'productividads.productividadable_id')
+            ->join('soporte_software', 'soporte_software.id_software','=','software.idsoftware')
             ->select('productividads.*', 'software.*', 'soporte_software.*','solicituds.*')->where('productividads.id_docente','=',auth()->user()->docente()->id )
             ->get();
 
         return view ('admin.miproductividad',compact('productividades'));
+    }
+
+    public function solicitudes2(){
+        $productividades = DB::table('productividads')
+        ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+        ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+        ->join('software', 'software.idsoftware', '=', 'productividads.productividadable_id')
+        ->join('soporte_software', 'soporte_software.id_software','=','software.idsoftware')
+        ->select('productividads.*', 'software.*', 'soporte_software.*','solicituds.*','docentes.*')
+        ->get();
+
+        //dd($productividades);
+        
+        
+
+        return view ('admin.revisarsolicitudes',compact('productividades'));
     }
 }

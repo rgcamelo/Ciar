@@ -1,0 +1,27 @@
+.backGreen{
+    font-size: 9.0pt;
+    border:solid #9BBB59 1.0pt;
+    border-top:none;
+    border-left:none;
+    background:#E6EED5;
+    padding:0cm 5.4pt 0cm 5.4pt
+}
+
+.backTitle{
+    font-size: 9.0pt; 
+    border:solid #9BBB59 1.0pt;
+    border-left:none;
+    border-right: none;
+    background:rgb(255, 255, 255); 
+    padding:0cm 5.4pt 0cm 5.4pt
+}
+
+.backWhite{
+    font-size: 9.0pt; 
+    border:solid #9BBB59 1.0pt;
+    border-top:none;
+    border-left:none;
+    background:rgb(255, 255, 255); 
+    padding:0cm 5.4pt 0cm 5.4pt
+}
+

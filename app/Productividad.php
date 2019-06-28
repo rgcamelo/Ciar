@@ -14,4 +14,7 @@ class Productividad extends Model
     public function productividadable(){
         return $this->morphTo();
     }
+
+    
+    
 }

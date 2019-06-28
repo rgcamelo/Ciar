@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Software extends Model
 {
     protected $fillable = [
-        'titulo', 'autores', 'titulares', 'creditoUpc', 'impactanivelU','codigo'
+        'titulo', 'noautores', 'autores', 'titulares', 'creditoUpc', 'impactanivelU','codigo'
     ];
     
     public function productividad(){

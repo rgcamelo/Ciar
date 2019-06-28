@@ -14,7 +14,8 @@ class CreateSoftwareTable extends Migration
     public function up()
     {
         Schema::create('software', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('idsoftware');
+            $table->integer('noautores');
             $table->string('autores');
             $table->string('titulares');
             $table->string('resultadoPares')->nullable();

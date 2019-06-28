@@ -209,8 +209,7 @@
           <ul class="sidebar-menu" data-widget="tree">
             <li class="header">Menu</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="/Docente/1"><i class="fa fa-link"></i> <span>Registrar Productividad</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+            @if ( auth()->user()->tipo == 'Docente' )
             <li class="treeview">
               <a href=""><i class="fa fa-link"></i> <span>Registrar Productividad</span>
                 <span class="pull-right-container">
@@ -223,7 +222,12 @@
               </ul>
             </li>
             <li class="active"><a href="/solicitudes"><i class="fa fa-link"></i> <span>Mis Solicitudes</span></a></li>
-            <li class="active"><a href="/productividad"><i class="fa fa-link"></i> <span>Productividad</span></a></li>
+            <li class="active"><a href="/productividad"><i class="fa fa-link"></i> <span>Productividad</span></a></li>  
+            @endif
+            
+            @if ( auth()->user()->tipo == 'Administrador')
+            <li class="active"><a href="/revisarsolicitudes"><i class="fa fa-link"></i> <span>Solicitudes</span></a></li>
+            @endif
           </ul>
           <!-- /.sidebar-menu -->
         </section>

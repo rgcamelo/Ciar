@@ -42,7 +42,8 @@
                                             {{$p->instrucciones}}
                                      </div>
                                      <div class="col-md-3">
-                                            <button class="btn btn-warning btn-sm">v</button><br><br>
+                                            <button class="btn btn-warning btn-sm">v</button>
+                                            <button class="btn btn-success btn-sm">v</button><br><br>
                                         </div>
                                     </div> 
                                     <div class="row">
@@ -52,7 +53,8 @@
                                                 {{$p->manualusuario}}
                                             </div>
                                             <div class="col-md-3">
-                                                   <button class="btn btn-warning btn-sm">v</button><br><br>
+                                                   <button class="btn btn-warning btn-sm">v</button>
+                                                   <button class="btn btn-success btn-sm">v</button><br><br>
                                                </div>
                                            </div>  
                                            <div class="row">
@@ -62,7 +64,8 @@
                                          {{$p->ejecutable}}
                                      </div>
                                      <div class="col-md-3">
-                                            <button class="btn btn-warning btn-sm">v</button><br><br>
+                                            <button class="btn btn-warning btn-sm">v</button>
+                                            <button class="btn btn-success btn-sm">v</button><br><br>
                                         </div>
                                     </div>  
                                     <div class="row">
@@ -72,7 +75,8 @@
                                                 {{$p->certificado_software}}
                                             </div>
                                             <div class="col-md-3">
-                                                   <button class="btn btn-warning btn-sm">v</button><br><br>
+                                                   <button class="btn btn-warning btn-sm">v</button>
+                                                   <button class="btn btn-success btn-sm">v</button><br><br>
                                                </div>
                                            </div>  
                                            <div class="row">
@@ -82,7 +86,8 @@
                                          {{$p->CvLac}}
                                      </div>
                                      <div class="col-md-3">
-                                            <button class="btn btn-warning btn-sm">v</button><br><br>
+                                            <button class="btn btn-warning btn-sm">v</button>
+                                            <button class="btn btn-success btn-sm">v</button><br><br>
                                         </div>
                                     </div>  <div class="row">
                                      <div class="col-md-9">
@@ -91,7 +96,8 @@
                                          {{$p->GrupLac}}
                                      </div>
                                      <div class="col-md-3">
-                                            <button class="btn btn-warning btn-sm">v</button><br><br>
+                                            <button class="btn btn-warning btn-sm">v</button>
+                                            <button class="btn btn-success btn-sm">v</button><br><br>
                                         </div>
                                     </div>  
                                     <div class="row">
@@ -101,7 +107,8 @@
                                                 {{$p->Certificado_impacto}} 
                                             </div>
                                             <div class="col-md-3">
-                                                   <button class="btn btn-warning btn-sm">v</button><br><br>
+                                                   <button class="btn btn-warning btn-sm">v</button>
+                                                   <button class="btn btn-success btn-sm">v</button><br><br>
                                                </div>
                                            </div>  
                             </tr>   
