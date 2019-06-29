@@ -11,6 +11,8 @@ use App\Solicitud;
 //use Barryvdh\DomPDF\PDF;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\File;
 
 class SoftwareController extends Controller
 {
@@ -19,7 +21,7 @@ class SoftwareController extends Controller
     }
 
     public function crear(){
-
+       
         $idu=auth()->user()->id_docente;
         $d=Docente::find($idu);
         
@@ -40,13 +42,17 @@ class SoftwareController extends Controller
 
         //dd($data);
 
+        $folder = 'archivos/software/'.$d->NombreCompleto.'_'.$d->id.'_'.$data['titulo'].'_'.time();
+        $path = 'archivos/software/'.$folder.'/';
+        File::makeDirectory($folder);
         
+        //File::makeDirectory("/archivos/software/$folder");
 
         if(request()->hasFile('codigo'))
         {
             $filec = request()->file('codigo');
-            $namec= time()."_1".$filec->getClientOriginalName();
-            $filec->move('archivos/software',$namec); 
+            $namec= time()."_1".'CodigoFuente_'.$filec->getClientOriginalName();
+            $filec->move($folder,$namec); 
                        
         }
 
@@ -63,45 +69,45 @@ class SoftwareController extends Controller
         if(request()->hasFile('instrucciones'))
         {
             $filei = request()->file('instrucciones');
-            $namei= time()."_2".$filei->getClientOriginalName();
-            $filei->move('archivos/software',$namei);            
+            $namei= time()."_2".'Instrucciones_'.$filei->getClientOriginalName();
+            $filei->move($folder,$namei);            
         }
         if(request()->hasFile('manualusuario'))
         {
             $filem = request()->file('manualusuario');
-            $namem= time()."_3".$filem->getClientOriginalName();
-            $filem->move('archivos/software',$namem);            
+            $namem= time()."_3".'ManualUsuario_'.$filem->getClientOriginalName();
+            $filem->move($folder,$namem);            
         }
         if(request()->hasFile('ejecutable'))
         {
             $filee = request()->file('ejecutable');
-            $namee= time()."_4".$filee->getClientOriginalName();
-            $filee->move('archivos/software',$namee);            
+            $namee= time()."_4".'Ejecutable_'.$filee->getClientOriginalName();
+            $filee->move($folder,$namee);            
         }
         if(request()->hasFile('certisoft'))
         {
             $filecer = request()->file('certisoft');
-            $namecer= time()."_5".$filecer->getClientOriginalName();
-            $filecer->move('archivos/software',$namecer);            
+            $namecer= time()."_5Certificado de Software_".$filecer->getClientOriginalName();
+            $filecer->move($folder,$namecer);            
         }
         if(request()->hasFile('cvlac'))
         {
             $filecv = request()->file('cvlac');
-            $namecv= time()."_6".$filecv->getClientOriginalName();
-            $filecv->move('archivos/software',$namecv);            
+            $namecv= time()."_6CvLac_".$filecv->getClientOriginalName();
+            $filecv->move($folder,$namecv);            
         }
         if(request()->hasFile('gruplac'))
         {
             $filegru = request()->file('gruplac');
-            $namegru= time()."_7".$filegru->getClientOriginalName();
-            $filegru->move('archivos/software',$namegru);            
+            $namegru= time()."_7GrupLac_".$filegru->getClientOriginalName();
+            $filegru->move($folder,$namegru);            
         }
         $nameimp='';
         if(request()->hasFile('certimpacto'))
         {
             $fileimp = request()->file('certimpacto');
-            $nameimp= time()."_8".$fileimp->getClientOriginalName();
-            $fileimp->move('archivos/software',$nameimp);            
+            $nameimp= time()."_8Certificado de Impacto_".$fileimp->getClientOriginalName();
+            $fileimp->move($folder,$nameimp);            
         }
 
         /*Software::create([
@@ -172,6 +178,37 @@ class SoftwareController extends Controller
         //dd($solicitud);
         //$solicitud->estado='Enviado a Pares';
         
+        return redirect()->route('revisarsolicitudes');
+    }
+
+    public function calificarpares(Solicitud $solicitud, Software $software){
+        
+        $data=request()->validate([
+            'resultadoPares' => ''
+        ]);
+
+        $software->update($data);
+        $e=([
+            'estado'=> 'Calificado por Pares'
+        ]);
+        $solicitud->update($e);
+        
+        //Crear notificacion
+        return redirect()->route('revisarsolicitudes');
+    }
+
+    public function calificarsoftware(Solicitud $solicitud){
+        
+        $data=request()->validate([
+            'puntos_asignados' => ''
+        ]);
+        $e=([
+            'estado'=> 'Calificado',
+            'puntos_asignados' => $data['puntos_asignados'],
+        ]);
+        $solicitud->update($e);
+        
+        //Crear notificacion
         return redirect()->route('revisarsolicitudes');
     }
 

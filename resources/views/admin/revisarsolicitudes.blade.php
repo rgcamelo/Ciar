@@ -178,33 +178,98 @@
                                                   <!-- /.box -->   
                                     </td>      
                                     <td>
-                                        <!-- Button trigger modal -->
-<button type="button" class="btn btn-warning" style="width:150px" data-toggle="modal" data-target="#pares">
-  Enviar a Pares
-</button>
+                                        @if ($p->estado == 'Enviado')
+                                        <button type="button" class="btn btn-warning" style="width:150px" data-toggle="modal" data-target="#pares">
+                                                Enviar a Pares
+                                              </button>
+                                              
+                                              <!-- Modal -->
+                                              <div class="modal fade" id="pares" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h2 class="text-center">¿Esta seguro de enviar la productividad a revision de pares?</h2>
+                                                      
+                                                    </div>
+                                                    <div class="modal-footer" style="display: flex;justify-content:center">
+                                                    <form action="{{ url("enviarpares/{$p->idsolicitud}") }}" method="post">
+                                                              {!! csrf_field() !!}
+                                                              <button type="submit" class="btn btn-success ">Aceptar</button>
+                                                      </form>
+                                                      <button type="button" class="btn btn-danger"  data-dismiss="modal">Cancelar</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div><br><br>
+                                        @endif
 
-<!-- Modal -->
-<div class="modal fade" id="pares" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
-          <h2 class="text-center">¿Esta seguro de enviar la productividad a revision de pares?</h2>
-        
-      </div>
-      <div class="modal-footer" style="display: flex;justify-content:center">
-      <form action="{{ url("enviarpares/{$p->idsolicitud}") }}" method="post">
-                {!! csrf_field() !!}
-                <button type="submit" class="btn btn-success ">Aceptar</button>
-        </form>
-        <button type="button" class="btn btn-danger"  data-dismiss="modal">Cancelar</button>
-      </div>
-    </div>
-  </div>
-</div><br><br>
-                                        <button style="width:150px" class="btn btn-success">Calificar</button> <br><br>
+                                        @if ($p->estado == 'Enviado a Pares')
+                                        <button type="button" class="btn btn-warning" style="width:150px" data-toggle="modal" data-target="#pares">
+                                                Subir Evaluacion Pares
+                                              </button>
+                                              
+                                              <!-- Modal -->
+                                              <div class="modal fade" id="pares" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    </div>
+                                                    <div class="modal-body" style="display: flex;justify-content:center">
+                                                            <form action="{{ url('calificarpares',['solicitud' => $p->idsolicitud, 'software' => $p->idsoftware]) }}" method="post">
+                                                                {!! csrf_field() !!}
+                                                                <label style="font-size: 32px" for="">Puntaje Par: </label><input style="font-size: 16px" type="number" required max="{{$p->puntos_aprox}}" min="0"   name="resultadoPares">
+                                                                <div class="" style="display: flex;justify-content:center">
+                                                                        <input type="submit" class="btn btn-success " value="Aceptar">
+                                                                        <button type="button" class="btn btn-danger"  data-dismiss="modal">Cancelar</button>
+                                                                    </div>
+                                                                
+                                                        </form>
+                                                        
+                                                    </div>
+                                                    <div class="modal-footer" style="display: flex;justify-content:center">
+                                                    
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div><br><br>
+                                        @endif
+                                        <!-- Button trigger modal -->
+
+                                        @if ($p->estado == 'Calificado por Pares')
+                                        <button type="button" class="btn btn-success" style="width:150px" data-toggle="modal" data-target="#calificar">
+                                                Calificar
+                                              </button>
+                                              
+                                              <!-- Modal -->
+                                              <div class="modal fade" id="calificar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    </div>
+                                                    <div class="modal-body" style="display: flex;justify-content:center">
+                                                            <form action="{{ url('calificarsoftware',['solicitud' => $p->idsolicitud]) }}" method="post">
+                                                                {!! csrf_field() !!}
+                                                                <label style="font-size: 32px" for="">Puntaje Asignado: </label><input style="font-size: 16px" type="number" required max="{{$p->puntos_aprox}}" min="0"   name="puntos_asignados">
+                                                                <div class="" style="display: flex;justify-content:center">
+                                                                        <input type="submit" class="btn btn-success " value="Aceptar">
+                                                                        <button type="button" class="btn btn-danger"  data-dismiss="modal">Cancelar</button>
+                                                                    </div>
+                                                                
+                                                        </form>
+                                                        
+                                                    </div>
+                                                    <div class="modal-footer" style="display: flex;justify-content:center">
+                                                    
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div><br><br>
+                                        @endif
                                         <button style="width:150px" class="btn btn-primary">ver</button>
                                     </td> 
                             </tr>                              

@@ -19,6 +19,8 @@ Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::post('enviarpares/{solicitud}', "SoftwareController@pares");
+Route::post('calificarsoftware/{solicitud}', "SoftwareController@calificarsoftware");
+Route::post('calificarpares/{solicitud}/{software}', "SoftwareController@calificarpares");
 Route::get('solicitudes','DashboardController@solicitudes')->name('solicitudes');
 Route::get('revisarsolicitudes','DashboardController@solicitudes2')->name('revisarsolicitudes');
 Route::get('productividad','DashboardController@productividades')->name('productividades');
