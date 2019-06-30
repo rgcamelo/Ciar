@@ -33,12 +33,33 @@ class DashboardController extends Controller
     }
 
     public function productividades(){
-        $productividades = DB::table('productividads')
+        $productividades = collect();
+        $Software = DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('software', 'software.idsoftware', '=', 'productividads.productividadable_id')
             ->join('soporte_software', 'soporte_software.id_software','=','software.idsoftware')
-            ->select('productividads.*', 'software.*', 'soporte_software.*','solicituds.*')->where('productividads.id_docente','=',auth()->user()->docente()->id )
+            ->select('productividads.*', 'software.*', 'soporte_software.*','solicituds.*')->where('productividads.id_docente','=',auth()->user()->docente()->id )->where('productividads.productividadable_type','=','App\Software')
             ->get();
+        
+        $libros = DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('libros', 'libros.idlibro', '=', 'productividads.productividadable_id')
+            ->join('libro_soportes', 'libro_soportes.id_libro',"=", 'libros.idlibro')
+            ->select('productividads.*','solicituds.*','libros.*','libro_soportes.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Libro')
+            ->get();
+
+        //$=array($libros,$Software);
+        
+        foreach($libros as $l){
+            $productividades->push($l);
+        }
+
+        foreach($Software as $s){
+            $productividades->push($s);
+        }
+
+        $productividades=$productividades->sortByDesc('idsolicitud');
+        
 
         return view ('admin.miproductividad',compact('productividades'));
     }

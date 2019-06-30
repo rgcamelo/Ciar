@@ -90,8 +90,8 @@
                                                                            {{$p->codigo}}
                                                                     </div>
                                                                     <div class="col-md-3">
-                                                                       <a class="btn btn-warning btn-sm" href="archivos/software/{{$p->codigo}}" style="width:50px"><i class="fa fa-download"></i></a>
-                                                                       <a class="btn btn-primary btn-sm" href="#" onclick="window.open('archivos/software/{{$p->codigo}}')"  style="width:50px"><i class="fa fa-download"></i></a>
+                                                                       <!--<a class="btn btn-warning btn-sm" href="archivos/software/{{$p->codigo}}" style="width:50px"><i class="fa fa-download"></i></a>-->
+                                                                       <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->codigo}}')"  style="width:50px"><i class="fa fa-download"></i></a>
                                                                        </div>
                                                                    </div> 
                                                                    <br>
@@ -102,7 +102,7 @@
                                                                 {{$p->instrucciones}}
                                                          </div>
                                                          <div class="col-md-3">
-                                                            <a class="btn btn-warning btn-sm" href="archivos/software/{{$p->instrucciones}}"style="width:50px"><i class="fa fa-download"></i></a>
+                                                            <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->instrucciones}}')"  style="width:50px"><i class="fa fa-download"></i></a>
                                                             </div>
                                                         </div> 
                                                         <br>
@@ -113,7 +113,7 @@
                                                                     {{$p->manualusuario}}
                                                                 </div>
                                                                 <div class="col-md-3">
-                                                                    <a class="btn btn-warning btn-sm" href="archivos/software/{{$p->manualusuario}}"style="width:50px"><i class="fa fa-download"></i></a>
+                                                                    <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->manualusuario}}')"  style="width:50px"><i class="fa fa-download"></i></a>
                                                                    </div>
                                                                </div>  
                                                         <br>
@@ -124,7 +124,7 @@
                                                              {{$p->ejecutable}}
                                                          </div>
                                                          <div class="col-md-3">
-                                                            <a class="btn btn-warning btn-sm" href="archivos/software/{{$p->ejecutable}}"style="width:50px"><i class="fa fa-download"></i></a>
+                                                            <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->ejecutable}}')"  style="width:50px"><i class="fa fa-download"></i></a>
                                                             </div>
                                                         </div>  
                                                         <br>
@@ -135,7 +135,7 @@
                                                                     {{$p->certificado_software}}
                                                                 </div>
                                                                 <div class="col-md-3">
-                                                                    <a class="btn btn-warning btn-sm" href="archivos/software/{{$p->certificado_software}}"style="width:50px"><i class="fa fa-download"></i></a>
+                                                                    <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->certificado_software}}')"  style="width:50px"><i class="fa fa-download"></i></a>
                                                                    </div>
                                                                </div>  
                                                         <br>
@@ -146,7 +146,7 @@
                                                              {{$p->CvLac}}
                                                          </div>
                                                          <div class="col-md-3">
-                                                            <a class="btn btn-warning btn-sm" href="archivos/software/{{$p->CvLac}}"style="width:50px"><i class="fa fa-download"></i></a>
+                                                            <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->CvLac}}')"  style="width:50px"><i class="fa fa-download"></i></a>
                                                             </div>
                                                         </div> 
                                                         <br>
@@ -157,7 +157,7 @@
                                                              {{$p->GrupLac}}
                                                          </div>
                                                          <div class="col-md-3">
-                                                            <a class="btn btn-warning btn-sm" href="archivos/software/{{$p->GrupLac}}"style="width:50px"><i class="fa fa-download"></i></a>
+                                                            <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->GrupLac}}')"  style="width:50px"><i class="fa fa-download"></i></a>
                                                             </div>
                                                         </div>  
                                                         <br>
@@ -168,14 +168,21 @@
                                                                     {{$p->Certificado_impacto}} 
                                                                 </div>
                                                                 <div class="col-md-3">
-                                                                    <a class="btn btn-warning btn-sm" href="archivos/software/{{$p->Certificado_impacto}}"style="width:50px"><i class="fa fa-download"></i></a><br><br>
+                                                                    <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->Certificado_impacto}}')"  style="width:50px"><i class="fa fa-download"></i></a>
                                                                    </div>
                                                                </div>  
-                                                    </div>
-                                                    <!-- /.box-body -->
-                                                    <!-- box-footer -->
-                                                  </div>
-                                                  <!-- /.box -->   
+                                                    
+                                                    
+                                          </div>
+                                          <div class="">
+
+                                                      <form action="{{ url('descargarzip',[ 'ruta' => $p->idsoporte]) }}" method="post">
+                                                        {!! csrf_field() !!}
+                                                        <button type="submit" style="margin-top:4px;margin-bottom:4px" class="btn btn-success btn-block"><i class="fa fa-download"></i></button>
+                                                      </form>
+                                             
+                                            </div>
+                                          </div>    
                                     </td>      
                                     <td>
                                         @if ($p->estado == 'Enviado')
@@ -219,9 +226,10 @@
                                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                     </div>
                                                     <div class="modal-body" style="display: flex;justify-content:center">
-                                                            <form action="{{ url('calificarpares',['solicitud' => $p->idsolicitud, 'software' => $p->idsoftware]) }}" method="post">
+                                                            <form action="{{ url('calificarpares',['solicitud' => $p->idsolicitud, 'software' => $p->idsoftware]) }}" id="calipar" method="post">
                                                                 {!! csrf_field() !!}
                                                                 <label style="font-size: 32px" for="">Puntaje Par: </label><input style="font-size: 16px" type="number" required max="{{$p->puntos_aprox}}" min="0"   name="resultadoPares">
+                                                                
                                                                 <div class="" style="display: flex;justify-content:center">
                                                                         <input type="submit" class="btn btn-success " value="Aceptar">
                                                                         <button type="button" class="btn btn-danger"  data-dismiss="modal">Cancelar</button>

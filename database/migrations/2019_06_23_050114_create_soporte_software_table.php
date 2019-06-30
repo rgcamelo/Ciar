@@ -24,6 +24,7 @@ class CreateSoporteSoftwareTable extends Migration
             $table->string('CvLac');
             $table->string('GrupLac');
             $table->string('Certificado_impacto');
+            $table->string('Zip');
             $table->timestamps();
         });
     }

@@ -128,6 +128,7 @@ class SoftwareController extends Controller
             'CvLac' => $namecv,
             'GrupLac' => $namegru,
             'Certificado_impacto' => $nameimp,
+            'Zip' => $folder
         ]);
 
         $idu=auth()->user()->id_docente;
@@ -211,5 +212,7 @@ class SoftwareController extends Controller
         //Crear notificacion
         return redirect()->route('revisarsolicitudes');
     }
+
+    
 
 }

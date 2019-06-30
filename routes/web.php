@@ -18,6 +18,7 @@ Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::post('descargarzip/{ruta}','Descargar@comprimirDescargar')->name('comprimirDescargar');
 Route::post('enviarpares/{solicitud}', "SoftwareController@pares");
 Route::post('calificarsoftware/{solicitud}', "SoftwareController@calificarsoftware");
 Route::post('calificarpares/{solicitud}/{software}', "SoftwareController@calificarpares");
@@ -28,6 +29,9 @@ Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/Docente/{docente}',"DocenteController@consultar")->name('docente.consultar');
 Route::post('/Docente/{docente}/seleccionarproductividad',"ProductividadController@seleccionar")->name('productividad.seleccionar');
 Route::get('software',"SoftwareController@nuevo")->name('software.nuevo');
+Route::get('libro',"LibroController@nuevo")->name('libro.nuevo');
+
 Route::post('/software',"SoftwareController@crear");
+Route::post('/libro',"LibroController@crear");
 Route::get('/descargar/{archivo}',"Descargar@descarga");
 
