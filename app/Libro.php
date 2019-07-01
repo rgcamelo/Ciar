@@ -15,14 +15,15 @@ class Libro extends Model
         return $this->morphOne(Productividad::class,'productividadable');
     }
 
-    public function soportes($ej, $cli, $cvlac, $gruplac, $ce){
+    public function soportes($ej, $cli, $cvlac, $gruplac, $ce, $z){
         Libro_Soportes::create([
             'id_libro' => $this->idlibro,         
             'ejemplar' => $ej,
             'Cvlac_libro' => $cvlac,
             'Gruplac_libro' => $gruplac,
             'Certificadolibrodeinvestigacion' => $cli,
-            'Certificadoeditorial' => $ce
+            'Certificadoeditorial' => $ce,
+            'Zip_libro' => $z
         ]);
     }
 

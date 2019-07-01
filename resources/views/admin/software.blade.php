@@ -31,7 +31,7 @@
                                 
                                 <div style="margin-bottom: 25px" class="input-group">
                                             <span class="input-group-addon">Numero de Autores</span>
-                                <input id="noautores" type="number" class="form-control" requireds name="noautores" value="{{old('noautores')}}">
+                                <input id="noautores" type="number" class="form-control" requireds name="noautores" min="1" value="{{old('noautores')}}">
                                 
                                         </div>
 

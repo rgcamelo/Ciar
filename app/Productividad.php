@@ -15,15 +15,6 @@ class Productividad extends Model
         return $this->morphTo();
     }
 
-    public function Quesoy(){
-        switch($this->productividadable_type){
-            case 'App\Libro':
-            $libro = Libro::find($this->productividadable_id);
-            return $libro;
-            break;
-        }
-        
-    }
     
     
 }

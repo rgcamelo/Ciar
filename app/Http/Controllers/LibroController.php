@@ -82,7 +82,7 @@ class LibroController extends Controller
             $fileimp->move($folder,$certieditorial);            
         }
 
-        $libro->soportes($ejemplar,$certilibroinves, $cvlac,$gruplac,$certieditorial);
+        $libro->soportes($ejemplar,$certilibroinves, $cvlac,$gruplac,$certieditorial,$folder);
 
         $productividad=$libro->productividad()->create([
             'id_docente' => $d->id,

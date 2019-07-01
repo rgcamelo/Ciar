@@ -22,6 +22,7 @@ class CreateLibroSoportesTable extends Migration
             $table->string('Gruplac_libro');
             $table->string('Certificadolibrodeinvestigacion');
             $table->string('Certificadoeditorial');
+            $table->string('Zip_libro');
             $table->timestamps();
         });
     }

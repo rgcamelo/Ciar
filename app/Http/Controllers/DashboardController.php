@@ -60,7 +60,6 @@ class DashboardController extends Controller
 
         $productividades=$productividades->sortByDesc('idsolicitud');
         
-
         return view ('admin.miproductividad',compact('productividades'));
     }
 
