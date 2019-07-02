@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="\admintle\css\AdminLTE.min.css">
+    <title>Formateo Software</title>
 </head>
 <body>
         <link rel="stylesheet" href="admintle/css/estilos.css">
-        <table border="1" align="center" cellspacing="0" cellpadding="0" width="571" style="border:solid rgb(0, 0, 0) 1.0pt;
+        <div>
+        <table border="1" align="center" cellspacing="0" cellpadding="0" width="471" style="border:solid rgb(0, 0, 0) 1.0pt;
         border-top:none;background:rgb(255, 255, 255)">
             <tbody>
                 <tr>
                     <td width="89" rowspan="2">
-                        <p>
+                        <div>
                             <img
                                     width="68"
                                     height="66"
@@ -24,25 +24,25 @@
                                     alt="Descripción: NuevoLogoUPC"
                             />
                             <strong></strong>
-                        </p>
+                        </div>
                     </td>
-                    <td width="322">
-                        <p align="center" style="font-family: Candara;font-size: 15pt">
+                    <td width="222">
+                        <div align="center" style="font-family: Candara;font-size: 15pt">
                             <strong>UNIVERSIDAD POPULAR DEL CESAR</strong>
-                        </p>
+                        </div>
                     </td>
                     <td width="183" style="font-family: Arial;font-size: 9.0pt" >
-                        <p>
+                        <div>
                                 CODIGO: 304-201.1-PRO05-FOR20
-                        </p>
+                        </div>
                     </td>
                 </tr>
                 <tr>
-                    <td width="322"
-                        <p align="center" style="font-family: Candara;font-size: 11pt">
+                    <td width="222">
+                        <div align="center" style="font-family: Candara;font-size: 11pt">
                             FORMATO DE SOLICITUD DE EVALUACIÓN DE PRODUCTOS
                             ACADÉMICOS:<strong> SOFTWARE</strong>
-                        </p>
+                        </div>
                     </td>
                     <td width="183" style="font-family: Arial;font-size: 9.0pt">
                         <p>
@@ -52,8 +52,9 @@
                 </tr>
             </tbody>
         </table>
-        <center>
-        <div class="parrafo">
+    </div>
+       
+        <div style="justify-content:center; font-family:'Courier New', Courier, monospace" >
         <p>
             Mediante este documento radico ante el CIARP de la Universidad Popular del
             Cesar, solicitud de evaluación de la producción académica aquí relacionada,
@@ -62,13 +63,14 @@
             2004.
         </p>
         </div>
-        </center>
+       
+        <div>
         <table border="1" align="center" cellspacing="0" cellpadding="0" width="571" style="border:solid #9BBB59 1.0pt;
         border-top:none;background:rgb(248, 248, 248)">
             <tbody>
                 <tr>
                     <td width="571" colspan="13" valign="top" class="backTitle"
-                        <p align="center">
+                        <p align="center" valign="top">
                             <strong>INFORMACION GENERAL</strong>
                         </p>
                     </td>
@@ -248,8 +250,10 @@
                 </tr>
             </tbody>
         </table>
+        </div>
         <br>
         <br>
+        <div>
         <table align="center" border="1" cellspacing="0" cellpadding="0" width="571" style="border:solid #9BBB59 1.0pt;
         border-top:none;background:rgb(248, 248, 248)">
             <tbody>
@@ -364,6 +368,7 @@
                 </tr>
             </tbody>
         </table>
+        </div>
         <center>
         <div class="parrafo">
         <p>

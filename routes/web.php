@@ -19,19 +19,30 @@ Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::post('descargarzip/{ruta}','Descargar@comprimirDescargar')->name('comprimirDescargar');
+Route::post('descargarziparticulo/{ruta}','Descargar@comprimirDescargarArticulo')->name('comprimirDescargararticulo');
+
+
 Route::post('enviarpares/{solicitud}', "SoftwareController@pares");
 Route::post('calificarsoftware/{solicitud}', "SoftwareController@calificarsoftware");
 Route::post('calificarpares/{solicitud}/{software}', "SoftwareController@calificarpares");
+Route::post('reprobar/{solicitud}', "SolicitudController@reprobar");
+
+
+
 Route::get('solicitudes','DashboardController@solicitudes')->name('solicitudes');
 Route::get('revisarsolicitudes','DashboardController@solicitudes2')->name('revisarsolicitudes');
 Route::get('productividad','DashboardController@productividades')->name('productividades');
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/Docente/{docente}',"DocenteController@consultar")->name('docente.consultar');
 Route::post('/Docente/{docente}/seleccionarproductividad',"ProductividadController@seleccionar")->name('productividad.seleccionar');
+
 Route::get('software',"SoftwareController@nuevo")->name('software.nuevo');
 Route::get('libro',"LibroController@nuevo")->name('libro.nuevo');
+Route::get('articulo',"ArticuloController@nuevo")->name('articulo.nuevo');
 
+Route::post('/articulo',"ArticuloController@crear");
 Route::post('/software',"SoftwareController@crear");
 Route::post('/libro',"LibroController@crear");
+
 Route::get('/descargar/{archivo}',"Descargar@descarga");
 

@@ -24,7 +24,8 @@ class SoftwareController extends Controller
        
         $idu=auth()->user()->id_docente;
         $d=Docente::find($idu);
-        
+        //$pdf = PDF::loadView('pdf.formulariosoftware');
+        //return $pdf->stream('invoice.pdf');
         //$data=request()->all();
         $data=request()->validate([
             'titulo' => 'required',
@@ -158,10 +159,8 @@ class SoftwareController extends Controller
 
         ]);
 
-        /*$data='Hola';
-        $pdf = PDF::loadView('pdf.formulariosoftware',compact('data'));
-        $pdf->stream('invoice.pdf');
-        */
+        
+        
         return redirect()->route('dashboard');
 
         //$data=request()->all();

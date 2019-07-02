@@ -219,6 +219,7 @@
               <ul class="treeview-menu">
                 <li><a href="/software">Software</a></li>
                 <li><a href="/libro">Libros</a></li>
+                <li><a href="/articulo">Articulo</a></li>
                 <li><a href="#">Link in level 2</a></li>
               </ul>
             </li>

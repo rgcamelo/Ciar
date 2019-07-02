@@ -7,7 +7,8 @@
                     $('#tabla').DataTable( {
                         "paging":   true,
                         "ordering": true,
-                        "info":     true
+                        "info":     true,
+                        order: [[0, 'desc']]
                     } );
                 } );</script>
             <table id="tabla" class='display table table-stripper'style="width:90%">
@@ -15,7 +16,7 @@
                         <tr>
                             <th>Titulo</th>
                             <th>Estado</th>
-                            <th>Soportes</th>
+                            <th style="width:500px">Soportes</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -102,7 +103,80 @@
                                 </td>
                         </tr>
                             @break
-                            @case('App\Software')
+                            @case('App\Articulo')
+                            <tr>
+                                    <td>{{$p->titulo}}</td>
+                                    <td>{{$p->estado}}</td>
+                                    <td >
+                                        <div class="box box-default box-solid collapsed-box" >
+                                            <div class="box-header with-border">
+                                                    <h3 class="box-title">Soportes</h3>
+                                                <br>
+                                              <div class="box-tools pull-right">
+                                                <!-- Collapse Button -->
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                  <i class="fa fa-plus"></i>
+                                                </button>
+                                              </div>
+                                              <!-- /.box-tools -->
+                                            </div>
+                                            <!-- /.box-header -->
+                                            <div class="box-body" style="display:none">
+                                                    <div class="row">
+                                                            <div class="col-md-9">
+                                                                <strong>Ejemplar:</strong>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                               <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip_articulo}}/{{$p->ejemplar_articulo}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                               </div>
+                                                           </div> 
+                                                           <br>
+                                                 <div class="row">
+                                                 <div class="col-md-9">
+                                                     <strong>Cvlac:</strong>
+                                                 </div>
+                                                 <div class="col-md-3">
+                                                    <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip_articulo}}/{{$p->Cvlac_articulo}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                    </div>
+                                                </div> 
+                                                <br>
+                                                <div class="row">
+                                                        <div class="col-md-9">
+                                                            <strong>Gruplac:</strong>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip_articulo}}/{{$p->Gruplac_articulo}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                           </div>
+                                                       </div>  
+                                                <br>
+                                                       <div class="row">
+                                                 <div class="col-md-9">
+                                                     <strong>Evidencia de la indexacion de la Revista:</strong>
+                                                 </div>
+                                                 <div class="col-md-3">
+                                                    <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip_articulo}}/{{$p->Evidenciarevista}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                    </div>
+                                                </div>  
+                                                                                        
+                                            
+                                  </div>
+                                  <div class="">
+        
+                                              <form action="{{ url('descargarziparticulo',[ 'ruta' => $p->idsoportearticulo]) }}" method="post">
+                                                {!! csrf_field() !!}
+                                                <button type="submit" style="margin-top:4px;margin-bottom:4px" class="btn btn-success btn-block"><i class="fa fa-download"></i></button>
+                                              </form>
+                                     
+                                    </div>
+                                    </div>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary">Modificar</button>
+                                    </td>
+                                </tr>
+                            
+                                @break
+                                @case('App\Software')
                             <tr>
                                     <td>{{$p->titulo}}</td>
                                     <td>{{$p->estado}}</td>

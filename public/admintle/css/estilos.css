@@ -1,5 +1,6 @@
 .backGreen{
     font-size: 9.0pt;
+    font-family: Arial;
     border:solid #9BBB59 1.0pt;
     border-top:none;
     border-left:none;
@@ -7,8 +8,15 @@
     padding:0cm 5.4pt 0cm 5.4pt
 }
 
+.parrafo{
+
+    font-size: 10.0pt;
+    text-align:  justify;
+}
+
 .backTitle{
     font-size: 9.0pt; 
+    font-family: Candara;
     border:solid #9BBB59 1.0pt;
     border-left:none;
     border-right: none;
@@ -18,6 +26,7 @@
 
 .backWhite{
     font-size: 9.0pt; 
+    font-family: Candara;
     border:solid #9BBB59 1.0pt;
     border-top:none;
     border-left:none;
