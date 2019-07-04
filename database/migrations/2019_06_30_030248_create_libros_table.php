@@ -21,6 +21,7 @@ class CreateLibrosTable extends Migration
             $table->string('isbn');
             $table->string('idioma');
             $table->string('noautores');
+            $table->string('resultadoPares')->nullable();
             $table->string('creditoUpc_libro');
             $table->timestamps();
         });

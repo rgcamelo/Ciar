@@ -22,9 +22,10 @@ Route::post('descargarzip/{ruta}','Descargar@comprimirDescargar')->name('comprim
 Route::post('descargarziparticulo/{ruta}','Descargar@comprimirDescargarArticulo')->name('comprimirDescargararticulo');
 
 
-Route::post('enviarpares/{solicitud}', "SoftwareController@pares");
-Route::post('calificarsoftware/{solicitud}', "SoftwareController@calificarsoftware");
-Route::post('calificarpares/{solicitud}/{software}', "SoftwareController@calificarpares");
+Route::post('enviarpares/{solicitud}', "SolicitudController@pares");
+Route::post('calificar/{solicitud}', "SolicitudController@calificar");
+Route::post('calificarparessoft/{solicitud}/{software}', "SolicitudController@calificarparessoft");
+Route::post('calificarpareslibro/{solicitud}/{libro}', "SolicitudController@calificarpareslibro");
 Route::post('reprobar/{solicitud}', "SolicitudController@reprobar");
 
 

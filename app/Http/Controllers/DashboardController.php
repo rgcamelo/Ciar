@@ -81,7 +81,7 @@ class DashboardController extends Controller
         ->join('docentes', 'docentes.id', '=','productividads.id_docente')
         ->join('software', 'software.idsoftware', '=', 'productividads.productividadable_id')
         ->join('soporte_software', 'soporte_software.id_software','=','software.idsoftware')
-        ->select('productividads.*', 'software.*', 'soporte_software.*','solicituds.*','docentes.*')
+        ->select('productividads.*', 'software.*', 'soporte_software.*','solicituds.*','docentes.*')->where('productividads.productividadable_type','=','App\Software')
         ->get();
 
         $libros = DB::table('productividads')
@@ -89,7 +89,7 @@ class DashboardController extends Controller
             ->join('docentes', 'docentes.id', '=','productividads.id_docente')
             ->join('libros', 'libros.idlibro', '=', 'productividads.productividadable_id')
             ->join('libro_soportes', 'libro_soportes.id_libro',"=", 'libros.idlibro')
-            ->select('productividads.*','solicituds.*','libros.*','libro_soportes.*','docentes.*')
+            ->select('productividads.*','solicituds.*','libros.*','libro_soportes.*','docentes.*')->where('productividads.productividadable_type','=','App\Libro')
             ->get();
 
         $Articulos = DB::table('productividads')
@@ -97,7 +97,7 @@ class DashboardController extends Controller
             ->join('docentes', 'docentes.id', '=','productividads.id_docente')
             ->join('articulos', 'articulos.id_articulo', '=', 'productividads.productividadable_id')
             ->join('articulo_soportes', 'articulo_soportes.idarticulo',"=", 'articulos.id_articulo')
-            ->select('productividads.*','solicituds.*','articulos.*','articulo_soportes.*','docentes.*')
+            ->select('productividads.*','solicituds.*','articulos.*','articulo_soportes.*','docentes.*')->where('productividads.productividadable_type','=','App\Articulo')
             ->get();
         //$=array($libros,$Software);
         

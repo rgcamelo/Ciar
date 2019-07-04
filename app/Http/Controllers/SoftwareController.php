@@ -200,11 +200,13 @@ class SoftwareController extends Controller
     public function calificarsoftware(Solicitud $solicitud){
         
         $data=request()->validate([
-            'puntos_asignados' => ''
+            'puntos_asignados' => '',
+            'comentario' => ''
         ]);
         $e=([
             'estado'=> 'Calificado',
             'puntos_asignados' => $data['puntos_asignados'],
+            'observaciones' => $data['comentario']
         ]);
         $solicitud->update($e);
         

@@ -8,7 +8,7 @@ class Libro extends Model
 {
     protected $primaryKey = 'idlibro';
     protected $fillable=[
-        'idlibro','fecha_publicacion','tipo_libro','editorial','isbn','idioma','noautores','creditoUpc_libro'
+        'idlibro','fecha_publicacion','tipo_libro','resultadoPares','editorial','isbn','idioma','noautores','creditoUpc_libro'
     ];
 
     public function productividad(){

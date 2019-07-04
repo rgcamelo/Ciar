@@ -7,31 +7,36 @@
     <title>Formateo Software</title>
 </head>
 <body>
-        <link rel="stylesheet" href="admintle/css/estilos.css">
+    
+        <link rel="stylesheet" href="admintle\css\estilos.css">
+        <style>
+            @font-face {
+                font-family: candara;
+                src: url("{{ asset('fuentes/CANDARA.ttf') }}");
+                font-weight: normal;
+            }
+        </style>
         <div>
-        <table border="1" align="center" cellspacing="0" cellpadding="0" width="471" style="border:solid rgb(0, 0, 0) 1.0pt;
+        <table border="1" align="center" cellspacing="0" cellpadding="0" width="500" style="border:solid rgb(0, 0, 0) 1.0pt;
         border-top:none;background:rgb(255, 255, 255)">
             <tbody>
                 <tr>
-                    <td width="89" rowspan="2">
+                    <td rowspan="2" width="60" height="70">
                         <div>
                             <img
-                                    width="68"
-                                    height="66"
+                                    width="60"
+                                    height="60"
+                                    class="imagen"
                                     src="admintle/img/upc.png"
-                                    align="left"
-                                    hspace="12"
                                     alt="Descripción: NuevoLogoUPC"
                             />
                             <strong></strong>
                         </div>
                     </td>
-                    <td width="222">
-                        <div align="center" style="font-family: Candara;font-size: 15pt">
+                    <td  style="font-family:candara; text-align:center;font-size: 13pt">
                             <strong>UNIVERSIDAD POPULAR DEL CESAR</strong>
-                        </div>
                     </td>
-                    <td width="183" style="font-family: Arial;font-size: 9.0pt" >
+                    <td style="font-family: Arial;font-size: 9.0pt" >
                         <div>
                                 CODIGO: 304-201.1-PRO05-FOR20
                         </div>
@@ -44,7 +49,7 @@
                             ACADÉMICOS:<strong> SOFTWARE</strong>
                         </div>
                     </td>
-                    <td width="183" style="font-family: Arial;font-size: 9.0pt">
+                    <td width="83" style="font-family: Arial;font-size: 9.0pt">
                         <p>
                                 VERSIÓN: 1
                         </p>
@@ -52,9 +57,9 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-       
-        <div style="justify-content:center; font-family:'Courier New', Courier, monospace" >
+    </div>  
+
+        <div class="parrafo" >
         <p>
             Mediante este documento radico ante el CIARP de la Universidad Popular del
             Cesar, solicitud de evaluación de la producción académica aquí relacionada,
@@ -63,304 +68,209 @@
             2004.
         </p>
         </div>
-       
+        
         <div>
-        <table border="1" align="center" cellspacing="0" cellpadding="0" width="571" style="border:solid #9BBB59 1.0pt;
+        <table border="1" align="center" cellspacing="0" cellpadding="0" width="500" style="border:solid #9BBB59 1.0pt;
         border-top:none;background:rgb(248, 248, 248)">
             <tbody>
                 <tr>
-                    <td width="571" colspan="13" valign="top" class="backTitle"
-                        <p align="center" valign="top">
+                    <td  colspan="14"  class="backTitle">
                             <strong>INFORMACION GENERAL</strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="220" valign="top"  class="backGreen"
-                        <p>
+                    <td  valign="top"  class="backGreen">
                             <strong>FECHA DE SOLICITUD</strong>
-                        </p>
                     </td>
-                    <td width="451" colspan="12" valign="top" class="backGreen">
-                        <p>
+                    <td  colspan="13" valign="top" class="backGreen">
+
                             <strong></strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="220" valign="top" class="backWhite"
-                        <p>
+                    <td  valign="top" class="backWhite">
+
                             <strong>NOMBRE COMPLETO DEL DOCENTE</strong>
-                        </p>
                     </td>
-                    <td width="451" colspan="12" valign="top" class="backWhite">
-                        <p>
+                    <td  colspan="13" valign="top" class="backWhite">
+                    
                             <strong></strong>
-                        </p>
+                      
                     </td>
                 </tr>
                 <tr>
-                    <td width="220" valign="top" class="backGreen"
-                        <p>
+                    <td valign="top" class="backGreen">
                             <strong>DEDICACIÓN</strong>
-                        </p>
                     </td>
-                    <td width="127" colspan="6" valign="top" class="backGreen"
-                        <p>
+                    <td colspan="5" valign="top" class="backGreen">
                             <strong>TIEMPO COMPLETO</strong>
-                        </p>
                     </td>
-                    <td width="102" colspan="1" valign="top" class="backGreen">
-                        <p>
+                    <td colspan="3" valign="top" class="backGreen">
                             <strong></strong>
-                        </p>
                     </td>
-                    <td width="97" colspan="4" valign="top" class="backGreen"
-                        <p>
+                    <td colspan="2" valign="top" class="backGreen">
                             <strong>MEDIO TIEMPO</strong>
-                        </p>
                     </td>
-                    <td width="125" colspan="3" valign="top" class="backGreen">
-                        <p>
+                    <td colspan="3" valign="top" class="backGreen">
                             <strong></strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="220" valign="top" class="backWhite"
-                        <p>
+                    <td valign="top" class="backWhite">
                             <strong>IDENTIFICACIÓN</strong>
-                        </p>
                     </td>
-                    <td width="36" valign="top" class="backWhite">
-                        <p>
+                    <td valign="top" class="backWhite">
                             <strong>C.C.</strong>
-                        </p>
                     </td>
-                    <td width="26" colspan="2" valign="top" class="backWhite">
-                        <p>
+                    <td valign="top" class="backWhite">
                             <strong></strong>
-                        </p>
                     </td>
-                    <td width="66" valign="top" class="backWhite">
-                        <p>
+                    <td valign="top" class="backWhite">
                             <strong>C. EXT</strong>
-                        </p>
                     </td>
-                    <td width="16" valign="top" class="backWhite">
-                        <p>
+                    <td valign="top" class="backWhite">
                             <strong></strong>
-                        </p>
                     </td>
-                    <td width="74" valign="top" class="backWhite">
-                        <p>
+                    <td valign="top" colspan="2" class="backWhite">
                             <strong>NÚMERO</strong>
-                        </p>
                     </td>
-                    <td width="234" colspan="6" valign="top" class="backWhite">
-                        <p>
+                    <td colspan="7" valign="top" class="backWhite">
                             <strong></strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="220" valign="top" class="backGreen"
-                        <p>
+                    <td valign="top" class="backGreen">
                             <strong>FACULTAD</strong>
-                        </p>
                     </td>
-                    <td width="451" colspan="12" valign="top" class="backGreen">
-                        <p>
+                    <td colspan="13" valign="top" class="backGreen">
                             <strong></strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="220" valign="top" class="backWhite"
-                        <p>
+                    <td valign="top" class="backWhite">
                             <strong>DEPARTAMENTO</strong>
-                        </p>
                     </td>
-                    <td width="451" colspan="12" valign="top" class="backWhite">
+                    <td colspan="13" valign="top" class="backWhite">
                         <p>
                             <strong></strong>
                         </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="220"  valign="top" class="backGreen"
-                        <p>
+                    <td  valign="top" class="backGreen">
                             <strong>GRUPO DE INVESTIGACIÓN AL QUE PERTENECE </strong>
-                        </p>
                     </td>
-                    <td width="307" colspan="9" valign="top" class="backGreen">
-                        <p>
+                    <td colspan="9" valign="top" class="backGreen">
                             <strong></strong>
-                        </p>
                     </td>
-                    <td width="104" colspan="2" valign="top" class="backGreen">
-                        <p>
+                    <td colspan="1" valign="top" class="backGreen">
                             <strong>CATEGORÍA</strong>
-                        </p>
                     </td>
-                    <td width="40" valign="top" class="backGreen">
-                        <p>
+                    <td colspan="3" valign="top" class="backGreen">
                             <strong></strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="220" valign="top" class="backWhite"
-                        <p>
+                    <td valign="top" class="backWhite">
                             <strong>CORREO ELECTRÓNICO</strong>
-                        </p>
                     </td>
-                    <td width="451" colspan="12" valign="top" class="backWhite">
-                        <p>
+                    <td colspan="13" valign="top" class="backWhite">
                             <strong></strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="220" valign="top" class="backGreen"
-                        <p>
+                    <td valign="top" class="backGreen">
                             <strong>TELÉFONOS <em>(FIJO Y CELULAR)</em></strong>
-                        </p>
                     </td>
-                    <td width="42" colspan="2" valign="top" class="backGreen">
-                        <p>
+                    <td colspan="2" valign="top" class="backGreen">
                             <strong>FIJO</strong>
-                        </p>
                     </td>
-                    <td width="187" colspan="5" valign="top" class="backGreen">
-                        <p>
-                            <strong></strong>
-                        </p>
+                    <td colspan="5" valign="top" class="backGreen">
                     </td>
-                    <td width="59" valign="top" class="backGreen">
-                        <p>
+                    <td valign="top" class="backGreen">
                             <strong>MÓVIL</strong>
-                        </p>
                     </td>
-                    <td width="163" colspan="4" valign="top" class="backGreen">
-                        <p>
-                            <strong></strong>
-                        </p>
+                    <td colspan="5" valign="top" class="backGreen">
+                        
                     </td>
                 </tr>
             </tbody>
         </table>
         </div>
         <br>
-        <br>
         <div>
-        <table align="center" border="1" cellspacing="0" cellpadding="0" width="571" style="border:solid #9BBB59 1.0pt;
+        <table align="center" border="1" cellspacing="0" cellpadding="0" width="500" style="border:solid  #9BBB59 1.0pt;
         border-top:none;background:rgb(248, 248, 248)">
             <tbody>
                 <tr>
-                    <td  width="670" colspan="13" valign="top" class="backTitle"
-                        <p align="center"></p>
+                    <td  colspan="13"  class="backTitle">
                             <strong>DATOS DEL SOFTWARE</strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="194" valign="top" class="backGreen"
-                        <p>
+                    <td width="200" class="backGreen">
                             <strong>TÍTULO DEL SOFTWARE</strong>
-                        </p>
                     </td>
-                    <td width="477" colspan="12" valign="top" class="backGreen">
-                        <p>
+                    <td  colspan="12" valign="top" class="backGreen">
                             <strong></strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="194" valign="top" class="backWhite"
-                        <p>
+                    <td  class="backWhite">
                             <strong>AUTORES:</strong>
-                        </p>
                     </td>
-                    <td width="477" colspan="12" valign="top" class="backWhite">
-                        <p>
+                    <td colspan="12" valign="top" class="backWhite">
                             <strong></strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="194" valign="top" class="backGreen">
-                        <p>
+                    <td class="backGreen">
                             <strong>TITULAR(ES) DEL SOFTWARE:</strong>
-                        </p>
                     </td>
-                    <td width="477" colspan="12" valign="top" class="backGreen">
-                        <p>
+                    <td  colspan="12"  class="backGreen">
                             <strong></strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="194" valign="top" class="backWhite">
-                        <p>
+                    <td  class="backWhite">
                             <strong>RESULTADO EVALUACIÓN DE PARES</strong>
-                        </p>
                     </td>
-                    <td width="477" colspan="12" valign="top" class="backWhite">
-                        <p>
+                    <td colspan="12"  class="backWhite">
                             <strong></strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="338" colspan="3" valign="top" class="backGreen"
-                        <p>
+                    <td  class="backGreen">
                             <strong>¿SE EVIDENCIA CRÉDITO A LA UPC?</strong>
-                        </p>
                     </td>
-                    <td width="76" colspan="1" valign="top" class="backGreen">
-                        <p>
+                    <td   class="backGreen">
                             <strong>SI</strong>
-                        </p>
                     </td>
-                    <td width="76" colspan="2" valign="top" class="backGreen">
-                        <p>
+                    <td  colspan="5" class="backGreen">
                             <strong></strong>
-                        </p>
                     </td>
-                    <td width="65" valign="top" class="backGreen">
-                        <p>
+                    <td   class="backGreen">
                             <strong>NO</strong>
-                        </p>
                     </td>
-                    <td width="69"  valign="top" class="backGreen">
-                        <p>
-                            <strong></strong>
-                        </p>
+                    <td colspan="5"   class="backGreen">
+                          <strong></strong>
                     </td>
                 </tr>
                 <tr>
-                    <td width="338" colspan="3" valign="top" class="backWhite"> 
-                        <p>
-                            <strong>¿IMPACTA EL SOFTWARE EN LA COMUNIDAD UNIVERSITARIA?</strong>
-                        </p>
+                    <td class="backWhite"> 
+                            <strong>¿IMPACTA EL SOFTWARE EN<strong><br>
+                            <strong> LA COMUNIDAD UNIVERSITARIA?</strong>
                     </td>
-                    <td width="28" valign="top" class="backWhite">
-                        <p>
+                    <td  class="backWhite">
                             <strong>SI</strong>
-                        </p>
                     </td>
-                    <td width="28" colspan="2" valign="top" class="backWhite">
-                        <p>
+                    <td  colspan="5" valign="top" class="backWhite">
                             <strong></strong>
-                        </p>
                     </td>
-                    <td width="38" valign="top" class="backWhite">
-                        <p>
+                    <td  class="backWhite">
                             <strong>NO</strong>
-                        </p>
                     </td>
-                    <td width="28" valign="top" class="backWhite">
+                    <td  colspan="5" class="backWhite">
                         <p>
                             <strong></strong>
                         </p>
@@ -371,139 +281,95 @@
         </div>
         <center>
         <div class="parrafo">
-        <p>
             Para atender la valoración de su solicitud, tenga en cuenta que requiere anexar: Código fuente y/o algoritmo según el lenguaje utilizado, instrucciones de uso según el lenguaje utilizado, manuales técnicos del usuario (Word, Pdf) , programa ejecutable, Una (1) copia de la certificación de registro del software expedida por autoridad competente, evidencia de actualización en CVLac (Pantallazo), Evidencia de actualización del GrupLac (Pantallazo), Certificación del impacto interno en la UPC por una autoridad competente.
-        </p>
         </div>
         </center>
-        <br>
         <div align="center">
-            <table  align="center" border="1" cellspacing="0" cellpadding="0" width="571" style="border:solid #9BBB59 1.0pt;
+            <table  align="center" border="1" cellspacing="0" cellpadding="0" width="500" style="border:solid #9BBB59 1.0pt;
             border-top:none;background:rgb(248, 248, 248)">
                 <tbody>
                     <tr>
-                        <td width="337" valign="top" class="backTitle">
-                            <p align="center">
-                                <strong>FIRMA DEL DOCENTE</strong>
-                            </p>
+                        <td class="backTitle">
+                            <strong>FIRMA DEL DOCENTE</strong>
                         </td>
-                        <td width="341" valign="top" class="backTitle">
-                            <p align="center">
-                                <strong>RADICADO EN ARCHIVO Y CORRESPONDENCIA</strong>
-                            </p>
+                        <td  class="backTitle">
+                            <strong>RADICADO EN ARCHIVO Y CORRESPONDENCIA</strong>
                         </td>
                     </tr>
                     <tr>
-                        <td width="337" valign="top" class="backGreen">
-                            <p>
-                                <br>
-                            </p>
+                        <td  class="backGreen">
                         </td>
-                        <td width="341" valign="top" class="backGreen">
-                            <p>
+                        <td  class="backGreen">
                                 <br>
                                 <br>                        
-                            </p>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <br>
-        <table align="center" border="1" cellspacing="0" cellpadding="0" width="571" style="border:solid #9BBB59 1.0pt;
+        <table align="center" border="1" cellspacing="0" cellpadding="0" width="500" style="border:solid #9BBB59 1.0pt;
         border-top:none;background:rgb(248, 248, 248)">
             <tbody>
                 <tr>
-                    <td width="697" colspan="5" valign="top" class="backTitle">
-                        <p align="center">
+                    <td  colspan="5" class="backTitle">
                             <strong>ESPACIO EXCLUSIVO DEL CIARP </strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="281" valign="top" class="backGreen"
-                        <p>
-                            <strong>APROBADO (SI/NO) </strong>
-                        </p>
+                    <td valign="top" class="backGreen">
+                        <strong>APROBADO (SI/NO) </strong>
                     </td>
-                    <td width="66" valign="top" class="backGreen"
-                        <p align="center">
+                    <td class="backGreen">
                             <strong>SI</strong>
-                        </p>
                     </td>
-                    <td width="132" valign="top" class="backGreen">
-                        <p align="center">
+                    <td  class="backGreen">
                             <strong></strong>
-                        </p>
                     </td>
-                    <td width="57" valign="top" class="backGreen"
-                        <p align="center">
+                    <td  class="backGreen">
                             <strong>NO</strong>
-                        </p>
                     </td>
-                    <td width="161" valign="top" class="backGreen">
-                        <p align="center">
+                    <td  class="backGreen">
                             <strong></strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="281" valign="top" class="backWhite"
-                        <p>
+                    <td  class="backWhite">
                             <strong>¿SE EVIDENCIA UN APORTE SIGNIFICATIVO DEL AUTOR? </strong>
-                        </p>
                     </td>
-                    <td width="66" valign="top" class="backWhite"
-                        <p align="center">
+                    <td class="backWhite">
                             <strong>SI</strong>
-                        </p>
                     </td>
-                    <td width="132" valign="top" class="backWhite">
-                        <p align="center">
+                    <td  class="backWhite">
                             <strong></strong>
-                        </p>
                     </td>
-                    <td width="57" valign="top" class="backWhite"
-                        <p align="center">
+                    <td class="backWhite"
                             <strong>NO</strong>
-                        </p>
                     </td>
-                    <td width="161" valign="top" class="backWhite">
-                        <p align="center">
+                    <td  class="backWhite">
                             <strong></strong>
-                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td width="281" valign="top" class="backGreen"
-                        <p>
+                    <td  class="backGreen">
                             <strong>PUNTOS ASIGNADOS (</strong>
                             <strong>
                                 NÚMEROS Y LETRAS): PS (Puntos salariales), BO
                                 (Bonificaciones)
                             </strong>
                             <strong></strong>
-                        </p>
                     </td>
-                    <td width="66" valign="top" class="backGreen"
-                        <p align="center">
+                    <td class="backGreen"
                             <strong>PS</strong>
-                        </p>
                     </td>
-                    <td width="132" valign="top" class="backGreen">
-                        <p align="center">
+                    <td  class="backGreen">
                             <strong></strong>
-                        </p>
                     </td>
-                    <td width="57" valign="top" class="backGreen"
-                        <p align="center">
+                    <td class="backGreen">
                             <strong>BO</strong>
-                        </p>
                     </td>
-                    <td width="161" valign="top" class="backGreen">
-                        <p align="center">
+                    <td  class="backGreen">
                             <strong></strong>
-                        </p>
                     </td>
                 </tr>
             </tbody>

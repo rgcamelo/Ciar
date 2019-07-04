@@ -33,9 +33,9 @@
                                             <span class="input-group-addon">Tipo de Libro</span>
                                             <select class="form-control" required id="tipolibro" name="tipolibro">
                                                  <option value="" selected></option>
-                                                            <option value="libro de texto">Libro de texto</option>
-                                                            <option value="libro resultado de un labor de investigacion">Libro resultado de un labor de investigacion</option>
-                                                            <option value="libro de ensayo">Libro de ensayo</option>                                                                  
+                                                            <option value="Libro de texto">Libro de texto</option>
+                                                            <option value="Libro resultado de un labor de investigacion">Libro resultado de un labor de investigacion</option>
+                                                            <option value="Libro de ensayo">Libro de ensayo</option>                                                                  
                                                           </select>                                         
                                     </div>
                                 

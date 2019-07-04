@@ -18,6 +18,7 @@ class CreateSolicitudsTable extends Migration
             $table->unsignedBigInteger('productividad_id');
             $table->foreign('productividad_id')->references('idproductividad')->on('productividads');
             $table->string('estado');
+            $table->string('observaciones')->nullable();
             $table->integer('puntos_aprox');
             $table->integer('puntos_asignados')->nullable();
             $table->timestamps();
