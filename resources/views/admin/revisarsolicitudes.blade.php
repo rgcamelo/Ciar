@@ -6,9 +6,8 @@
             <script>$(document).ready(function() {
                     $('#tabla').DataTable( {
                         "paging":   true,
-                        "ordering": true,
-                        "info":     true,
-                        order: [[0, 'desc']]
+                        "ordering": false,
+                        "info":     true
                     } );
                 } );</script>
             <table id="tabla" class='display table table-stripper'style="width:90%">
@@ -35,6 +34,12 @@
                                 @case('App\Software')
                               <tr>                           
                                  @include('admin.revisarsoftware')
+                                </tr>                              
+                
+                                @break
+                                @case('App\Ponencia')
+                                 <tr>                           
+                                 @include('admin.revisarponencia')
                                 </tr>                              
                 
                                 @break

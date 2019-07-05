@@ -19,8 +19,10 @@ class CreateSolicitudsTable extends Migration
             $table->foreign('productividad_id')->references('idproductividad')->on('productividads');
             $table->string('estado');
             $table->string('observaciones')->nullable();
-            $table->integer('puntos_aprox');
-            $table->integer('puntos_asignados')->nullable();
+            $table->string('puntos_aprox')->nullable();
+            $table->string('puntos_asignados')->nullable();
+            $table->string('bonificacion_calculada')->nullable();
+            $table->string('bonificacion_asignada')->nullable();
             $table->timestamps();
         });
     }

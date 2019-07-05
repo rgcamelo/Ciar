@@ -55,8 +55,19 @@ class DashboardController extends Controller
             ->join('articulo_soportes', 'articulo_soportes.idarticulo',"=", 'articulos.id_articulo')
             ->select('productividads.*','solicituds.*','articulos.*','articulo_soportes.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Articulo')
             ->get();
+
+        $Ponencias = DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('ponencias', 'ponencias.idponencia', '=', 'productividads.productividadable_id')
+            ->join('ponencia_soportes', 'ponencia_soportes.idponencia',"=", 'ponencias.idponencia')
+            ->select('productividads.*','solicituds.*','ponencias.*','ponencia_soportes.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Ponencia')
+            ->get();
         //$=array($libros,$Software);
         
+        foreach($Ponencias as $p){
+            $productividades->push($p);
+        }
+
         foreach($Articulos as $a){
             $productividades->push($a);
         }
@@ -68,6 +79,8 @@ class DashboardController extends Controller
         foreach($Software as $s){
             $productividades->push($s);
         }
+
+        
 
         $productividades=$productividades->sortByDesc('idsolicitud');
         
@@ -99,8 +112,19 @@ class DashboardController extends Controller
             ->join('articulo_soportes', 'articulo_soportes.idarticulo',"=", 'articulos.id_articulo')
             ->select('productividads.*','solicituds.*','articulos.*','articulo_soportes.*','docentes.*')->where('productividads.productividadable_type','=','App\Articulo')
             ->get();
+
+        $Ponencias = DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('ponencias', 'ponencias.idponencia', '=', 'productividads.productividadable_id')
+            ->join('ponencia_soportes', 'ponencia_soportes.idponencia',"=", 'ponencias.idponencia')
+            ->select('productividads.*','solicituds.*','ponencias.*','ponencia_soportes.*','docentes.*')->where('productividads.productividadable_type','=','App\Ponencia')
+            ->get();
         //$=array($libros,$Software);
-        
+        foreach($Ponencias as $p){
+            $productividades->push($p);
+        }
+
         foreach($Articulos as $a){
             $productividades->push($a);
         }
@@ -113,7 +137,7 @@ class DashboardController extends Controller
             $productividades->push($s);
         }
 
-        //$productividades=$productividades->sortByDesc('idsolicitud');
+        $productividades=$productividades->sortByDesc('idproductividad');
 
         //dd($productividades);
         

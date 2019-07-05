@@ -20,6 +20,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::post('descargarzip/{ruta}','Descargar@comprimirDescargar')->name('comprimirDescargar');
 Route::post('descargarziparticulo/{ruta}','Descargar@comprimirDescargarArticulo')->name('comprimirDescargararticulo');
+Route::post('descargarzipponencia/{ruta}','Descargar@comprimirDescargarPonencia')->name('comprimirDescargarPonencia');
 
 
 Route::post('enviarpares/{solicitud}', "SolicitudController@pares");
@@ -40,10 +41,12 @@ Route::post('/Docente/{docente}/seleccionarproductividad',"ProductividadControll
 Route::get('software',"SoftwareController@nuevo")->name('software.nuevo');
 Route::get('libro',"LibroController@nuevo")->name('libro.nuevo');
 Route::get('articulo',"ArticuloController@nuevo")->name('articulo.nuevo');
+Route::get('ponencia',"PonenciaController@nuevo")->name('ponencia.nuevo');
 
 Route::post('/articulo',"ArticuloController@crear");
 Route::post('/software',"SoftwareController@crear");
 Route::post('/libro',"LibroController@crear");
+Route::post('/ponencia',"PonenciaController@crear");
 
 Route::get('/descargar/{archivo}',"Descargar@descarga");
 
