@@ -6,7 +6,7 @@
             <script>$(document).ready(function() {
                     $('#tabla').DataTable( {
                         "paging":   true,
-                        "ordering": true,
+                        "ordering": false,
                         "info":     true
                     } );
                 } );</script>

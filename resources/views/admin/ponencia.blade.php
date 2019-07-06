@@ -57,16 +57,29 @@
                                                           </select>                                         
                                 </div>        
 
-                                
                                 <div style="margin-bottom: 25px" class="input-group {{ $errors->has('idioma') ? 'has-error' : ''}}">
-                                            <span class="input-group-addon">Idioma</span>
-                                            <input id="titulares" type="text" required class="form-control" name="idioma" value="{{old('idioma')}}">                                          
-                                </div>
+                                        <span class="input-group-addon">Idioma</span>
+                                        <select class="form-control" required name="idioma" value="{{old('idioma')}}">
+                                             <option value="" selected></option>
+                                                        <option value="Español">Español</option>
+                                                        <option value="Inglés">Inglés</option>
+                                                        <option value="Francés">Francés</option>
+                                                        <option value="Alemán">Alemán</option>
+                                                        <option value="Italiano">Italiano</option>
+                                                        <option value="Portugués">Portugués</option>
+                                                        <option value="Ruso">Ruso</option>
+                                                      </select>                                         
+                                </div>  
+                                
 
                                 <div style="margin-bottom: 25px" class="input-group {{ $errors->has('noautores') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">Numero de Autores</span>
-                                <input id="noautores" type="number" class="form-control" requireds name="noautores" value="{{old('noautores')}}">
+                                <input id="noautores_ponencia" type="number" class="form-control" requireds name="noautores" min="1" value="{{old('noautores')}}">
                                 
+                                </div>
+
+                                <div id="grupo">
+
                                 </div>
 
                                 <div style="margin-bottom: 25px" class="input-group {{ $errors->has('paginaevento') ? 'has-error' : ''}}">
@@ -94,17 +107,17 @@
 
                                 <div style="margin-bottom: 25px" class="input-group {{ $errors->has('issn') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">ISSN</span>
-                                            <input id="titulares" type="text"  class="form-control" name="issn" value="{{old('issn')}}">                                          
+                                            <input id="issn" type="text"  class="form-control" name="issn" value="{{old('issn')}}">                                          
                                 </div>
 
                                 <div style="margin-bottom: 25px" class="input-group {{ $errors->has('isbn') ? 'has-error' : ''}}">
                                     <span class="input-group-addon">ISBN</span>
-                                    <input id="titulares" type="text" class="form-control" name="isbn" value="{{old('isbn')}}">                                          
+                                    <input id="isbn" type="text" class="form-control" name="isbn" value="{{old('isbn')}}">                                          
                                 </div>
 
                                 <div style="margin-bottom: 25px" class="input-group {{ $errors->has('ponencias') ? 'has-error' : ''}}">
                                     <span class="input-group-addon">Ponencias reconocidas en el presente año</span>
-                                 <input id="noautores" type="number" class="form-control" name="ponencias" value="{{old('ponencias')}}">
+                                 <input id="noponencias" type="number" class="form-control" name="ponencias" min="0" value="{{old('ponencias')}}">
                         
                                 </div>             
                                 

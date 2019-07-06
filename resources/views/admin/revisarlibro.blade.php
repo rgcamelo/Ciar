@@ -135,7 +135,7 @@
 </div>
 <div class="">
 
-          <form action="{{ url('descargarzip',[ 'ruta' => $p->id_soportelibro]) }}" method="post">
+          <form action="{{ url('descargarziplibro',[ 'ruta' => $p->id_soportelibro]) }}" method="post">
             {!! csrf_field() !!}
             <button type="submit" style="margin-top:4px;margin-bottom:4px" class="btn btn-success btn-block"><i class="fa fa-download"></i></button>
           </form>

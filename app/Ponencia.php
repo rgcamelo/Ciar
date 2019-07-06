@@ -70,7 +70,6 @@ class Ponencia extends Model
             'productividad_id' => $idp,
             'estado' => 'Enviado',
             'bonificacion_calculada' => $pa,
-
         ]);
     }
 

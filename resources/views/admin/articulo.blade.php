@@ -75,15 +75,28 @@
                                             <input id="titulares" type="text" required class="form-control" name="issn" value="{{old('issn')}}">                                          
                                 </div>
 
-                                <div style="margin-bottom: 25px" class="input-group">
-                                            <span class="input-group-addon">Idioma</span>
-                                            <input id="titulares" type="text" required class="form-control" name="idioma" value="{{old('idioma')}}">                                          
-                                </div>
+                                <div style="margin-bottom: 25px" class="input-group {{ $errors->has('idioma') ? 'has-error' : ''}}">
+                                        <span class="input-group-addon">Idioma</span>
+                                        <select class="form-control" required name="idioma" value="{{old('idioma')}}">
+                                             <option value="" selected></option>
+                                                        <option value="Español">Español</option>
+                                                        <option value="Inglés">Inglés</option>
+                                                        <option value="Francés">Francés</option>
+                                                        <option value="Alemán">Alemán</option>
+                                                        <option value="Italiano">Italiano</option>
+                                                        <option value="Portugués">Portugués</option>
+                                                        <option value="Ruso">Ruso</option>
+                                                      </select>                                         
+                                </div>  
 
                                 <div style="margin-bottom: 25px" class="input-group">
                                             <span class="input-group-addon">Numero de Autores</span>
-                                <input id="noautores" type="number" class="form-control" requireds name="noautores" value="{{old('noautores')}}">
+                                <input id="noautores_libro" type="number" class="form-control" requireds name="noautores" min="1" value="{{old('noautores')}}">
                                 
+                                </div>
+
+                                <div id="grupo">
+
                                 </div>
 
                                 <div style="margin-bottom: 25px" class="input-group">

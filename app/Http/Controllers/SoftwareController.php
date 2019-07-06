@@ -27,10 +27,9 @@ class SoftwareController extends Controller
         //$pdf = PDF::loadView('pdf.formulariosoftware');
         //return $pdf->stream('invoice.pdf');
         //$data=request()->all();
-        $data=request()->validate([
+        /*$data=request()->validate([
             'titulo' => 'required',
             'noautores' => 'required',
-            'autores' => 'required',
             'titulares' => 'required',
             'credito' => '',
             'impacto' => '', 
@@ -40,8 +39,10 @@ class SoftwareController extends Controller
             'autores.required' => 'Autores es un campo requerido',
             'titulares.required' => 'Titulares es un campo requerido'
         ]);
-
-        //dd($data);
+        */
+        
+        $data=request()->all();
+        //dd($todos);
 
         $folder = 'archivos/software/'.$d->NombreCompleto.'_'.$d->id.'_'.$data['titulo'].'_'.time();
         $path = 'archivos/software/'.$folder.'/';
@@ -57,8 +58,20 @@ class SoftwareController extends Controller
                        
         }
 
+        $autores='';
+        for($i=1; $i<=$data['noautores'];$i++){
+            if ($i == $data['noautores']) {
+                $autores=$autores." ".$data['autor'.$i.''];
+            }
+            else{
+                $autores=$autores." ".$data['autor'.$i.''].";";
+            }
+            
+        }
+
+        
         $software=Software::create([
-            'autores' => $data['autores'],
+            'autores' => $autores,
             'noautores' => $data['noautores'],
             'titulares' => $data['titulares'],
             'creditoUpc' => $data['credito'],
@@ -155,7 +168,7 @@ class SoftwareController extends Controller
         Solicitud::create([
             'productividad_id' => $solicitud->idproductividad,
             'estado' => 'Enviado',
-            'puntos_aprox' => round($pa),
+            'puntos_aprox' =>$pa,
 
         ]);
 

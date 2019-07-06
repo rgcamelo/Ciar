@@ -48,6 +48,23 @@ class SolicitudController extends Controller
         return redirect()->route('revisarsolicitudes');
     }
 
+    public function calificarbonificacion(Solicitud $solicitud){
+        
+        $data=request()->validate([
+            'bonificacion' => '',
+            'comentario' => ''
+        ]);
+        $e=([
+            'estado'=> 'Aprobado',
+            'bonificacion_asignada' => $data['bonificacion'],
+            'observaciones' => $data['comentario']
+        ]);
+        $solicitud->update($e);
+        
+        //Crear notificacion
+        return redirect()->route('revisarsolicitudes');
+    }
+
     public function pares(Solicitud $solicitud){
         $e=([
             'estado'=> 'Enviado a Pares'

@@ -73,7 +73,7 @@ class Libro extends Model
         Solicitud::create([
             'productividad_id' => $idp,
             'estado' => 'Enviado',
-            'puntos_aprox' => round($pa),
+            'puntos_aprox' => $pa,
 
         ]);
     }

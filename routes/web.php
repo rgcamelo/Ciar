@@ -21,10 +21,12 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::post('descargarzip/{ruta}','Descargar@comprimirDescargar')->name('comprimirDescargar');
 Route::post('descargarziparticulo/{ruta}','Descargar@comprimirDescargarArticulo')->name('comprimirDescargararticulo');
 Route::post('descargarzipponencia/{ruta}','Descargar@comprimirDescargarPonencia')->name('comprimirDescargarPonencia');
+Route::post('descargarziplibro/{ruta}','Descargar@comprimirDescargarLibro')->name('comprimirDescargarlibro');
 
 
 Route::post('enviarpares/{solicitud}', "SolicitudController@pares");
 Route::post('calificar/{solicitud}', "SolicitudController@calificar");
+Route::post('calificarbonificacion/{solicitud}', "SolicitudController@calificarbonificacion");
 Route::post('calificarparessoft/{solicitud}/{software}', "SolicitudController@calificarparessoft");
 Route::post('calificarpareslibro/{solicitud}/{libro}', "SolicitudController@calificarpareslibro");
 Route::post('reprobar/{solicitud}', "SolicitudController@reprobar");

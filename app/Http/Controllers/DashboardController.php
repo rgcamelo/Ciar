@@ -25,7 +25,7 @@ class DashboardController extends Controller
             ->select('solicituds.*', 'productividads.titulo')->where('productividads.id_docente','=',auth()->user()->docente()->id )
             ->get();
 
-            $solicitudes=$solicitudes->sortBy('idsolicitud');
+            $solicitudes=$solicitudes->sortByDesc('idsolicitud');
     
         return view ('admin.missolicitudes',compact('solicitudes'));
 
