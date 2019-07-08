@@ -110,4 +110,12 @@ class SolicitudController extends Controller
         //Crear notificacion
         return redirect()->route('revisarsolicitudes');
     }
+
+    public function cancelar(Solicitud $solicitud){
+        $e=([
+            'estado'=> 'Cancelado'
+        ]);
+        $solicitud->update($e);
+        return redirect()->route('solicitudes');
+    }
 }

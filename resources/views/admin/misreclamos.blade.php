@@ -15,16 +15,14 @@
                         <tr>
                             <th>Titulo</th>
                             <th>estado</th>
-                            <th>Puntos Calculados</th>
-                            <th>Puntos Asignados</th>
-                            <th>Bonificacion Calculada</th>
-                            <th>Bonificacion Asignada</th>
-                            <th>Observaciones</th>
+                            <th >Contenido</th>
+                            <th>Soporte</th>
+                            <th>Respuesta</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($solicitudes as $sol)
+                        @foreach ($reclamos as $sol)
                         <tr>
                                 <td>{{$sol->titulo}}</td>
                                 <td>
@@ -50,11 +48,9 @@
                                                   <span style="font-size:16px" class="label label-danger">{{$sol->estado}}</span>
                                                 @endif                                                  
                                         
-                                <td style="font-size:24px">{{$sol->puntos_aprox}}</td>
-                                <td style="font-size:24px">{{$sol->puntos_asignados}}</td>
-                                <td style="font-size:24px">{{$sol->bonificacion_calculada}}</td>
-                                <td style="font-size:24px">{{$sol->bonificacion_asignada}}</td>
-                                <td>{{$sol->observaciones}}</td>
+                                <td>{{$sol->contenido}}</td>
+                                <td style="font-size:24px">{{$sol->soporte}}</td>
+                                <td style="font-size:24px">{{$sol->soporte_respuesta}}</td>                 
                                 <td >
                                     @if ($sol->estado == 'Enviado')
                                         <button type="button" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#cancelar">

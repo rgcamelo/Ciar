@@ -226,6 +226,7 @@
             </li>
             <li class="active"><a href="/solicitudes"><i class="fa fa-link"></i> <span>Mis Solicitudes</span></a></li>
             <li class="active"><a href="/productividad"><i class="fa fa-link"></i> <span>Productividad</span></a></li>  
+            <li class="active"><a href="/reclamos"><i class="fa fa-link"></i> <span>Mis reclamos</span></a></li>  
             @endif
             
             @if ( auth()->user()->tipo == 'Administrador')

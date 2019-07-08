@@ -22,12 +22,27 @@ class DashboardController extends Controller
     public function solicitudes(){
         $solicitudes = DB::table('solicituds')
             ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->select('solicituds.*', 'productividads.titulo')->where('productividads.id_docente','=',auth()->user()->docente()->id )
+            ->select('solicituds.*', 'productividads.*')->where('productividads.id_docente','=',auth()->user()->docente()->id )
             ->get();
 
             $solicitudes=$solicitudes->sortByDesc('idsolicitud');
     
         return view ('admin.missolicitudes',compact('solicitudes'));
+
+        
+        
+    }
+
+    public function reclamos(){
+        $reclamos = DB::table('solicituds')
+            ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('reclamos', 'reclamos.id_solicitud', '=', 'solicituds.idsolicitud')
+            ->select('solicituds.*', 'productividads.*','reclamos.*')->where('productividads.id_docente','=',auth()->user()->docente()->id )
+            ->get();
+
+            $reclamos=$reclamos->sortByDesc('idsolicitud');
+    
+        return view ('admin.misreclamos',compact('reclamos'));
 
         
         

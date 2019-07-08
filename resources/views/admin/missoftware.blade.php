@@ -16,7 +16,10 @@
         @endif   
         @if ($p->estado == 'No Aprobado')
           <span style="font-size:16px" class="label label-danger">{{$p->estado}}</span>
-        @endif   
+        @endif 
+        @if ($p->estado == 'Cancelado')
+          <span style="font-size:16px" class="label label-danger">{{$p->estado}}</span>
+        @endif       
 </td>
 <td style="width:400pxs">
     <div class="box box-default box-solid collapsed-box" >

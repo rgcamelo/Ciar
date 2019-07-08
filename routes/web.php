@@ -25,6 +25,8 @@ Route::post('descargarziplibro/{ruta}','Descargar@comprimirDescargarLibro')->nam
 
 
 Route::post('enviarpares/{solicitud}', "SolicitudController@pares");
+Route::post('cancelar/{solicitud}', "SolicitudController@cancelar");
+Route::post('reclamar/{solicitud}/{productividad}', "ReclamoController@reclamar");
 Route::post('calificar/{solicitud}', "SolicitudController@calificar");
 Route::post('calificarbonificacion/{solicitud}', "SolicitudController@calificarbonificacion");
 Route::post('calificarparessoft/{solicitud}/{software}', "SolicitudController@calificarparessoft");
@@ -34,6 +36,7 @@ Route::post('reprobar/{solicitud}', "SolicitudController@reprobar");
 
 
 Route::get('solicitudes','DashboardController@solicitudes')->name('solicitudes');
+Route::get('reclamos','DashboardController@reclamos')->name('reclamos');
 Route::get('revisarsolicitudes','DashboardController@solicitudes2')->name('revisarsolicitudes');
 Route::get('productividad','DashboardController@productividades')->name('productividades');
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
