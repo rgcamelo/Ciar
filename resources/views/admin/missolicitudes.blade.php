@@ -40,14 +40,17 @@
                                                   <span style="font-size:16px" class="label label-warning">{{$sol->estado}}</span>
                                                
                                                 @endif 
-                                                @if ($sol->estado == 'Aprobado')
-                                               <span style="font-size:16px" class="label label-success">{{$sol->estado}}</span>
+                                                @if ($sol->estado == 'Aprobado' or $sol->estado =='Aprobado2')
+                                               <span style="font-size:16px" class="label label-success">Aprobado</span>
                                                 @endif   
-                                                @if ($sol->estado == 'No Aprobado')
-                                                  <span style="font-size:16px" class="label label-danger">{{$sol->estado}}</span>
+                                                @if ($sol->estado == 'No Aprobado' or $sol->estado == 'Rechazado2')
+                                                  <span style="font-size:16px" class="label label-danger">No Aprobado</span>
                                                 @endif  
                                                 @if ($sol->estado == 'Cancelado')
                                                   <span style="font-size:16px" class="label label-danger">{{$sol->estado}}</span>
+                                                @endif 
+                                                @if ($sol->estado == 'Reclamado')
+                                                  <span style="font-size:16px" class="label label-warning">{{$sol->estado}}</span>
                                                 @endif                                                  
                                         
                                 <td style="font-size:24px">{{$sol->puntos_aprox}}</td>
@@ -84,9 +87,9 @@
                                                 </div>
                                               </div><br><br>
                                     @endif
-                                    @if ($sol->estado == 'Aprobado' or $sol->estado == 'No Aprobado')
+                                    @if ( ($sol->estado == 'Aprobado' or $sol->estado == 'No Aprobado') )
                                         <button type="button" class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#reclamo">
-                                                Reclamo
+                                                Reclamar
                                               </button>
                                               
                                               <!-- Modal -->

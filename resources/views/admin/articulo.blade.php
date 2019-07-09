@@ -110,13 +110,13 @@
 
                                 <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon">Puntos Solicitados</span>
-                                 <input id="noautores" type="number" class="form-control" requireds name="puntossolicitados" value="{{old('puntossolicitados')}}">
+                                 <input id="puntossolicitados" type="number" class="form-control" requireds name="puntossolicitados" value="{{old('puntossolicitados')}}">
                         
                                 </div>
 
                                 <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon">Bonificacion Solicitada</span>
-                                 <input id="noautores" type="number" class="form-control" requireds name="bonificacionsolicitada" value="{{old('bonificacionsolicitada')}}">
+                                 <input id="bonificacionsolicitada" type="number" class="form-control" requireds name="bonificacionsolicitada" value="{{old('bonificacionsolicitada')}}">
                         
                                 </div>               
                                 

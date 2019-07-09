@@ -45,7 +45,20 @@ class DashboardController extends Controller
         return view ('admin.misreclamos',compact('reclamos'));
 
         
-        
+    }
+
+
+    public function revisarreclamos(){
+        $reclamos = DB::table('solicituds')
+            ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('reclamos', 'reclamos.id_solicitud', '=', 'solicituds.idsolicitud')
+            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->select('solicituds.*', 'productividads.*','reclamos.*')
+            ->get();
+
+            $reclamos=$reclamos->sortByDesc('idsolicitud');
+    
+        return view ('admin.revisarreclamos',compact('reclamos'));
     }
 
     public function productividades(){

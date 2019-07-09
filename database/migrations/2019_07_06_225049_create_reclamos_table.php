@@ -20,7 +20,9 @@ class CreateReclamosTable extends Migration
             $table->string('contenido');
             $table->string('soporte')->nullable();
             $table->string('estado');
+            $table->string('respuesta')->nullable();
             $table->string('soporte_respuesta')->nullable();
+            $table->string('ruta');
             $table->timestamps();
         });
     }

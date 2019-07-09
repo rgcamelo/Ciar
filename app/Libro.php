@@ -31,7 +31,7 @@ class Libro extends Model
         //dd($this->tipo_libro);
         
         switch($this->tipo_libro){
-            case 'libro de texto':
+            case 'Libro de texto':
             if($this->noautores <= 3){
                 return 15;               
             }
@@ -42,7 +42,7 @@ class Libro extends Model
                 return 15/($this->noautores/2);   
             }
             break;
-            case 'libro de ensayo':
+            case 'Libro de ensayo':
             if($this->noautores <= 3){
                 return 15;               
             }
@@ -53,7 +53,7 @@ class Libro extends Model
                 return 15/($this->noautores/2);   
             }
             break;
-            case 'libro resultado de un labor de investigacion':
+            case 'Libro resultado de un labor de investigacion':
             if($this->noautores <= 3){
                 return 20;               
             }

@@ -33,10 +33,14 @@ Route::post('calificarparessoft/{solicitud}/{software}', "SolicitudController@ca
 Route::post('calificarpareslibro/{solicitud}/{libro}', "SolicitudController@calificarpareslibro");
 Route::post('reprobar/{solicitud}', "SolicitudController@reprobar");
 
+Route::post('aceptarreclamo/{reclamo}', "ReclamoController@aprobar");
+Route::post('aceptarreclamobonificacion/{reclamo}', "ReclamoController@aprobarbonificacion");
+Route::post('rechazarreclamo/{reclamo}', "ReclamoController@rechazar");
 
 
 Route::get('solicitudes','DashboardController@solicitudes')->name('solicitudes');
 Route::get('reclamos','DashboardController@reclamos')->name('reclamos');
+Route::get('revisarreclamos','DashboardController@revisarreclamos')->name('revisarreclamos');
 Route::get('revisarsolicitudes','DashboardController@solicitudes2')->name('revisarsolicitudes');
 Route::get('productividad','DashboardController@productividades')->name('productividades');
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');

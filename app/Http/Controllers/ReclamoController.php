@@ -24,14 +24,106 @@ class ReclamoController extends Controller
             $reclamo->move($folder,$soportereclamo);            
         }
 
+        $e=([
+            'estado'=> 'Reclamado',
+        ]);
+        $solicitud->update($e);
+
         Reclamo::create([
             'id_solicitud' => $solicitud->idsolicitud,
             'contenido' => $data['reclamo'],
             'soporte' => $soportereclamo,
-            'estado' => 'Enviado'
+            'estado' => 'Enviado',
+            'ruta' => $folder
         ]);
 
         return redirect()->route('solicitudes');
 
+    }
+
+    public function aprobar(Reclamo $reclamo){
+        $data=request()->all();
+
+        if(request()->hasFile('soportejustificacion'))
+        {
+            $aceptado = request()->file('soportejustificacion');
+            $soportejustificacion= time()."_1SoportejustificacionAceptado_".$aceptado->getClientOriginalName();
+            $aceptado->move($reclamo->ruta,$soportejustificacion);            
+        }
+
+        $solicitud=$reclamo->Solicitud();
+
+        $s=([
+            'estado'=>'Aprobado2',
+            'puntos_asignados' => $solicitud->puntos_aprox,
+            'observaciones' => ''
+        ]);
+
+        $solicitud->update($s);
+
+        $e=([
+            'estado'=> 'Aprobado',
+            'soporte_respuesta' => $soportejustificacion,
+            'respuesta' => $data['justificacion'],
+        ]);
+        $reclamo->update($e);
+        return redirect()->route('revisarreclamos');
+    }
+
+    public function aprobarbonificacion(Reclamo $reclamo){
+        $data=request()->all();
+
+        if(request()->hasFile('soportejustificacion'))
+        {
+            $aceptado = request()->file('soportejustificacion');
+            $soportejustificacion= time()."_1SoportejustificacionAceptado_".$aceptado->getClientOriginalName();
+            $aceptado->move($reclamo->ruta,$soportejustificacion);            
+        }
+
+        $solicitud=$reclamo->Solicitud();
+
+        $s=([
+            'estado'=>'Aprobado2',
+            'bonificacion_asignada' => $solicitud->bonificacion_calculada,
+            'observaciones' => ''
+        ]);
+
+        $solicitud->update($s);
+
+        $e=([
+            'estado'=> 'Aprobado',
+            'soporte_respuesta' => $soportejustificacion,
+            'respuesta' => $data['justificacion'],
+        ]);
+        $reclamo->update($e);
+        return redirect()->route('revisarreclamos');
+    }
+
+    public function rechazar(Reclamo $reclamo){
+        $data=request()->all();
+
+        if(request()->hasFile('soportejustificacion'))
+        {
+            $aceptado = request()->file('soportejustificacion');
+            $soportejustificacion= time()."_1SoportejustificacionRechazado_".$aceptado->getClientOriginalName();
+            $aceptado->move($reclamo->ruta,$soportejustificacion);            
+        }
+
+        $solicitud=$reclamo->Solicitud();
+
+        $s=([
+            'estado'=>'Rechazado2',
+            'observaciones' => ''
+        ]);
+
+        $solicitud->update($s);
+
+        $e=([
+            'estado'=> 'Rechazado',
+            'soporte_respuesta' => $soportejustificacion,
+            'respuesta' => $data['justificacion'],
+        ]);
+        $reclamo->update($e);
+        return redirect()->route('revisarreclamos');
     }
 }

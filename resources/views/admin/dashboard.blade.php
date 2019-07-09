@@ -231,6 +231,8 @@
             
             @if ( auth()->user()->tipo == 'Administrador')
             <li class="active"><a href="/revisarsolicitudes"><i class="fa fa-link"></i> <span>Solicitudes</span></a></li>
+            <li class="active"><a href="/revisarreclamos"><i class="fa fa-link"></i> <span>Reclamos</span></a></li>
+
             @endif
           </ul>
           <!-- /.sidebar-menu -->

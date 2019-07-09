@@ -11,15 +11,18 @@
                                       <span style="font-size:16px" class="label label-warning">{{$p->estado}}</span>
                                    
                                     @endif 
-                                    @if ($p->estado == 'Aprobado')
-                                   <span style="font-size:16px" class="label label-success">{{$p->estado}}</span>
+                                    @if ($p->estado == 'Aprobado' or $p->estado == 'Aprobado2')
+                                   <span style="font-size:16px" class="label label-success">Aprobado</span>
                                     @endif   
                                     @if ($p->estado == 'No Aprobado')
                                       <span style="font-size:16px" class="label label-danger">{{$p->estado}}</span>
                                     @endif
                                     @if ($p->estado == 'Cancelado')
                                     <span style="font-size:16px" class="label label-danger">{{$p->estado}}</span>
-                                  @endif     
+                                  @endif 
+                                  @if ($p->estado == 'Reclamado')
+                                                  <span style="font-size:16px" class="label label-warning">{{$p->estado}}</span>
+                                                @endif     
                                 </td>
                             <td>
                                 <div class="box box-default box-solid collapsed-box">
