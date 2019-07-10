@@ -23,6 +23,8 @@ Route::post('descargarziparticulo/{ruta}','Descargar@comprimirDescargarArticulo'
 Route::post('descargarzipponencia/{ruta}','Descargar@comprimirDescargarPonencia')->name('comprimirDescargarPonencia');
 Route::post('descargarziplibro/{ruta}','Descargar@comprimirDescargarLibro')->name('comprimirDescargarlibro');
 
+Route::get ('nuevaconvocatoria', "ConvocatoriaController@nuevo")->name('convocatoria.nuevo');
+Route::post('convocatoria', "ConvocatoriaController@crear");
 
 Route::post('enviarpares/{solicitud}', "SolicitudController@pares");
 Route::post('cancelar/{solicitud}', "SolicitudController@cancelar");
