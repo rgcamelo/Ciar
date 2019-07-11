@@ -17,6 +17,7 @@ class ReclamoController extends Controller
         $folder = 'archivos/reclamos/'.$d->NombreCompleto.'_'.$d->id.'_'.$productividad['titulo'].'_'.time();
         File::makeDirectory($folder);
 
+        $soportereclamo=null;
         if(request()->hasFile('soportereclamo'))
         {
             $reclamo = request()->file('soportereclamo');
@@ -44,6 +45,7 @@ class ReclamoController extends Controller
     public function aprobar(Reclamo $reclamo){
         $data=request()->all();
 
+        $soportejustificacion=null;
         if(request()->hasFile('soportejustificacion'))
         {
             $aceptado = request()->file('soportejustificacion');
@@ -54,7 +56,6 @@ class ReclamoController extends Controller
         $solicitud=$reclamo->Solicitud();
 
         $s=([
-            'estado'=>'Aprobado2',
             'puntos_asignados' => $solicitud->puntos_aprox,
             'observaciones' => ''
         ]);
@@ -83,7 +84,6 @@ class ReclamoController extends Controller
         $solicitud=$reclamo->Solicitud();
 
         $s=([
-            'estado'=>'Aprobado2',
             'bonificacion_asignada' => $solicitud->bonificacion_calculada,
             'observaciones' => ''
         ]);
@@ -112,7 +112,6 @@ class ReclamoController extends Controller
         $solicitud=$reclamo->Solicitud();
 
         $s=([
-            'estado'=>'Rechazado2',
             'observaciones' => ''
         ]);
 

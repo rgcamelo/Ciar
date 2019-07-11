@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -47,5 +48,12 @@ class User extends Authenticatable
         $idu=auth()->user()->id_docente;
         $d=Docente::find($idu);
         return $d;
+    }
+
+    public function Convocatoria(){
+        $convocatoria = DB::table('convocatorias')
+            ->where('convocatorias.estado','=','Actual')
+            ->take(1)->get();
+        return $convocatoria;    
     }
 }

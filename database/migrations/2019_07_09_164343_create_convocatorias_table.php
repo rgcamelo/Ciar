@@ -19,6 +19,9 @@ class CreateConvocatoriasTable extends Migration
             $table->date('fecha_inicio');
             $table->date('fecha_final');
             $table->string('estado');
+            $table->string('solicitudes')->nullable();
+            $table->string('aprobadas')->nullable();
+            $table->string('rechazadas')->nullable();
             $table->timestamps();
         });
     }

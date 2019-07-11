@@ -23,6 +23,8 @@ class CreateSolicitudsTable extends Migration
             $table->string('puntos_asignados')->nullable();
             $table->string('bonificacion_calculada')->nullable();
             $table->string('bonificacion_asignada')->nullable();
+            $table->unsignedBigInteger('idconvocatoria');
+            $table->foreign('idconvocatoria')->references('idconvocatoria')->on('convocatorias');
             $table->timestamps();
         });
     }

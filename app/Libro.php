@@ -69,12 +69,12 @@ class Libro extends Model
         
     }
 
-    public function solicitud($idp,$pa){
+    public function solicitud($idp,$pa,$idc){
         Solicitud::create([
             'productividad_id' => $idp,
             'estado' => 'Enviado',
             'puntos_aprox' => $pa,
-
+            'idconvocatoria' => $idc,
         ]);
     }
 }

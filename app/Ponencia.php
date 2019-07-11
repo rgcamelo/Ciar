@@ -65,11 +65,12 @@ class Ponencia extends Model
         }
     }
 
-    public function solicitud($idp,$pa){
+    public function solicitud($idp,$pa,$idc){
         Solicitud::create([
             'productividad_id' => $idp,
             'estado' => 'Enviado',
             'bonificacion_calculada' => $pa,
+            'idconvocatoria' => $idc,
         ]);
     }
 

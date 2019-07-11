@@ -50,7 +50,9 @@
                                         
                                 <td>{{$sol->contenido}}</td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$sol->ruta}}/{{$sol->soporte}}')" ><i class="fa fa-eye"></i></a>
+                                  @if ($sol->soporte != null)
+                                  <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$sol->ruta}}/{{$sol->soporte}}')" ><i class="fa fa-eye"></i></a>  
+                                  @endif
                                 </td>
                                 <td style="font-size:24px">
                                   @if ($sol->soporte_respuesta != null)

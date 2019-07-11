@@ -210,29 +210,42 @@
             <li class="header">Menu</li>
             <!-- Optionally, you can add icons to the links -->
             @if ( auth()->user()->tipo == 'Docente' )
-            <li class="treeview">
-              <a href=""><i class="fa fa-link"></i> <span>Registrar Productividad</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                  </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="/software">Software</a></li>
-                <li><a href="/libro">Libros</a></li>
-                <li><a href="/articulo">Articulo</a></li>
-                <li><a href="/ponencia">Ponencia</a></li>
-                <li><a href="#">Link in level 2</a></li>
-              </ul>
-            </li>
+            @if ( isset( auth()->user()->convocatoria()->first()->estado))
+            @if ( auth()->user()->convocatoria()->first()->estado == 'Actual')
+                 @if ( strtotime(date('Y-m-d')) >= strtotime(auth()->user()->convocatoria()->first()->fecha_inicio) and strtotime(date('Y-m-d')) <= strtotime(auth()->user()->convocatoria()->first()->fecha_final) )
+                 <li class="treeview">
+                    <a href=""><i class="fa fa-link"></i> <span>Registrar Productividad</span>
+                      <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li><a href="/software">Software</a></li>
+                      <li><a href="/libro">Libros</a></li>
+                      <li><a href="/articulo">Articulo</a></li>
+                      <li><a href="/ponencia">Ponencia</a></li>
+                      <li><a href="#">Link in level 2</a></li>
+                    </ul>
+                  </li>
+                 @endif
+             @endif
+                
+            @endif
+
             <li class="active"><a href="/solicitudes"><i class="fa fa-link"></i> <span>Mis Solicitudes</span></a></li>
             <li class="active"><a href="/productividad"><i class="fa fa-link"></i> <span>Productividad</span></a></li>  
             <li class="active"><a href="/reclamos"><i class="fa fa-link"></i> <span>Mis reclamos</span></a></li>  
             @endif
             
             @if ( auth()->user()->tipo == 'Administrador')
+            @if ( isset( auth()->user()->convocatoria()->first()->estado))
+            <li class="active"><a href="/laconvocatoria"><i class="fa fa-link"></i> <span>Convocatoria</span></a></li>
+            @else
             <li class="active"><a href="/nuevaconvocatoria"><i class="fa fa-link"></i> <span>Convocatoria</span></a></li>
+            @endif
             <li class="active"><a href="/revisarsolicitudes"><i class="fa fa-link"></i> <span>Solicitudes</span></a></li>
             <li class="active"><a href="/revisarreclamos"><i class="fa fa-link"></i> <span>Reclamos</span></a></li>
+            <li class="active"><a href="/registros"><i class="fa fa-link"></i> <span>Registros</span></a></li>
 
             @endif
           </ul>

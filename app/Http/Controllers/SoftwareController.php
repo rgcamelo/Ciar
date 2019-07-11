@@ -163,13 +163,13 @@ class SoftwareController extends Controller
             $pa=15/($data['noautores']/2);
         }
 
-    
+        $convocatoria=auth()->user()->convocatoria()->first();
         $solicitud = Productividad::all()->last();
         Solicitud::create([
             'productividad_id' => $solicitud->idproductividad,
             'estado' => 'Enviado',
             'puntos_aprox' =>$pa,
-
+            'idconvocatoria' => $convocatoria->idconvocatoria,
         ]);
 
         

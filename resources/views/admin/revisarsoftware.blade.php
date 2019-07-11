@@ -61,7 +61,10 @@
                                         @endif   
                                         @if ($p->estado == 'No Aprobado')
                                           <span class="label label-danger">{{$p->estado}}</span>
-                                        @endif                                                   
+                                        @endif       
+                                        @if ($p->estado == 'Reclamado')
+                                          <span class="label label-warning">{{$p->estado}}</span>
+                                        @endif                                               
                                 </div>
                                 </div>
         </div>                      

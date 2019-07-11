@@ -14,13 +14,10 @@
                     <thead>
                         <tr>
                             <th>Titulo</th>
-                            <th>estado</th>
-                            <th>Puntos Calculados</th>
-                            <th>Puntos Asignados</th>
-                            <th>Bonificacion Calculada</th>
-                            <th>Bonificacion Asignada</th>
+                            <th style="width:100px">Estado</th>
+                            <th style="width:200px"></th>
                             <th>Observaciones</th>
-                            <th>Opciones</th>
+                            <th style="width:100px">Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,11 +49,50 @@
                                                 @if ($sol->estado == 'Reclamado')
                                                   <span style="font-size:16px" class="label label-warning">{{$sol->estado}}</span>
                                                 @endif                                                  
-                                        
-                                <td style="font-size:24px">{{$sol->puntos_aprox}}</td>
-                                <td style="font-size:24px">{{$sol->puntos_asignados}}</td>
-                                <td style="font-size:24px">{{$sol->bonificacion_calculada}}</td>
-                                <td style="font-size:24px">{{$sol->bonificacion_asignada}}</td>
+                                </td> 
+                                <td>
+                                  <div class="info-box 
+                                  @if($sol->estado == 'Aprobado' or $sol->estado =='Aprobado2')bg-green @endif
+                                  @if ($sol->estado == 'Enviado' or $sol->estado == 'Enviado a Pares' or $sol->estado == 'Reclamado' or $sol->estado == 'Calificado por Pares')bg-yellow @endif
+                                  @if ($sol->estado == 'No Aprobado' or $sol->estado == 'Rechazado2' or $sol->estado == 'Cancelado')bg-red @endif
+                                  ">
+                                    @if ($sol->puntos_aprox == null)
+                                    <div>
+                                        <span class="info-box-icon">
+                                          <i class="
+                                          @if($sol->estado == 'Aprobado' or $sol->estado =='Aprobado2')fa fa-check @endif
+                                          @if ($sol->estado == 'Enviado' or $sol->estado == 'Enviado a Pares' or $sol->estado == 'Reclamado' or $sol->estado == 'Calificado por Pares')fa fa-envelope @endif
+                                          @if ($sol->estado == 'No Aprobado' or $sol->estado == 'Rechazado2' or $sol->estado == 'Cancelado')fa fa-close @endif
+                                          "></i>
+                                        </span>
+                                        <div class="info-box-content">
+                                          <span class="info-box-text">Bonificacion Calculada:</span>
+                                          <span class="info-box-number">{{$sol->bonificacion_calculada}}</span>
+                                          <span class="info-box-text">Bonificacion Asignada:</span>
+                                          <span class="info-box-number">{{$sol->bonificacion_asignada}}</span>
+                                        </div>
+                                      </div>
+                                    @endif
+                                    @if ($sol->bonificacion_calculada == null)
+                                    <div>
+                                      <span class="info-box-icon">
+                                        <i class="
+                                        @if($sol->estado == 'Aprobado' or $sol->estado =='Aprobado2')fa fa-check @endif
+                                        @if ($sol->estado == 'Enviado' or $sol->estado == 'Enviado a Pares' or $sol->estado == 'Reclamado' or $sol->estado == 'Calificado por Pares')fa fa-envelope @endif
+                                        @if ($sol->estado == 'No Aprobado' or $sol->estado == 'Rechazado2' or $sol->estado == 'Cancelado')fa fa-close @endif
+                                        "></i>
+                                      </span>
+                                      <div class="info-box-content">
+                                        <span class="info-box-text">Puntos Calculados:</span>
+                                        <span class="info-box-number">{{$sol->puntos_aprox}}</span>
+                                        <span class="info-box-text">Puntos Asignados:</span>
+                                        <span class="info-box-number">{{$sol->puntos_asignados}}</span>
+                                      </div>
+                                    </div>
+                                    @endif
+
+                                  </div>
+                                </td>       
                                 <td>{{$sol->observaciones}}</td>
                                 <td >
                                     @if ($sol->estado == 'Enviado')

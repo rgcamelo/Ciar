@@ -8,6 +8,6 @@ class Convocatoria extends Model
 {
     protected $primaryKey = 'idconvocatoria';
     protected $fillable=[
-        'titulo','fecha_inicio','fecha_final','estado'
+        'titulo','fecha_inicio','fecha_final','estado','solicitudes','aprobadas','rechazadas'
     ];
 }

@@ -96,8 +96,8 @@ class PonenciaController extends Controller
         ]); 
 
         $pa=$ponencia->puntaje();
-
-        $ponencia->solicitud($productividad->idproductividad, $pa);
+        $convocatoria=auth()->user()->convocatoria()->first();
+        $ponencia->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 
         return redirect()->route('dashboard');
     }

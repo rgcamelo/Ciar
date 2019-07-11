@@ -26,7 +26,7 @@ class DashboardController extends Controller
             ->get();
 
             $solicitudes=$solicitudes->sortByDesc('idsolicitud');
-    
+
         return view ('admin.missolicitudes',compact('solicitudes'));
 
         
@@ -108,10 +108,7 @@ class DashboardController extends Controller
             $productividades->push($s);
         }
 
-        
-
         $productividades=$productividades->sortByDesc('idsolicitud');
-        
         return view ('admin.miproductividad',compact('productividades'));
     }
 
@@ -172,5 +169,13 @@ class DashboardController extends Controller
         
 
         return view ('admin.revisarsolicitudes',compact('productividades'));
+    }
+
+    public function registros(){
+
+        $convocatorias = DB::table('convocatorias')->get();
+
+        $convocatorias = $convocatorias->sortByDesc('idconvocatoria');
+        return view ('admin.registros',compact('convocatorias'));
     }
 }
