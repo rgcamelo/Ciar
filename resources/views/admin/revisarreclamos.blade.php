@@ -100,14 +100,14 @@
                                                                         <div class="form-row" style="display: flex;justify-content:center">
                                                                                 <div style="margin-bottom: 25px" class="input-group">
                                                                                         <span class="input-group-addon">Soporte:</span>
-                                                                                         <input type="file" class="form-control" name="soportejustificacion" >    
+                                                                                         <input type="file" required class="form-control" name="soportejustificacion" >    
                                                                                 </div> 
                                                                         </div>
                                                                             <br>
                                                                             <br>
                                                                             <div class="form-row" style="display: flex;justify-content:center" >
                                                                              <br>
-                                                                                    <input type="submit" class="btn btn-success " value="Aceptar">
+                                                                                    <input type="submit" class="btn btn-success mr-5 " value="Aceptar">
                                                                                     <button type="button" class="btn btn-danger"  data-dismiss="modal">Cancelar</button>
                                                                                 </div>
                                                       </form>
@@ -146,14 +146,14 @@
                                                           <div class="form-row" style="display: flex;justify-content:center">
                                                                   <div style="margin-bottom: 25px" class="input-group">
                                                                           <span class="input-group-addon">Soporte:</span>
-                                                                           <input type="file" class="form-control" name="soportejustificacion" >    
+                                                                           <input type="file" required class="form-control" name="soportejustificacion" >    
                                                                   </div> 
                                                           </div>
                                                               <br>
                                                               <br>
                                                               <div class="form-row" style="display: flex;justify-content:center" >
                                                                <br>
-                                                                      <input type="submit" class="btn btn-success " value="Aceptar">
+                                                                      <input type="submit" class="btn btn-success mr-5" value="Aceptar">
                                                                       <button type="button" class="btn btn-danger"  data-dismiss="modal">Cancelar</button>
                                                                   </div>
                                                       </form>

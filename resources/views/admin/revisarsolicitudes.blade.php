@@ -9,7 +9,8 @@
                         "ordering": false,
                         "info":     true
                     } );
-                } );</script>
+                } );
+                </script>
             <table id="tabla" class='display table table-stripper'style="width:90%">
                     <thead>
                         <tr>

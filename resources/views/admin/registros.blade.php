@@ -17,7 +17,6 @@
                             <th style="width:100px">Solicitudes</th>
                             <th style="width:100px">Aceptadas</th>
                             <th>Rechazadas</th>
-                            <th style="width:50px"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,7 +40,11 @@
                                               <div class="info-box-content">
                                                 <span class="info-box-text">Solicitudes Recibidas:</span>
                                                 <span class="info-box-number">{{$c->solicitudes}}</span>
+                                                @if ($c->estado == 'Cerrada')
+                                                <button class="btn btn-warning form-control"><i class="fa fa-file"></i> </button>       
+                                                @endif
                                               </div>
+                                              
                                             </div>
                                         </div>
                                 </td>
@@ -54,6 +57,9 @@
                                               <div class="info-box-content">
                                                 <span class="info-box-text">Solicitudes Aprobadas:</span>
                                                 <span class="info-box-number">{{$c->aprobadas}}</span>
+                                                @if ($c->estado == 'Cerrada')
+                                                <button class="btn btn-success form-control"><i class="fa fa-file"></i> </button>       
+                                                @endif
                                               </div>
                                             </div>
                                         </div>
@@ -67,14 +73,14 @@
                                               <div class="info-box-content">
                                                 <span class="info-box-text">Solicitudes Rechazadas:</span>
                                                 <span class="info-box-number">{{$c->rechazadas}}</span>
+                                                @if ($c->estado == 'Cerrada')
+                                                <button class="btn btn-danger form-control"><i class="fa fa-file"></i> </button>       
+                                                @endif
                                               </div>
                                             </div>
                                         </div>
-                                </td>  
-                                     
-                                <td></td>
-                               
-                            </tr>   
+                                </td>   
+                            </tr>                                             
                         @endforeach
                                                 
                     </tbody>

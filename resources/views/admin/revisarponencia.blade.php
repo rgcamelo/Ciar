@@ -1,70 +1,107 @@
 <td>
-        <div class="">
-            <div class="row">
-                    <div class="col-md-9">
-                            <strong>Titulo:</strong>                                           
-                           {{$p->titulo}}
-                    </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-9">
-                                <strong>Tipo de Productividad:</strong>                                           
-                               Ponencia
-                        </div>
-                        </div>
-                    <div class="row">
-                    <div class="col-md-9">
-                            <strong>Solicitante:</strong>                                           
-                           {{$p->NombreCompleto}}
-                    </div>
-                    </div>
-                    <div class="row">
-                            <div class="col-md-9">
-                                    <strong>Nombre del Evento:</strong>                                           
-                                    {{$p->nombreevento}}
-                            </div>
-                            </div>
-                    <div class="row">
-                    <div class="col-md-9">
-                            <strong>Numero de Autores:</strong>                                           
-                           {{$p->noautores_ponencia}}
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="col-md-9">
-                            <strong>Evidencia Credito a la Upc:</strong>                                           
-                           {{$p->creditoUpc_ponencia}}
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="col-md-9">
-                            <strong>Bonificacion Calculada:</strong>                                           
-                           {{$p->bonificacion_calculada}}
-                    </div>
-                    </div>
-                    <div class="row">
-                            <div class="col-md-9">
-                                    <strong>Estado:</strong>
-                                    @if ($p->estado == 'Enviado')
-                                      <span class="label label-warning">Recibido</span>
-                                    @endif
-                                    @if ($p->estado == 'Enviado a Pares')
-                                      <span class="label label-warning">Enviado a Pares</span>
-                                   
-                                    @endif
-                                    @if ($p->estado == 'Calificado por Pares')
-                                      <span class="label label-warning">{{$p->estado}}</span>
-                                   
-                                    @endif 
-                                    @if ($p->estado == 'Aprobado')
-                            <span class="label label-success">{{$p->estado}}</span>
-                                    @endif   
-                                    @if ($p->estado == 'No Aprobado')
-                                      <span class="label label-danger">{{$p->estado}}</span>
-                                    @endif                                                   
-                            </div>
-                            </div>
-    </div> 
+    <div class="info-box 
+    ">
+      @if ($p->puntos_aprox == null)
+      <div>
+          <span class="info-box-icon
+          @if($p->estado == 'Aprobado' or $p->estado =='Aprobado2')bg-green @endif
+          @if ($p->estado == 'Enviado' or $p->estado == 'Enviado a Pares' or $p->estado == 'Reclamado' or $p->estado == 'Calificado por Pares')bg-yellow @endif
+          @if ($p->estado == 'No Aprobado' or $p->estado == 'Rechazado2' or $p->estado == 'Cancelado')bg-red @endif
+    
+          ">
+            <i class="
+            @if($p->estado == 'Aprobado' or $p->estado =='Aprobado2')fa fa-check @endif
+            @if ($p->estado == 'Enviado' or $p->estado == 'Enviado a Pares' or $p->estado == 'Reclamado' or $p->estado == 'Calificado por Pares')fa fa-envelope @endif
+            @if ($p->estado == 'No Aprobado' or $p->estado == 'Rechazado2' or $p->estado == 'Cancelado')fa fa-close @endif
+            "></i>
+          </span>
+          <div class="info-box-content">
+              <span class="info-box-text"><strong>Titulo: </strong>{{$p->titulo}}</span>
+              <span class="info-box-text"><strong>Tipo: </strong>Ponencia</span>
+              <span class="info-box-text"><strong>Bonificacion Calculada: </strong>{{$p->bonificacion_calculada}}</span>
+              @if ($p->bonificacion_asignada != null)
+              <span class="info-box-text"><strong>Bonificacion Asignada: </strong>{{$p->bonificacion_asignada}}</span>
+              @endif
+              <span class="info-box-text"><strong>Estado: </strong>
+                @if ($p->estado == 'Enviado')
+                <span class="label label-warning">Recibido</span>
+              @endif
+              @if ($p->estado == 'Enviado a Pares')
+                <span class="label label-warning">Enviado a Pares</span>
+             
+              @endif
+              @if ($p->estado == 'Calificado por Pares')
+                <span class="label label-warning">{{$p->estado}}</span>
+             
+              @endif 
+              @if ($p->estado == 'Aprobado')
+              <span class="label label-success">{{$p->estado}}</span>
+              @endif   
+              @if ($p->estado == 'No Aprobado')
+                <span class="label label-danger">{{$p->estado}}</span>
+              @endif
+              @if ($p->estado == 'Cancelado')
+                <span style="font-size:16px" class="label label-danger">{{$p->estado}}</span>
+              @endif 
+              @if ($p->estado == 'Reclamado')
+                <span class="label label-warning">{{$p->estado}}</span>
+              @endif 
+            </span>
+          </div>
+        </div>
+      @endif
+      @if ($p->bonificacion_calculada == null)
+      <div>
+        <span class="info-box-icon 
+        @if($p->estado == 'Aprobado' or $p->estado =='Aprobado2')bg-green @endif
+        @if ($p->estado == 'Enviado' or $p->estado == 'Enviado a Pares' or $p->estado == 'Reclamado' or $p->estado == 'Calificado por Pares')bg-yellow @endif
+        @if ($p->estado == 'No Aprobado' or $p->estado == 'Rechazado2' or $p->estado == 'Cancelado')bg-red @endif
+    
+        ">
+          <i class="
+          @if($p->estado == 'Aprobado' or $p->estado =='Aprobado2')fa fa-check @endif
+          @if ($p->estado == 'Enviado' or $p->estado == 'Enviado a Pares' or $p->estado == 'Reclamado' or $p->estado == 'Calificado por Pares')fa fa-envelope @endif
+          @if ($p->estado == 'No Aprobado' or $p->estado == 'Rechazado2' or $p->estado == 'Cancelado')fa fa-close @endif
+          "></i>
+        </span>
+        <div class="info-box-content">
+            <span class="info-box-text"><strong>Titulo: </strong>{{$p->titulo}}</span>
+            <span class="info-box-text"><strong>Tipo: </strong>Ponencia</span>
+            <span class="info-box-text"><strong>Puntos Calculados: </strong>{{$p->puntos_aprox}}</span>
+            @if ($p->puntos_asignados != null)
+            <span class="info-box-text"><strong>Puntos Asignados: </strong>{{$p->puntos_asignados}}</span>
+            @endif
+            <span class="info-box-text"><strong>Estado: </strong>
+              @if ($p->estado == 'Enviado')
+              <span class="label label-warning">Recibido</span>
+            @endif
+            @if ($p->estado == 'Enviado a Pares')
+              <span class="label label-warning">Enviado a Pares</span>
+           
+            @endif
+            @if ($p->estado == 'Calificado por Pares')
+              <span class="label label-warning">{{$p->estado}}</span>
+           
+            @endif 
+            @if ($p->estado == 'Aprobado')
+            <span class="label label-success">{{$p->estado}}</span>
+            @endif   
+            @if ($p->estado == 'No Aprobado')
+              <span class="label label-danger">{{$p->estado}}</span>
+            @endif
+            @if ($p->estado == 'Cancelado')
+              <span style="font-size:16px" class="label label-danger">{{$p->estado}}</span>
+            @endif 
+            @if ($p->estado == 'Reclamado')
+              <span class="label label-warning">{{$p->estado}}</span>
+            @endif 
+          </span>
+                                    
+        </div>
+      </div>
+      @endif
+
+    </div>
     </td>
     <td>
             <div class="box box-default box-solid collapsed-box" >

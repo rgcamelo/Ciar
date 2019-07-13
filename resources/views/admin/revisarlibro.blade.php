@@ -1,76 +1,107 @@
 <td>
-    <div class="">
-        <div class="row">
-                <div class="col-md-9">
-                        <strong>Titulo:</strong>                                           
-                       {{$p->titulo}}
-                </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-9">
-                            <strong>Tipo de Productividad:</strong>                                           
-                           Libro
-                    </div>
-                    </div>
-                <div class="row">
-                <div class="col-md-9">
-                        <strong>Solicitante:</strong>                                           
-                       {{$p->NombreCompleto}}
-                </div>
-                </div>
-                <div class="row">
-                        <div class="col-md-9">
-                                <strong>Tipo de libro:</strong>                                           
-                                {{$p->tipo_libro}}
-                        </div>
-                        </div>
-                <div class="row">
-                <div class="col-md-9">
-                        <strong>Numero de Autores:</strong>                                           
-                       {{$p->noautores}}
-                </div>
-                </div>
-                <div class="row">
-                <div class="col-md-9">
-                        <strong>Nombre de la Editorial:</strong>                                           
-                       {{$p->editorial}}
-                </div>
-                </div>
-                <div class="row">
-                <div class="col-md-9">
-                        <strong>Evidencia Credito a la Upc:</strong>                                           
-                       {{$p->creditoUpc_libro}}
-                </div>
-                </div>
-                <div class="row">
-                <div class="col-md-9">
-                        <strong>Puntaje Aproximado:</strong>                                           
-                       {{$p->puntos_aprox}}
-                </div>
-                </div>
-                <div class="row">
-                        <div class="col-md-9">
-                                <strong>Estado:</strong>
-                                @if ($p->estado == 'Enviado')
-                                  <span class="label label-warning">Recibido</span>
-                                @endif
-                                @if ($p->estado == 'Enviado a Pares')
-                                  <span class="label label-warning">Enviado a Pares</span>
-                               
-                                @endif
-                                @if ($p->estado == 'Calificado por Pares')
-                                  <span class="label label-warning">{{$p->estado}}</span>
-                               
-                                @endif 
-                                @if ($p->estado == 'Aprobado')
-                        <span class="label label-success">{{$p->estado}}</span>
-                                @endif   
-                                @if ($p->estado == 'No Aprobado')
-                                  <span class="label label-danger">{{$p->estado}}</span>
-                                @endif                                                   
-                        </div>
-                        </div>
-</div> 
+    <div class="info-box 
+    ">
+      @if ($p->puntos_aprox == null)
+      <div>
+          <span class="info-box-icon
+          @if($p->estado == 'Aprobado' or $p->estado =='Aprobado2')bg-green @endif
+          @if ($p->estado == 'Enviado' or $p->estado == 'Enviado a Pares' or $p->estado == 'Reclamado' or $p->estado == 'Calificado por Pares')bg-yellow @endif
+          @if ($p->estado == 'No Aprobado' or $p->estado == 'Rechazado2' or $p->estado == 'Cancelado')bg-red @endif
+    
+          ">
+            <i class="
+            @if($p->estado == 'Aprobado' or $p->estado =='Aprobado2')fa fa-check @endif
+            @if ($p->estado == 'Enviado' or $p->estado == 'Enviado a Pares' or $p->estado == 'Reclamado' or $p->estado == 'Calificado por Pares')fa fa-envelope @endif
+            @if ($p->estado == 'No Aprobado' or $p->estado == 'Rechazado2' or $p->estado == 'Cancelado')fa fa-close @endif
+            "></i>
+          </span>
+          <div class="info-box-content">
+              <span class="info-box-text"><strong>Titulo: </strong>{{$p->titulo}}</span>
+              <span class="info-box-text"><strong>Tipo: </strong>Libro</span>
+              <span class="info-box-text"><strong>Bonificacion Calculada: </strong>{{$p->bonificacion_calculada}}</span>
+              @if ($p->bonificacion_asignada != null)
+              <span class="info-box-text"><strong>Bonificacion Asignada: </strong>{{$p->bonificacion_asignada}}</span>
+              @endif
+              <span class="info-box-text"><strong>Estado: </strong>
+                @if ($p->estado == 'Enviado')
+                <span class="label label-warning">Recibido</span>
+              @endif
+              @if ($p->estado == 'Enviado a Pares')
+                <span class="label label-warning">Enviado a Pares</span>
+             
+              @endif
+              @if ($p->estado == 'Calificado por Pares')
+                <span class="label label-warning">{{$p->estado}}</span>
+             
+              @endif 
+              @if ($p->estado == 'Aprobado')
+              <span class="label label-success">{{$p->estado}}</span>
+              @endif   
+              @if ($p->estado == 'No Aprobado')
+                <span class="label label-danger">{{$p->estado}}</span>
+              @endif
+              @if ($p->estado == 'Cancelado')
+                <span style="font-size:16px" class="label label-danger">{{$p->estado}}</span>
+              @endif 
+              @if ($p->estado == 'Reclamado')
+                <span class="label label-warning">{{$p->estado}}</span>
+              @endif 
+            </span>
+          </div>
+        </div>
+      @endif
+      @if ($p->bonificacion_calculada == null)
+      <div>
+        <span class="info-box-icon 
+        @if($p->estado == 'Aprobado' or $p->estado =='Aprobado2')bg-green @endif
+        @if ($p->estado == 'Enviado' or $p->estado == 'Enviado a Pares' or $p->estado == 'Reclamado' or $p->estado == 'Calificado por Pares')bg-yellow @endif
+        @if ($p->estado == 'No Aprobado' or $p->estado == 'Rechazado2' or $p->estado == 'Cancelado')bg-red @endif
+    
+        ">
+          <i class="
+          @if($p->estado == 'Aprobado' or $p->estado =='Aprobado2')fa fa-check @endif
+          @if ($p->estado == 'Enviado' or $p->estado == 'Enviado a Pares' or $p->estado == 'Reclamado' or $p->estado == 'Calificado por Pares')fa fa-envelope @endif
+          @if ($p->estado == 'No Aprobado' or $p->estado == 'Rechazado2' or $p->estado == 'Cancelado')fa fa-close @endif
+          "></i>
+        </span>
+        <div class="info-box-content">
+            <span class="info-box-text"><strong>Titulo: </strong>{{$p->titulo}}</span>
+            <span class="info-box-text"><strong>Tipo: </strong>Libro</span>
+            <span class="info-box-text"><strong>Puntos Calculados: </strong>{{$p->puntos_aprox}}</span>
+            @if ($p->puntos_asignados != null)
+            <span class="info-box-text"><strong>Puntos Asignados: </strong>{{$p->puntos_asignados}}</span>
+            @endif
+            <span class="info-box-text"><strong>Estado: </strong>
+              @if ($p->estado == 'Enviado')
+              <span class="label label-warning">Recibido</span>
+            @endif
+            @if ($p->estado == 'Enviado a Pares')
+              <span class="label label-warning">Enviado a Pares</span>
+           
+            @endif
+            @if ($p->estado == 'Calificado por Pares')
+              <span class="label label-warning">{{$p->estado}}</span>
+           
+            @endif 
+            @if ($p->estado == 'Aprobado')
+            <span class="label label-success">{{$p->estado}}</span>
+            @endif   
+            @if ($p->estado == 'No Aprobado')
+              <span class="label label-danger">{{$p->estado}}</span>
+            @endif
+            @if ($p->estado == 'Cancelado')
+              <span style="font-size:16px" class="label label-danger">{{$p->estado}}</span>
+            @endif 
+            @if ($p->estado == 'Reclamado')
+              <span class="label label-warning">{{$p->estado}}</span>
+            @endif 
+          </span>
+                                    
+        </div>
+      </div>
+      @endif
+
+    </div>  
 </td>
 <td>
     <div class="box box-default box-solid collapsed-box">
@@ -145,8 +176,8 @@
 </td>
 <td>
         @if ($p->estado == 'Enviado')
-        <button type="button" class="btn btn-warning" style="width:150px" data-toggle="modal" data-target="#pares">
-                Enviar a Pares
+        <button type="button" class="btn btn-warning btn-lg" title="Enviar a Pares" data-toggle="modal" data-target="#pares">
+                <span class="fa fa-arrow-left"></span>
               </button>
               
               <!-- Modal -->
@@ -169,12 +200,12 @@
                     </div>
                   </div>
                 </div>
-              </div><br><br>
+              </div>
         @endif
 
         @if ($p->estado == 'Enviado a Pares')
-        <button type="button" class="btn btn-warning" style="width:150px" data-toggle="modal" data-target="#pares">
-                Subir Evaluacion Pares
+        <button type="button" class="btn btn-warning btn-lg" title="Subir Calificacion de Pares" data-toggle="modal" data-target="#pares">
+                <span class="fa fa-graduation-cap"></span>
               </button>
               
               <!-- Modal -->
@@ -202,17 +233,15 @@
                     </div>
                   </div>
                 </div>
-              </div><br><br>
+              </div>
         @endif
         <!-- Button trigger modal -->
 
         @if ($p->estado == 'Calificado por Pares')
-        <div class="row">
-            <div class="col-sm-12 col-xs-12">
-                <button class="btn btn-success" type="button" data-toggle="modal" data-target="#calificar"><span class="fa fa-check"></span></button>
-                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#reprobar"><span class="fa fa-close"></span></button>
-              </div>
-        </div>
+                <button class="btn btn-success btn-lg" type="button" data-toggle="modal" data-target="#calificar"><span class="fa fa-check"></span></button>
+                <button class="btn btn-danger btn-lg" type="button" data-toggle="modal" data-target="#reprobar"><span class="fa fa-close"></span></button>
+
+
         
               
               <!-- Modal -->
@@ -248,10 +277,6 @@
                         </div>
                           
                       </div>
-                            
-                        <br>
-                        
-                        
                     </div>
                     <div class="modal-footer" style="display: flex;justify-content:center">
                     
@@ -287,8 +312,6 @@
                     </div>
                   </div>
                 </div>
-              
-              <br>
         @endif
-        <button class="btn btn-primary">Modificar</button>
+        <button class="btn btn-primary btn-lg" ><span class="fa fa-eye"></span></button>
     </td>

@@ -20,9 +20,11 @@ class DashboardController extends Controller
     }
 
     public function solicitudes(){
+        $c=auth()->user()->convocatoria()->first();
         $solicitudes = DB::table('solicituds')
             ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->select('solicituds.*', 'productividads.*')->where('productividads.id_docente','=',auth()->user()->docente()->id )
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
 
             $solicitudes=$solicitudes->sortByDesc('idsolicitud');
@@ -34,10 +36,12 @@ class DashboardController extends Controller
     }
 
     public function reclamos(){
+        $c=auth()->user()->convocatoria()->first();
         $reclamos = DB::table('solicituds')
             ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('reclamos', 'reclamos.id_solicitud', '=', 'solicituds.idsolicitud')
             ->select('solicituds.*', 'productividads.*','reclamos.*')->where('productividads.id_docente','=',auth()->user()->docente()->id )
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
 
             $reclamos=$reclamos->sortByDesc('idsolicitud');
@@ -49,11 +53,13 @@ class DashboardController extends Controller
 
 
     public function revisarreclamos(){
+        $c=auth()->user()->convocatoria()->first();
         $reclamos = DB::table('solicituds')
             ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('reclamos', 'reclamos.id_solicitud', '=', 'solicituds.idsolicitud')
             ->join('docentes', 'docentes.id', '=','productividads.id_docente')
             ->select('solicituds.*', 'productividads.*','reclamos.*')
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
 
             $reclamos=$reclamos->sortByDesc('idsolicitud');
@@ -68,6 +74,7 @@ class DashboardController extends Controller
             ->join('software', 'software.idsoftware', '=', 'productividads.productividadable_id')
             ->join('soporte_software', 'soporte_software.id_software','=','software.idsoftware')
             ->select('productividads.*', 'software.*', 'soporte_software.*','solicituds.*')->where('productividads.id_docente','=',auth()->user()->docente()->id )->where('productividads.productividadable_type','=','App\Software')
+        
             ->get();
         
         $libros = DB::table('productividads')
@@ -75,6 +82,7 @@ class DashboardController extends Controller
             ->join('libros', 'libros.idlibro', '=', 'productividads.productividadable_id')
             ->join('libro_soportes', 'libro_soportes.id_libro',"=", 'libros.idlibro')
             ->select('productividads.*','solicituds.*','libros.*','libro_soportes.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Libro')
+            
             ->get();
 
         $Articulos = DB::table('productividads')
@@ -82,6 +90,7 @@ class DashboardController extends Controller
             ->join('articulos', 'articulos.id_articulo', '=', 'productividads.productividadable_id')
             ->join('articulo_soportes', 'articulo_soportes.idarticulo',"=", 'articulos.id_articulo')
             ->select('productividads.*','solicituds.*','articulos.*','articulo_soportes.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Articulo')
+            
             ->get();
 
         $Ponencias = DB::table('productividads')
@@ -89,6 +98,7 @@ class DashboardController extends Controller
             ->join('ponencias', 'ponencias.idponencia', '=', 'productividads.productividadable_id')
             ->join('ponencia_soportes', 'ponencia_soportes.idponencia',"=", 'ponencias.idponencia')
             ->select('productividads.*','solicituds.*','ponencias.*','ponencia_soportes.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Ponencia')
+            
             ->get();
         //$=array($libros,$Software);
         
@@ -113,6 +123,7 @@ class DashboardController extends Controller
     }
 
     public function solicitudes2(){
+        $c=auth()->user()->convocatoria()->first();
         $productividades = collect();
         $Software = DB::table('productividads')
         ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
@@ -120,6 +131,7 @@ class DashboardController extends Controller
         ->join('software', 'software.idsoftware', '=', 'productividads.productividadable_id')
         ->join('soporte_software', 'soporte_software.id_software','=','software.idsoftware')
         ->select('productividads.*', 'software.*', 'soporte_software.*','solicituds.*','docentes.*')->where('productividads.productividadable_type','=','App\Software')
+        ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
         ->get();
 
         $libros = DB::table('productividads')
@@ -128,6 +140,7 @@ class DashboardController extends Controller
             ->join('libros', 'libros.idlibro', '=', 'productividads.productividadable_id')
             ->join('libro_soportes', 'libro_soportes.id_libro',"=", 'libros.idlibro')
             ->select('productividads.*','solicituds.*','libros.*','libro_soportes.*','docentes.*')->where('productividads.productividadable_type','=','App\Libro')
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
 
         $Articulos = DB::table('productividads')
@@ -136,6 +149,7 @@ class DashboardController extends Controller
             ->join('articulos', 'articulos.id_articulo', '=', 'productividads.productividadable_id')
             ->join('articulo_soportes', 'articulo_soportes.idarticulo',"=", 'articulos.id_articulo')
             ->select('productividads.*','solicituds.*','articulos.*','articulo_soportes.*','docentes.*')->where('productividads.productividadable_type','=','App\Articulo')
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
 
         $Ponencias = DB::table('productividads')
@@ -144,6 +158,7 @@ class DashboardController extends Controller
             ->join('ponencias', 'ponencias.idponencia', '=', 'productividads.productividadable_id')
             ->join('ponencia_soportes', 'ponencia_soportes.idponencia',"=", 'ponencias.idponencia')
             ->select('productividads.*','solicituds.*','ponencias.*','ponencia_soportes.*','docentes.*')->where('productividads.productividadable_type','=','App\Ponencia')
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
         //$=array($libros,$Software);
         foreach($Ponencias as $p){
@@ -174,7 +189,6 @@ class DashboardController extends Controller
     public function registros(){
 
         $convocatorias = DB::table('convocatorias')->get();
-
         $convocatorias = $convocatorias->sortByDesc('idconvocatoria');
         return view ('admin.registros',compact('convocatorias'));
     }

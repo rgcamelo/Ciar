@@ -96,8 +96,8 @@
                                 <td>{{$sol->observaciones}}</td>
                                 <td >
                                     @if ($sol->estado == 'Enviado')
-                                        <button type="button" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#cancelar">
-                                                Cancelar
+                                        <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar">
+                                                <span class="fa fa-close"></span>
                                               </button>
                                               
                                               <!-- Modal -->
@@ -124,8 +124,8 @@
                                               </div><br><br>
                                     @endif
                                     @if ( ($sol->estado == 'Aprobado' or $sol->estado == 'No Aprobado') )
-                                        <button type="button" class="btn btn-warning btn-sm"  data-toggle="modal" data-target="#reclamo">
-                                                Reclamar
+                                        <button type="button" class="btn btn-warning btn-lg"  data-toggle="modal" data-target="#reclamo">
+                                                <span class="fa fa-commenting"></span>
                                               </button>
                                               
                                               <!-- Modal -->
