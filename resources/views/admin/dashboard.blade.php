@@ -224,7 +224,16 @@
                       <li><a href="/libro">Libros</a></li>
                       <li><a href="/articulo">Articulo</a></li>
                       <li><a href="/ponencia">Ponencia</a></li>
-                      <li><a href="#">Link in level 2</a></li>
+                      <li><a href="/video">Cinematografias o Fonografias</a></li>
+                      <li><a href="/premiosnacionales">Premios Nacionales</a></li>
+                      <li><a href="/patente">Patente</a></li>
+                      <li><a href="/traduccion">Traduccion</a></li>
+                      <li><a href="/obra">Obras Artisticas</a></li>
+                      <li><a href="/produccionTecnica">Produccion Tecnica</a></li>
+                      <li><a href="/estudiosPostdoctorales">Estudios PostDoctorales</a></li>
+                      <li><a href="/publicacionImpresa">Publicacion Impresa Universitaria</a></li>
+                      <li><a href="/reseñasCriticas">Reseñas Criticas</a></li>
+                      <li><a href="/direccionTesis">Direccion de Tesis</a></li>
                     </ul>
                   </li>
                  @endif
@@ -274,12 +283,7 @@
     
       <!-- Main Footer -->
       <footer class="main-footer">
-        <!-- To the right -->
-        <div class="pull-right hidden-xs">
-          Anything you want
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+        
       </footer>
     
       <!-- Control Sidebar -->

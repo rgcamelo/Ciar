@@ -56,11 +56,32 @@ Route::get('software',"SoftwareController@nuevo")->name('software.nuevo');
 Route::get('libro',"LibroController@nuevo")->name('libro.nuevo');
 Route::get('articulo',"ArticuloController@nuevo")->name('articulo.nuevo');
 Route::get('ponencia',"PonenciaController@nuevo")->name('ponencia.nuevo');
+Route::get('video',"VideoController@nuevo")->name('video.nuevo');
+Route::get('premiosnacionales',"PremiosnacionalesController@nuevo")->name('premiosnacionales.nuevo');
+Route::get('patente',"PatenteController@nuevo")->name('patente.nuevo');
+Route::get('traduccion',"TraduccionController@nuevo")->name('traduccion.nuevo');
+Route::get('obra',"ObraController@nuevo")->name('obra.nuevo');
+Route::get('produccionTecnica',"ProduccionTecnicaController@nuevo")->name('producciontecnica.nuevo');
+Route::get('estudiosPostdoctorales',"EstudiosPostdoctoralesController@nuevo")->name('estudiosPostdoctorales.nuevo');
+Route::get('publicacionImpresa',"PublicacionImpresaController@nuevo")->name('publicacionImpresa.nuevo');
+Route::get('reseñasCriticas',"ReseñasCriticasController@nuevo")->name('reseñasCriticas.nuevo');
+Route::get('direccionTesis',"DireccionTesisController@nuevo")->name('direccionTesis.nuevo');
+
 
 Route::post('/articulo',"ArticuloController@crear");
 Route::post('/software',"SoftwareController@crear");
 Route::post('/libro',"LibroController@crear");
 Route::post('/ponencia',"PonenciaController@crear");
+Route::post('/video',"VideoController@crear");
+Route::post('/premiosnacionales',"PremiosnacionalesController@crear");
+Route::post('/patente',"PatenteController@crear");
+Route::post('/traduccion',"TraduccionController@crear");
+Route::post('/obra',"ObraController@crear");
+Route::post('/produccionTecnica',"ProduccionTecnicaController@crear");
+Route::post('/estudiosPostdoctorales',"EstudiosPostdoctoralesController@crear");
+Route::post('/publicacionImpresa',"PublicacionImpresaController@crear");
+Route::post('/reseñasCriticas',"ReseñasCriticasController@crear");
+Route::post('/direccionTesis',"DireccionTesisController@crear");
 
 Route::get('/descargar/{archivo}',"Descargar@descarga");
 

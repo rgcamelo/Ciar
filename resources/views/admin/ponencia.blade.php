@@ -74,7 +74,7 @@
 
                                 <div style="margin-bottom: 25px" class="input-group {{ $errors->has('noautores') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">Numero de Autores</span>
-                                <input id="noautores_ponencia" type="number" class="form-control" requireds name="noautores" min="1" value="{{old('noautores')}}">
+                                <input id="noautores_ponencia" type="number" class="form-control" required name="noautores" min="1" value="{{old('noautores')}}">
                                 
                                 </div>
 

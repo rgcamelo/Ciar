@@ -21,13 +21,18 @@ class DashboardController extends Controller
 
     public function solicitudes(){
         $c=auth()->user()->convocatoria()->first();
-        $solicitudes = DB::table('solicituds')
+
+        $solicitudes= collect();
+        if(isset($c)){
+            $solicitudes = DB::table('solicituds')
             ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->select('solicituds.*', 'productividads.*')->where('productividads.id_docente','=',auth()->user()->docente()->id )
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
 
             $solicitudes=$solicitudes->sortByDesc('idsolicitud');
+        }
+        
 
         return view ('admin.missolicitudes',compact('solicitudes'));
 
@@ -37,12 +42,16 @@ class DashboardController extends Controller
 
     public function reclamos(){
         $c=auth()->user()->convocatoria()->first();
-        $reclamos = DB::table('solicituds')
+        $reclamos = collect();
+        if(isset($c)){
+            $reclamos = DB::table('solicituds')
             ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('reclamos', 'reclamos.id_solicitud', '=', 'solicituds.idsolicitud')
             ->select('solicituds.*', 'productividads.*','reclamos.*')->where('productividads.id_docente','=',auth()->user()->docente()->id )
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
+        }
+        
 
             $reclamos=$reclamos->sortByDesc('idsolicitud');
     
@@ -54,14 +63,16 @@ class DashboardController extends Controller
 
     public function revisarreclamos(){
         $c=auth()->user()->convocatoria()->first();
-        $reclamos = DB::table('solicituds')
+        $reclamos = collect();
+        if(isset($c)){
+            $reclamos = DB::table('solicituds')
             ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('reclamos', 'reclamos.id_solicitud', '=', 'solicituds.idsolicitud')
             ->join('docentes', 'docentes.id', '=','productividads.id_docente')
             ->select('solicituds.*', 'productividads.*','reclamos.*')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
-
+        }
             $reclamos=$reclamos->sortByDesc('idsolicitud');
     
         return view ('admin.revisarreclamos',compact('reclamos'));
@@ -125,7 +136,9 @@ class DashboardController extends Controller
     public function solicitudes2(){
         $c=auth()->user()->convocatoria()->first();
         $productividades = collect();
-        $Software = DB::table('productividads')
+
+        if(isset($c)){
+            $Software = DB::table('productividads')
         ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
         ->join('docentes', 'docentes.id', '=','productividads.id_docente')
         ->join('software', 'software.idsoftware', '=', 'productividads.productividadable_id')
@@ -178,6 +191,8 @@ class DashboardController extends Controller
         }
 
         $productividades=$productividades->sortByDesc('idproductividad');
+        }
+        
 
         //dd($productividades);
         

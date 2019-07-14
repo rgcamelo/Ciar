@@ -41,7 +41,7 @@
                 <span class="label label-danger">{{$p->estado}}</span>
               @endif
               @if ($p->estado == 'Cancelado')
-                <span style="font-size:16px" class="label label-danger">{{$p->estado}}</span>
+                <span class="label label-danger">{{$p->estado}}</span>
               @endif 
               @if ($p->estado == 'Reclamado')
                 <span class="label label-warning">{{$p->estado}}</span>
@@ -90,7 +90,7 @@
               <span class="label label-danger">{{$p->estado}}</span>
             @endif
             @if ($p->estado == 'Cancelado')
-              <span style="font-size:16px" class="label label-danger">{{$p->estado}}</span>
+              <span class="label label-danger">{{$p->estado}}</span>
             @endif 
             @if ($p->estado == 'Reclamado')
               <span class="label label-warning">{{$p->estado}}</span>
@@ -169,12 +169,9 @@
     <td>
 
             @if ($p->estado == 'Enviado')
-            <div class="row">
-                <div class="col-sm-12 col-xs-12">
-                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#calificar"><span class="fa fa-check"></span></button>
-                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#reprobar"><span class="fa fa-close"></span></button>
-                  </div>
-            </div>
+
+                    <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar"><span class="fa fa-check"></span></button>
+                    <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar"><span class="fa fa-close"></span></button>
             
                   
                   <!-- Modal -->
@@ -249,8 +246,6 @@
                         </div>
                       </div>
                     </div>
-                  
-                  <br>
             @endif
-            <button class="btn btn-primary">Ver</button>
+            <button class="btn btn-primary btn-lg"><span class="fa fa-eye"></span></button>
         </td>

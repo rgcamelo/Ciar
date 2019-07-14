@@ -96,12 +96,12 @@
                                 <td>{{$sol->observaciones}}</td>
                                 <td >
                                     @if ($sol->estado == 'Enviado')
-                                        <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar">
+                                        <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
                                                 <span class="fa fa-close"></span>
                                               </button>
                                               
                                               <!-- Modal -->
-                                              <div class="modal fade" id="cancelar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal fade" id="cancelar{{$sol->idsolicitud}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                 <div class="modal-dialog" role="document">
                                                   <div class="modal-content">
                                                     <div class="modal-header">

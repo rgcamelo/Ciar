@@ -28,38 +28,39 @@ class Ponencia extends Model
     }
 
     public function puntaje(){
+
         switch($this->tipoevento){
             case 'Internacional':
-            if($this->noautores_ponencia <= 3){
+            if($this->noautores <= 3){
                 return 84;               
             }
-            elseif($this->noautores_ponencia <= 5){
+            elseif($this->noautores <= 5){
                return 84/2; 
             }
             else{
-                return 84/($this->noautores_ponencia/2);   
+                return 84/($this->noautores/2);   
             }
             break;
             case 'Nacional':
-            if($this->noautores_ponencia <= 3){
+            if($this->noautores <= 3){
                 return 48;               
             }
-            elseif($this->noautores_ponencia <= 5){
+            elseif($this->noautores <= 5){
                return 48/2; 
             }
             else{
-                return 48/($this->noautores_ponencia/2);   
+                return 48/($this->noautores/2);   
             }
             break;
             case 'Regional':
-            if($this->noautores_ponencia <= 3){
+            if($this->noautores <= 3){
                 return 24;               
             }
-            elseif($this->noautores_ponencia <= 5){
+            elseif($this->noautores <= 5){
                return 24/2; 
             }
             else{
-                return 24/($this->noautores_ponencia/2);   
+                return 24/($this->noautores/2);   
             }
             break;
         }

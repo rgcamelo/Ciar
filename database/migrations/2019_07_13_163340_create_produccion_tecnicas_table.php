@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVideosTable extends Migration
+class CreateProduccionTecnicasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateVideosTable extends Migration
      */
     public function up()
     {
-        Schema::create('videos', function (Blueprint $table) {
-            $table->bigIncrements('idvideo');
-            $table->string('tipo');
+        Schema::create('produccion_tecnicas', function (Blueprint $table) {
+            $table->bigIncrements('idproducciontecnica');
             $table->string('titulo');
-            $table->string('impacto');
-            $table->string('noautores_video');
+            $table->string('tipo');
+            $table->string('noautores');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateVideosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('videos');
+        Schema::dropIfExists('produccion_tecnicas');
     }
 }

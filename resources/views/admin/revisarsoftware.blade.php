@@ -90,7 +90,7 @@
               <span class="label label-danger">{{$p->estado}}</span>
             @endif
             @if ($p->estado == 'Cancelado')
-              <span style="font-size:16px" class="label label-danger">{{$p->estado}}</span>
+              <span class="label label-danger">{{$p->estado}}</span>
             @endif 
             @if ($p->estado == 'Reclamado')
               <span class="label label-warning">{{$p->estado}}</span>
