@@ -19,7 +19,6 @@ class VideoController extends Controller
         //dd($data);
         
         $video=Video::create([
-            'titulo' => $data['titulo'],
             'tipo' => $data['tipo'],
             'impacto' => $data['impacto'],
             'noautores_video' => $data['noautores'],

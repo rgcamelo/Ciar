@@ -9,7 +9,7 @@ class Video extends Model
     protected $primaryKey = 'idvideo';
 
     protected $fillable =[
-        'tipo','titulo','impacto','noautores_video'
+        'tipo','impacto','noautores_video'
     ];
     
     public function productividad(){

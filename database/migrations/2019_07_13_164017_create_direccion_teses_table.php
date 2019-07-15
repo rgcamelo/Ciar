@@ -15,7 +15,6 @@ class CreateDireccionTesesTable extends Migration
     {
         Schema::create('direccion_teses', function (Blueprint $table) {
             $table->bigIncrements('iddireccion');
-            $table->string('titulo');
             $table->string('noautores');
             $table->string('tipo');
             $table->timestamps();

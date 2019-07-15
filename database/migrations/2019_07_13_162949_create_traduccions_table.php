@@ -16,7 +16,6 @@ class CreateTraduccionsTable extends Migration
         Schema::create('traduccions', function (Blueprint $table) {
             $table->bigIncrements('idtraduccion');
             $table->string('tipo');
-            $table->string('titulo');
             $table->string('noautores');
             $table->timestamps();
         });

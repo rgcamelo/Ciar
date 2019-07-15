@@ -15,7 +15,6 @@ class CreatePatentesTable extends Migration
     {
         Schema::create('patentes', function (Blueprint $table) {
             $table->bigIncrements('idpatente');
-            $table->string('titulo');
             $table->string('noautores');
             $table->timestamps();
         });

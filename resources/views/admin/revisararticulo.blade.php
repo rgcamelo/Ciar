@@ -11,8 +11,12 @@
           ">
             <i class="
             @if($p->estado == 'Aprobado' or $p->estado =='Aprobado2')fa fa-check @endif
-            @if ($p->estado == 'Enviado' or $p->estado == 'Enviado a Pares' or $p->estado == 'Reclamado' or $p->estado == 'Calificado por Pares')fa fa-envelope @endif
-            @if ($p->estado == 'No Aprobado' or $p->estado == 'Rechazado2' or $p->estado == 'Cancelado')fa fa-close @endif
+          @if ($p->estado == 'Enviado')fa fa-envelope @endif
+          @if ($p->estado == 'Enviado a Pares' )fa fa-arrow-left @endif
+          @if ($p->estado == 'Reclamado' )fa fa-commenting @endif
+          @if ($p->estado == 'Calificado por Pares' )fa fa-graduation-cap @endif
+          @if ($p->estado == 'No Aprobado' or $p->estado == 'Rechazado2' or $p->estado == 'Cancelado')fa fa-close @endif
+          @if ($p->estado == 'Cancelado')fa fa-minus @endif
             "></i>
           </span>
           <div class="info-box-content">
@@ -169,12 +173,12 @@
 <td>
         @if ($p->estado == 'Enviado')
 
-                <button class="btn btn-success btn-lg" title="Aprobar" type="button" data-toggle="modal" data-target="#calificar"><span class="fa fa-check"></span></button>
-                <button class="btn btn-danger btn-lg" title="No Aprobar" type="button" data-toggle="modal" data-target="#reprobar"><span class="fa fa-close"></span></button>
+                <button class="btn btn-success btn-lg" title="Aprobar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
+                <button class="btn btn-danger btn-lg" title="No Aprobar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
         
               
               <!-- Modal -->
-              <div class="modal fade" id="calificar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal fade" id="calificar{{$p->idsolicitud}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -217,7 +221,7 @@
                 </div>
               </div>
 
-              <div class="modal fade" id="reprobar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal fade" id="reprobar{{$p->idsolicitud}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">

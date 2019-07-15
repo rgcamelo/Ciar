@@ -3,10 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\ReseñasCriticas;
 
 class ReseñasCriticasController extends Controller
 {
     public function nuevo(){
         return view('admin.reseña');
+    }
+
+    public function crear(){
+        $d=auth()->user()->Docente();
+
+        $data=request()->all();
+
+        //dd($data);
+        
+        $reseña=ReseñasCriticas::create([
+            'noautores' => $data['noautores'],
+        ]);
+        
+
+        $productividad=$reseña->productividad()->create([
+            'id_docente' => $d->id,
+            'titulo' => $data['titulo'],
+        ]); 
+
+        $pa=$reseña->puntaje();
+        $convocatoria=auth()->user()->convocatoria()->first();
+        $reseña->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
+
+        return redirect()->route('dashboard');
     }
 }

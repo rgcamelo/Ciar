@@ -15,7 +15,6 @@ class CreateObrasTable extends Migration
     {
         Schema::create('obras', function (Blueprint $table) {
             $table->bigIncrements('idobra');
-            $table->string('titulo');
             $table->string('tipo');
             $table->string('impacto');
             $table->string('noautores');

@@ -15,7 +15,6 @@ class CreateProduccionTecnicasTable extends Migration
     {
         Schema::create('produccion_tecnicas', function (Blueprint $table) {
             $table->bigIncrements('idproducciontecnica');
-            $table->string('titulo');
             $table->string('tipo');
             $table->string('noautores');
             $table->timestamps();

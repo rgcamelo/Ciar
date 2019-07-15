@@ -15,7 +15,6 @@ class CreateEstudiosPostdoctoralesTable extends Migration
     {
         Schema::create('estudios_postdoctorales', function (Blueprint $table) {
             $table->bigIncrements('idestudiopost');
-            $table->string('titulo');
             $table->timestamps();
         });
     }

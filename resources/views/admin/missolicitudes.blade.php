@@ -7,7 +7,10 @@
                     $('#tabla').DataTable( {
                         "paging":   true,
                         "ordering": false,
-                        "info":     true
+                        "info":     true,
+                        "language": {
+                        "emptyTable": "<div><img src='/admintle/img/user2-160x160.jpg'></img></div>"
+                        }
                     } );
                 } );</script>
             <table id="tabla" class='display'style="width:100%">
@@ -61,8 +64,12 @@
                                         <span class="info-box-icon">
                                           <i class="
                                           @if($sol->estado == 'Aprobado' or $sol->estado =='Aprobado2')fa fa-check @endif
-                                          @if ($sol->estado == 'Enviado' or $sol->estado == 'Enviado a Pares' or $sol->estado == 'Reclamado' or $sol->estado == 'Calificado por Pares')fa fa-envelope @endif
+                                          @if ($sol->estado == 'Enviado')fa fa-envelope @endif
+                                          @if ($sol->estado == 'Enviado a Pares' )fa fa-arrow-left @endif
+                                          @if ($sol->estado == 'Reclamado' )fa fa-commenting @endif
+                                          @if ($sol->estado == 'Calificado por Pares' )fa fa-graduation-cap @endif
                                           @if ($sol->estado == 'No Aprobado' or $sol->estado == 'Rechazado2' or $sol->estado == 'Cancelado')fa fa-close @endif
+                                          @if ($sol->estado == 'Cancelado')fa fa-minus @endif
                                           "></i>
                                         </span>
                                         <div class="info-box-content">
@@ -78,8 +85,12 @@
                                       <span class="info-box-icon">
                                         <i class="
                                         @if($sol->estado == 'Aprobado' or $sol->estado =='Aprobado2')fa fa-check @endif
-                                        @if ($sol->estado == 'Enviado' or $sol->estado == 'Enviado a Pares' or $sol->estado == 'Reclamado' or $sol->estado == 'Calificado por Pares')fa fa-envelope @endif
-                                        @if ($sol->estado == 'No Aprobado' or $sol->estado == 'Rechazado2' or $sol->estado == 'Cancelado')fa fa-close @endif
+                                          @if ($sol->estado == 'Enviado')fa fa-envelope @endif
+                                          @if ($sol->estado == 'Enviado a Pares' )fa fa-arrow-left @endif
+                                          @if ($sol->estado == 'Reclamado' )fa fa-commenting @endif
+                                          @if ($sol->estado == 'Calificado por Pares' )fa fa-graduation-cap @endif
+                                          @if ($sol->estado == 'No Aprobado' or $sol->estado == 'Rechazado2' or $sol->estado == 'Cancelado')fa fa-close @endif
+                                          @if ($sol->estado == 'Cancelado')fa fa-minus @endif
                                         "></i>
                                       </span>
                                       <div class="info-box-content">
@@ -124,12 +135,12 @@
                                               </div><br><br>
                                     @endif
                                     @if ( ($sol->estado == 'Aprobado' or $sol->estado == 'No Aprobado') )
-                                        <button type="button" class="btn btn-warning btn-lg"  data-toggle="modal" data-target="#reclamo">
+                                            <button type="button" class="btn btn-warning btn-lg"  data-toggle="modal" data-target="#reclamo{{$sol->idproductividad}}">
                                                 <span class="fa fa-commenting"></span>
                                               </button>
                                               
                                               <!-- Modal -->
-                                              <div class="modal fade" id="reclamo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                              <div class="modal fade" id="reclamo{{$sol->idproductividad}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                 <div class="modal-dialog" role="document">
                                                   <div class="modal-content">
                                                     <div class="modal-header">

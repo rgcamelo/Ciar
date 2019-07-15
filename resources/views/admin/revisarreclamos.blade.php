@@ -65,14 +65,14 @@
                                     @if ($sol->estado == 'Enviado')
                                     <div class="row">
                                         <div class="col-sm-12 col-xs-12">
-                                            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#calificar"><span class="fa fa-check"></span></button>
-                                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#reprobar"><span class="fa fa-close"></span></button>
+                                            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#calificar{{$sol->idreclamo}}"><span class="fa fa-check"></span></button>
+                                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#reprobar{{$sol->idreclamo}}"><span class="fa fa-close"></span></button>
                                           </div>
                                     </div>
                                     
                                           
                                           <!-- Modal -->
-                                          <div class="modal fade" id="calificar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                  <div class="modal fade" id="calificar{{$sol->idreclamo}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                             <div class="modal-dialog" role="document">
                                               <div class="modal-content">
                                                 <div class="modal-header">
@@ -127,7 +127,7 @@
                                             </div>
                                           </div>
                             
-                                          <div class="modal fade" id="reprobar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                          <div class="modal fade" id="reprobar{{$sol->idreclamo}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                               <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                   <div class="modal-header">
