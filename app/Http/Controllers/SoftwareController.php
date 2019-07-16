@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 class SoftwareController extends Controller
 {
@@ -24,8 +25,7 @@ class SoftwareController extends Controller
        
         $idu=auth()->user()->id_docente;
         $d=Docente::find($idu);
-        //$pdf = PDF::loadView('pdf.formulariosoftware');
-        //return $pdf->stream('invoice.pdf');
+        
         //$data=request()->all();
         /*$data=request()->validate([
             'titulo' => 'required',
@@ -172,13 +172,22 @@ class SoftwareController extends Controller
             'idconvocatoria' => $convocatoria->idconvocatoria,
         ]);
 
-        
+        $this->pdf($folder);
         
         return redirect()->route('dashboard');
 
         //$data=request()->all();
         //dd($data);
         //return view('admin.prueba');
+    }
+
+    public function pdf($folder){
+
+        $data
+
+
+        $pdf = PDF::loadView('pdf.formulariosoftware',compact('solicitud'));
+        $pdf->save($folder.'/FormatoEnviadoSoftware.pdf');
     }
 
     public function pares(Solicitud $solicitud){

@@ -111,8 +111,117 @@ class DashboardController extends Controller
             ->select('productividads.*','solicituds.*','ponencias.*','ponencia_soportes.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Ponencia')
             
             ->get();
-        //$=array($libros,$Software);
+
+        $Videos = DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('videos', 'videos.idvideo', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','videos.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Video')
+            
+            ->get();
         
+        $Premios= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('premios_nacionales', 'premios_nacionales.idpremio', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','premios_nacionales.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Premios_Nacionales')
+            
+            ->get();
+        
+        $Patentes= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('patentes', 'patentes.idpatente', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','patentes.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Patente')
+            
+            ->get();
+
+        $Traducciones= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('traduccions', 'traduccions.idtraduccion', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','traduccions.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Traduccion')
+            
+            ->get();    
+        
+        $Obras= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('obras', 'obras.idobra', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','obras.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Obra')
+            
+            ->get();  
+
+        $Produccion= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('produccion_tecnicas', 'produccion_tecnicas.idproducciontecnica', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','produccion_tecnicas.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\ProduccionTecnica')
+            
+            ->get();  
+
+        $Estudios= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('estudios_postdoctorales', 'estudios_postdoctorales.idestudiopost', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','estudios_postdoctorales.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\EstudiosPostdoctorales')
+            
+            ->get();  
+
+        $Publicacion= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('publicacion_impresas', 'publicacion_impresas.idpublicacionimpresa', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','publicacion_impresas.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\PublicacionImpresa')
+            
+            ->get(); 
+
+        $Reseña= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('reseñas_criticas', 'reseñas_criticas.idreseña', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','reseñas_criticas.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\ReseñasCriticas')
+            
+            ->get(); 
+
+        $Direccion= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('direccion_teses', 'direccion_teses.iddireccion', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','direccion_teses.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\DireccionTesis')
+            
+            ->get(); 
+        //$=array($libros,$Software);
+        foreach($Direccion as $d){
+            $productividades->push($d);
+        }
+
+        foreach($Reseña as $d){
+            $productividades->push($d);
+        }
+
+        foreach($Publicacion as $pu){
+            $productividades->push($pu);
+        }
+
+        foreach($Estudios as $e){
+            $productividades->push($e);
+        }
+
+        foreach($Produccion as $pro){
+            $productividades->push($pro);
+        }
+
+        foreach($Obras as $o){
+            $productividades->push($o);
+        }
+
+        foreach($Traducciones as $t){
+            $productividades->push($t);
+        }
+
+        foreach($Patentes as $pa){
+            $productividades->push($pa);
+        }
+
+        foreach($Premios as $pre){
+            $productividades->push($pre);
+        }
+
+        foreach($Videos as $v){
+            $productividades->push($v);
+        }
+
         foreach($Ponencias as $p){
             $productividades->push($p);
         }
@@ -173,7 +282,126 @@ class DashboardController extends Controller
             ->select('productividads.*','solicituds.*','ponencias.*','ponencia_soportes.*','docentes.*')->where('productividads.productividadable_type','=','App\Ponencia')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
+
+        $Videos = DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('videos', 'videos.idvideo', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','videos.*')->where('productividads.productividadable_type','=','App\Video')
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->get();
+        
+        $Premios= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('premios_nacionales', 'premios_nacionales.idpremio', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','premios_nacionales.*')->where('productividads.productividadable_type','=','App\Premios_Nacionales')
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->get();
+        
+        $Patentes= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('patentes', 'patentes.idpatente', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','patentes.*')->where('productividads.productividadable_type','=','App\Patente')
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->get();
+
+        $Traducciones= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('traduccions', 'traduccions.idtraduccion', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','traduccions.*')->where('productividads.productividadable_type','=','App\Traduccion')
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->get();    
+        
+        $Obras= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('obras', 'obras.idobra', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','obras.*')->where('productividads.productividadable_type','=','App\Obra')
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->get();  
+
+        $Produccion= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('produccion_tecnicas', 'produccion_tecnicas.idproducciontecnica', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','produccion_tecnicas.*')->where('productividads.productividadable_type','=','App\ProduccionTecnica')
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->get();  
+
+        $Estudios= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('estudios_postdoctorales', 'estudios_postdoctorales.idestudiopost', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','estudios_postdoctorales.*')->where('productividads.productividadable_type','=','App\EstudiosPostdoctorales')
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->get();  
+
+        $Publicacion= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('publicacion_impresas', 'publicacion_impresas.idpublicacionimpresa', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','publicacion_impresas.*')->where('productividads.productividadable_type','=','App\PublicacionImpresa')
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->get(); 
+
+        $Reseña= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('reseñas_criticas', 'reseñas_criticas.idreseña', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','reseñas_criticas.*')->where('productividads.productividadable_type','=','App\ReseñasCriticas')
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->get(); 
+
+        $Direccion= DB::table('productividads')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('direccion_teses', 'direccion_teses.iddireccion', '=', 'productividads.productividadable_id')
+            ->select('productividads.*','solicituds.*','direccion_teses.*')->where('productividads.productividadable_type','=','App\DireccionTesis')
+            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->get(); 
         //$=array($libros,$Software);
+
+        foreach($Direccion as $d){
+            $productividades->push($d);
+        }
+
+        foreach($Reseña as $d){
+            $productividades->push($d);
+        }
+
+        foreach($Publicacion as $pu){
+            $productividades->push($pu);
+        }
+
+        foreach($Estudios as $e){
+            $productividades->push($e);
+        }
+
+        foreach($Produccion as $pro){
+            $productividades->push($pro);
+        }
+
+        foreach($Obras as $o){
+            $productividades->push($o);
+        }
+
+        foreach($Traducciones as $t){
+            $productividades->push($t);
+        }
+
+        foreach($Patentes as $pa){
+            $productividades->push($pa);
+        }
+
+        foreach($Premios as $pre){
+            $productividades->push($pre);
+        }
+
+        foreach($Videos as $v){
+            $productividades->push($v);
+        }
         foreach($Ponencias as $p){
             $productividades->push($p);
         }
@@ -191,6 +419,8 @@ class DashboardController extends Controller
         }
 
         $productividades=$productividades->sortByDesc('idproductividad');
+
+
         }
         
 

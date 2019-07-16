@@ -291,7 +291,7 @@
                         <div class="modal-body" style="display: flex;justify-content:center">
                                 <form action="{{ url('calificarparessoft',['solicitud' => $p->idsolicitud, 'software' => $p->idsoftware]) }}" id="calipar" method="post">
                                     {!! csrf_field() !!}
-                                    <label style="font-size: 32px" for="">Puntaje Par: </label><input style="font-size: 16px" type="number" required max="{{$p->puntos_aprox}}" min="0"   name="resultadoPares">
+                                    <label style="font-size: 32px" for="">Puntaje Par: </label><input style="font-size: 16px" type="number" step="0.01" required max=5 min="0"   name="resultadoPares">
                                     
                                     <div class="" style="display: flex;justify-content:center">
                                             <input type="submit" class="btn btn-success " value="Aceptar">

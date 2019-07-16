@@ -3,9 +3,12 @@
 @section('content')
    <div class="row">
        <div class="col-md-4 col-md-offset-4">
-           <div class="panel panel-default">
+           <div class="panel panel-success">
                <div class="panel-heading">
-                    <h1 class="panel-title">Acceso a la aplicacion</h1>
+                 <div style="display: flex;justify-content:center">
+                    <img style="width:160px;height:160px" src="/admintle/img/ciarp.png" alt="">
+                 </div>
+                    
                </div>
                <div class="panel-body">
                <form method="POST" action="{{route('login')}}">
@@ -20,7 +23,7 @@
                             <input class="form-control" type="password" name="password" placeholder="Contraseña">
                            {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
                         </div>
-                        <button class="btn btn-primary btn-block">Acceder</button>
+                        <button class="btn btn-success btn-block">Acceder</button>
                    </form>
                </div>
            </div>

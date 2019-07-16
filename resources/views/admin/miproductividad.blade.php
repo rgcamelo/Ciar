@@ -44,6 +44,67 @@
                                 </tr>
                             
                                 @break
+                                @case('App\Video')
+                                <tr>
+                                   @include('admin.misvideos')
+                                </tr>
+                            
+                                @break
+                                @case('App\Premios_Nacionales')
+                                <tr>
+                                   @include('admin.mispremios')
+                                </tr>
+                            
+                                @break
+                                @case('App\Patente')
+                                <tr>
+                                   @include('admin.mispatentes')
+                                </tr>
+                            
+                                @break
+                                @case('App\Traduccion')
+                                <tr>
+                                   @include('admin.mistraducciones')
+                                </tr>
+                            
+                                @break
+                                @case('App\Obra')
+                                <tr>
+                                   @include('admin.misobras')
+                                </tr>
+                            
+                                @break
+                                @case('App\ProduccionTecnica')
+                                <tr>
+                                   @include('admin.misproducciones')
+                                </tr>
+                            
+                                @break
+                                @case('App\EstudiosPostdoctorales')
+                                <tr>
+                                   @include('admin.miestudios')
+                                </tr>
+                            
+                                @break
+                                @case('App\PublicacionImpresa')
+                                <tr>
+                                   @include('admin.mispublicaciones')
+                                </tr>
+                            
+                                @break
+                                @case('App\ReseñasCriticas')
+                                <tr>
+                                   @include('admin.misreseñas')
+                                </tr>
+                            
+                                @break
+                                @case('App\DireccionTesis')
+                                <tr>
+                                   @include('admin.misdirecciones')
+                                </tr>
+                            
+                                @break
+
                             @default
                                 
                         @endswitch

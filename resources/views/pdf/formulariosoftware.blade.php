@@ -83,7 +83,7 @@
                             <strong>FECHA DE SOLICITUD</strong>
                     </td>
                     <td  colspan="13" valign="top" class="backGreen">
-
+                            {{$solicitud->created_at}}
                             <strong></strong>
                     </td>
                 </tr>

@@ -1,36 +1,46 @@
+
 .backGreen{
+    padding-bottom: 6;
+    padding-left: 6;
     font-size: 9.0pt;
-    font-family: Arial;
+    font-family: Candara;
     border:solid #9BBB59 1.0pt;
-    border-top:none;
-    border-left:none;
     background:#E6EED5;
-    padding:0cm 5.4pt 0cm 5.4pt
+}
+
+.imagen{
+    padding-bottom: 0;
+    padding-left: 15;
+    padding-right: 15;
+    padding-top: 20;
 }
 
 .parrafo{
-
-    font-size: 10.0pt;
+    padding-left: 10;
+    padding-right: 20;
+    justify-content: center;
+    font-family: Candara;
+    font-size: 11.0pt;
     text-align:  justify;
 }
 
+
+
 .backTitle{
+    text-align: center;
     font-size: 9.0pt; 
-    font-family: Candara;
     border:solid #9BBB59 1.0pt;
-    border-left:none;
-    border-right: none;
+    border-bottom-width: 2;
     background:rgb(255, 255, 255); 
-    padding:0cm 5.4pt 0cm 5.4pt
+    padding-bottom: 6;
 }
 
 .backWhite{
+    padding-bottom: 6;
+    padding-left: 6;
     font-size: 9.0pt; 
     font-family: Candara;
     border:solid #9BBB59 1.0pt;
-    border-top:none;
-    border-left:none;
     background:rgb(255, 255, 255); 
-    padding:0cm 5.4pt 0cm 5.4pt
 }
 
