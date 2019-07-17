@@ -58,6 +58,7 @@ class DireccionTesis extends Model
                 'estado' => 'Enviado',
                 'bonificacion_calculada' => $pa,
                 'idconvocatoria' => $idc,
+                'fechasolicitud' => (date('Y-m-d'))
             ]);
     }
 }

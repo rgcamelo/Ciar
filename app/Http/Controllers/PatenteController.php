@@ -24,11 +24,11 @@ class PatenteController extends Controller
         
 
         $productividad=$patente->productividad()->create([
-            'id_docente' => $d->id,
+            'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=$patente->puntaje();
+        $pa=round($pa=$patente->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $patente->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 

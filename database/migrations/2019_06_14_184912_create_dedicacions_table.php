@@ -14,8 +14,8 @@ class CreateDedicacionsTable extends Migration
     public function up()
     {
         Schema::create('dedicacions', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('Tipo');
+            $table->bigIncrements('iddedicacion');
+            $table->string('TipoDedicacion');
             $table->timestamps();
         });
     }

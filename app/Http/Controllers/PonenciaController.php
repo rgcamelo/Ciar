@@ -91,11 +91,11 @@ class PonenciaController extends Controller
         $ponencia->soportes($memoria,$certieponente, $cvlac,$gruplac,$folder);
 
         $productividad=$ponencia->productividad()->create([
-            'id_docente' => $d->id,
+            'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=$ponencia->puntaje();
+        $pa=round($pa=$ponencia->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $ponencia->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 

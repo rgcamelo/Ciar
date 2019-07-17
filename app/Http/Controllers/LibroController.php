@@ -85,11 +85,11 @@ class LibroController extends Controller
         $libro->soportes($ejemplar,$certilibroinves, $cvlac,$gruplac,$certieditorial,$folder);
 
         $productividad=$libro->productividad()->create([
-            'id_docente' => $d->id,
+            'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=$libro->puntaje();
+        $pa=round($pa=$libro->puntaje(),3);
 
         $convocatoria=auth()->user()->convocatoria()->first();
         $libro->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);

@@ -14,7 +14,7 @@ class FacultadSeeder extends Seeder
     public function run()
     {
         Facultad::create([
-            'nombre'=> 'Faculta de ciencias y tecnologia',
+            'nombreFacultad'=> 'Faculta de ciencias y tecnologia',
         ]);
 
     }

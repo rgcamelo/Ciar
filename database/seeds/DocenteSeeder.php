@@ -19,7 +19,6 @@ class DocenteSeeder extends Seeder
             'dedicacion_id' =>1,
             'Departamento'=>1,
             'grupoInvestigacion_id'=>1,
-            'categoria_id'=>1,
             'Correo'=>'rafaelgcamelo@gmail.com',
             'Telefono' =>'3042136318',
         ]);
@@ -31,7 +30,6 @@ class DocenteSeeder extends Seeder
             'dedicacion_id' =>1,
             'Departamento'=>1,
             'grupoInvestigacion_id'=>1,
-            'categoria_id'=>1,
             'Correo'=>'rafaelgcamelo@gmail.com',
             'Telefono' =>'3042136318',
         ]);

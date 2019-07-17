@@ -24,11 +24,11 @@ class PremiosNacionalesController extends Controller
         
 
         $productividad=$premio->productividad()->create([
-            'id_docente' => $d->id,
+            'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=$premio->puntaje();
+        $pa=round($pa=$premio->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $premio->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 

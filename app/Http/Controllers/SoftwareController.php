@@ -149,7 +149,7 @@ class SoftwareController extends Controller
         $d=Docente::find($idu);
 
         $software->productividad()->create([
-            'id_docente' => $d->id,
+            'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
 
@@ -163,16 +163,18 @@ class SoftwareController extends Controller
             $pa=15/($data['noautores']/2);
         }
 
+        $pa=round($pa,3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $solicitud = Productividad::all()->last();
-        Solicitud::create([
+        $s=Solicitud::create([
             'productividad_id' => $solicitud->idproductividad,
             'estado' => 'Enviado',
             'puntos_aprox' =>$pa,
             'idconvocatoria' => $convocatoria->idconvocatoria,
+            'fechasolicitud' => (date('Y-m-d'))
         ]);
 
-        $this->pdf($folder);
+        $this->pdf($folder,$s);
         
         return redirect()->route('dashboard');
 
@@ -181,61 +183,31 @@ class SoftwareController extends Controller
         //return view('admin.prueba');
     }
 
-    public function pdf($folder){
+    public function pdf($folder,$solicitud){
+        $d=auth()->user()->Docente();
 
-        $data
+        $data = DB::table('docentes')
+            ->join('productividads', 'docentes.iddocente', '=','productividads.id_docente')
+            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
+            ->join('dedicacions', 'docentes.dedicacion_id', '=','dedicacions.iddedicacion')
+            ->join('departamentos', 'docentes.Departamento', '=','departamentos.iddepartamento')
+            ->join('facultad', 'departamentos.facultad_id', '=','facultad.idfacultad')
+            ->join('software', 'software.idsoftware', '=', 'productividads.productividadable_id')
+            ->join('grupo_investigacions', 'docentes.grupoInvestigacion_id', '=','grupo_investigacions.idgrupo')
+            ->join('categorias', 'categorias.idcategoria', '=','grupo_investigacions.categoria_id')
 
+            ->select('docentes.*', 'productividads.*','dedicacions.*','departamentos.*','facultad.*','grupo_investigacions.*','categorias.*','solicituds.*','software.*')
+            ->where('solicituds.idsolicitud','=',$solicitud->idsolicitud)
+            ->get();
 
-        $pdf = PDF::loadView('pdf.formulariosoftware',compact('solicitud'));
-        $pdf->save($folder.'/FormatoEnviadoSoftware.pdf');
-    }
+        $pdf = PDF::loadView('pdf.formulariosoftware',compact('data'));
+        $pdf->save($folder.'/FormatoEnviadoSoftware'.$solicitud->idsolicitud.'.pdf');
 
-    public function pares(Solicitud $solicitud){
         $e=([
-            'estado'=> 'Enviado a Pares'
+            'formatoenviado' => 'FormatoEnviadoSoftware'.$solicitud->idsolicitud.'.pdf',
+            'folder' => $folder
         ]);
         $solicitud->update($e);
-        
-        //Crear notificacion
-        //dd($solicitud);
-        //$solicitud->estado='Enviado a Pares';
-        
-        return redirect()->route('revisarsolicitudes');
     }
-
-    public function calificarpares(Solicitud $solicitud, Software $software){
-        
-        $data=request()->validate([
-            'resultadoPares' => ''
-        ]);
-
-        $software->update($data);
-        $e=([
-            'estado'=> 'Calificado por Pares'
-        ]);
-        $solicitud->update($e);
-        
-        //Crear notificacion
-        return redirect()->route('revisarsolicitudes');
-    }
-
-    public function calificarsoftware(Solicitud $solicitud){
-        
-        $data=request()->validate([
-            'puntos_asignados' => '',
-            'comentario' => ''
-        ]);
-        $e=([
-            'estado'=> 'Calificado',
-            'puntos_asignados' => $data['puntos_asignados'],
-            'observaciones' => $data['comentario']
-        ]);
-        $solicitud->update($e);
-        
-        //Crear notificacion
-        return redirect()->route('revisarsolicitudes');
-    }
-
-    
 
 }

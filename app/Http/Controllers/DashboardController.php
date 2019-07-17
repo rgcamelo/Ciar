@@ -26,7 +26,7 @@ class DashboardController extends Controller
         if(isset($c)){
             $solicitudes = DB::table('solicituds')
             ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->select('solicituds.*', 'productividads.*')->where('productividads.id_docente','=',auth()->user()->docente()->id )
+            ->select('solicituds.*', 'productividads.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente )
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
 
@@ -47,7 +47,7 @@ class DashboardController extends Controller
             $reclamos = DB::table('solicituds')
             ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('reclamos', 'reclamos.id_solicitud', '=', 'solicituds.idsolicitud')
-            ->select('solicituds.*', 'productividads.*','reclamos.*')->where('productividads.id_docente','=',auth()->user()->docente()->id )
+            ->select('solicituds.*', 'productividads.*','reclamos.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente )
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
         }
@@ -68,7 +68,7 @@ class DashboardController extends Controller
             $reclamos = DB::table('solicituds')
             ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('reclamos', 'reclamos.id_solicitud', '=', 'solicituds.idsolicitud')
-            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
             ->select('solicituds.*', 'productividads.*','reclamos.*')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
@@ -84,7 +84,7 @@ class DashboardController extends Controller
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('software', 'software.idsoftware', '=', 'productividads.productividadable_id')
             ->join('soporte_software', 'soporte_software.id_software','=','software.idsoftware')
-            ->select('productividads.*', 'software.*', 'soporte_software.*','solicituds.*')->where('productividads.id_docente','=',auth()->user()->docente()->id )->where('productividads.productividadable_type','=','App\Software')
+            ->select('productividads.*', 'software.*', 'soporte_software.*','solicituds.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente )->where('productividads.productividadable_type','=','App\Software')
         
             ->get();
         
@@ -92,7 +92,7 @@ class DashboardController extends Controller
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('libros', 'libros.idlibro', '=', 'productividads.productividadable_id')
             ->join('libro_soportes', 'libro_soportes.id_libro',"=", 'libros.idlibro')
-            ->select('productividads.*','solicituds.*','libros.*','libro_soportes.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Libro')
+            ->select('productividads.*','solicituds.*','libros.*','libro_soportes.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente)->where('productividads.productividadable_type','=','App\Libro')
             
             ->get();
 
@@ -100,7 +100,7 @@ class DashboardController extends Controller
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('articulos', 'articulos.id_articulo', '=', 'productividads.productividadable_id')
             ->join('articulo_soportes', 'articulo_soportes.idarticulo',"=", 'articulos.id_articulo')
-            ->select('productividads.*','solicituds.*','articulos.*','articulo_soportes.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Articulo')
+            ->select('productividads.*','solicituds.*','articulos.*','articulo_soportes.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente)->where('productividads.productividadable_type','=','App\Articulo')
             
             ->get();
 
@@ -108,77 +108,77 @@ class DashboardController extends Controller
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('ponencias', 'ponencias.idponencia', '=', 'productividads.productividadable_id')
             ->join('ponencia_soportes', 'ponencia_soportes.idponencia',"=", 'ponencias.idponencia')
-            ->select('productividads.*','solicituds.*','ponencias.*','ponencia_soportes.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Ponencia')
+            ->select('productividads.*','solicituds.*','ponencias.*','ponencia_soportes.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente)->where('productividads.productividadable_type','=','App\Ponencia')
             
             ->get();
 
         $Videos = DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('videos', 'videos.idvideo', '=', 'productividads.productividadable_id')
-            ->select('productividads.*','solicituds.*','videos.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Video')
+            ->select('productividads.*','solicituds.*','videos.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente)->where('productividads.productividadable_type','=','App\Video')
             
             ->get();
         
         $Premios= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('premios_nacionales', 'premios_nacionales.idpremio', '=', 'productividads.productividadable_id')
-            ->select('productividads.*','solicituds.*','premios_nacionales.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Premios_Nacionales')
+            ->select('productividads.*','solicituds.*','premios_nacionales.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente)->where('productividads.productividadable_type','=','App\Premios_Nacionales')
             
             ->get();
         
         $Patentes= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('patentes', 'patentes.idpatente', '=', 'productividads.productividadable_id')
-            ->select('productividads.*','solicituds.*','patentes.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Patente')
+            ->select('productividads.*','solicituds.*','patentes.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente)->where('productividads.productividadable_type','=','App\Patente')
             
             ->get();
 
         $Traducciones= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('traduccions', 'traduccions.idtraduccion', '=', 'productividads.productividadable_id')
-            ->select('productividads.*','solicituds.*','traduccions.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Traduccion')
+            ->select('productividads.*','solicituds.*','traduccions.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente)->where('productividads.productividadable_type','=','App\Traduccion')
             
             ->get();    
         
         $Obras= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('obras', 'obras.idobra', '=', 'productividads.productividadable_id')
-            ->select('productividads.*','solicituds.*','obras.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\Obra')
+            ->select('productividads.*','solicituds.*','obras.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente)->where('productividads.productividadable_type','=','App\Obra')
             
             ->get();  
 
         $Produccion= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('produccion_tecnicas', 'produccion_tecnicas.idproducciontecnica', '=', 'productividads.productividadable_id')
-            ->select('productividads.*','solicituds.*','produccion_tecnicas.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\ProduccionTecnica')
+            ->select('productividads.*','solicituds.*','produccion_tecnicas.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente)->where('productividads.productividadable_type','=','App\ProduccionTecnica')
             
             ->get();  
 
         $Estudios= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('estudios_postdoctorales', 'estudios_postdoctorales.idestudiopost', '=', 'productividads.productividadable_id')
-            ->select('productividads.*','solicituds.*','estudios_postdoctorales.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\EstudiosPostdoctorales')
+            ->select('productividads.*','solicituds.*','estudios_postdoctorales.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente)->where('productividads.productividadable_type','=','App\EstudiosPostdoctorales')
             
             ->get();  
 
         $Publicacion= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('publicacion_impresas', 'publicacion_impresas.idpublicacionimpresa', '=', 'productividads.productividadable_id')
-            ->select('productividads.*','solicituds.*','publicacion_impresas.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\PublicacionImpresa')
+            ->select('productividads.*','solicituds.*','publicacion_impresas.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente)->where('productividads.productividadable_type','=','App\PublicacionImpresa')
             
             ->get(); 
 
         $Reseña= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('reseñas_criticas', 'reseñas_criticas.idreseña', '=', 'productividads.productividadable_id')
-            ->select('productividads.*','solicituds.*','reseñas_criticas.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\ReseñasCriticas')
+            ->select('productividads.*','solicituds.*','reseñas_criticas.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente)->where('productividads.productividadable_type','=','App\ReseñasCriticas')
             
             ->get(); 
 
         $Direccion= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('direccion_teses', 'direccion_teses.iddireccion', '=', 'productividads.productividadable_id')
-            ->select('productividads.*','solicituds.*','direccion_teses.*')->where('productividads.id_docente','=',auth()->user()->docente()->id)->where('productividads.productividadable_type','=','App\DireccionTesis')
+            ->select('productividads.*','solicituds.*','direccion_teses.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente)->where('productividads.productividadable_type','=','App\DireccionTesis')
             
             ->get(); 
         //$=array($libros,$Software);
@@ -249,7 +249,7 @@ class DashboardController extends Controller
         if(isset($c)){
             $Software = DB::table('productividads')
         ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-        ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+        ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
         ->join('software', 'software.idsoftware', '=', 'productividads.productividadable_id')
         ->join('soporte_software', 'soporte_software.id_software','=','software.idsoftware')
         ->select('productividads.*', 'software.*', 'soporte_software.*','solicituds.*','docentes.*')->where('productividads.productividadable_type','=','App\Software')
@@ -258,7 +258,7 @@ class DashboardController extends Controller
 
         $libros = DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
             ->join('libros', 'libros.idlibro', '=', 'productividads.productividadable_id')
             ->join('libro_soportes', 'libro_soportes.id_libro',"=", 'libros.idlibro')
             ->select('productividads.*','solicituds.*','libros.*','libro_soportes.*','docentes.*')->where('productividads.productividadable_type','=','App\Libro')
@@ -267,7 +267,7 @@ class DashboardController extends Controller
 
         $Articulos = DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
             ->join('articulos', 'articulos.id_articulo', '=', 'productividads.productividadable_id')
             ->join('articulo_soportes', 'articulo_soportes.idarticulo',"=", 'articulos.id_articulo')
             ->select('productividads.*','solicituds.*','articulos.*','articulo_soportes.*','docentes.*')->where('productividads.productividadable_type','=','App\Articulo')
@@ -276,7 +276,7 @@ class DashboardController extends Controller
 
         $Ponencias = DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
             ->join('ponencias', 'ponencias.idponencia', '=', 'productividads.productividadable_id')
             ->join('ponencia_soportes', 'ponencia_soportes.idponencia',"=", 'ponencias.idponencia')
             ->select('productividads.*','solicituds.*','ponencias.*','ponencia_soportes.*','docentes.*')->where('productividads.productividadable_type','=','App\Ponencia')
@@ -292,7 +292,7 @@ class DashboardController extends Controller
         
         $Premios= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
             ->join('premios_nacionales', 'premios_nacionales.idpremio', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','premios_nacionales.*')->where('productividads.productividadable_type','=','App\Premios_Nacionales')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
@@ -300,7 +300,7 @@ class DashboardController extends Controller
         
         $Patentes= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
             ->join('patentes', 'patentes.idpatente', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','patentes.*')->where('productividads.productividadable_type','=','App\Patente')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
@@ -308,7 +308,7 @@ class DashboardController extends Controller
 
         $Traducciones= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
             ->join('traduccions', 'traduccions.idtraduccion', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','traduccions.*')->where('productividads.productividadable_type','=','App\Traduccion')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
@@ -316,7 +316,7 @@ class DashboardController extends Controller
         
         $Obras= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
             ->join('obras', 'obras.idobra', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','obras.*')->where('productividads.productividadable_type','=','App\Obra')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
@@ -324,7 +324,7 @@ class DashboardController extends Controller
 
         $Produccion= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
             ->join('produccion_tecnicas', 'produccion_tecnicas.idproducciontecnica', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','produccion_tecnicas.*')->where('productividads.productividadable_type','=','App\ProduccionTecnica')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
@@ -332,7 +332,7 @@ class DashboardController extends Controller
 
         $Estudios= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
             ->join('estudios_postdoctorales', 'estudios_postdoctorales.idestudiopost', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','estudios_postdoctorales.*')->where('productividads.productividadable_type','=','App\EstudiosPostdoctorales')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
@@ -340,7 +340,7 @@ class DashboardController extends Controller
 
         $Publicacion= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
             ->join('publicacion_impresas', 'publicacion_impresas.idpublicacionimpresa', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','publicacion_impresas.*')->where('productividads.productividadable_type','=','App\PublicacionImpresa')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
@@ -348,7 +348,7 @@ class DashboardController extends Controller
 
         $Reseña= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
             ->join('reseñas_criticas', 'reseñas_criticas.idreseña', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','reseñas_criticas.*')->where('productividads.productividadable_type','=','App\ReseñasCriticas')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
@@ -356,7 +356,7 @@ class DashboardController extends Controller
 
         $Direccion= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->join('docentes', 'docentes.id', '=','productividads.id_docente')
+            ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
             ->join('direccion_teses', 'direccion_teses.iddireccion', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','direccion_teses.*')->where('productividads.productividadable_type','=','App\DireccionTesis')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)

@@ -15,9 +15,11 @@ class GrupoInvestigacionSeeder extends Seeder
     public function run()
     {
         $facultad= Facultad::find(1);
+
         GrupoInvestigacion::create([
-            'Nombre' => 'Ciarp',
-            'departamento_id' => $facultad->id,
+            'NombreGrupo' => 'Ciarp',
+            'departamento_id' => $facultad->idfacultad,
+            'categoria_id' => 1,
         ]);
     }
 }

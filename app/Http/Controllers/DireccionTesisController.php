@@ -25,11 +25,11 @@ class DireccionTesisController extends Controller
         
 
         $productividad=$direccion->productividad()->create([
-            'id_docente' => $d->id,
+            'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=$direccion->puntaje();
+        $pa=round($pa=$direccion->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $direccion->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 

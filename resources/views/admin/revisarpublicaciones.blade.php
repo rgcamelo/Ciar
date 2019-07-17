@@ -191,5 +191,5 @@
                       </div>
                     </div>
             @endif
-            <button class="btn btn-primary btn-lg"><span class="fa fa-eye"></span></button>
+            <!--<button class="btn btn-primary btn-lg"><span class="fa fa-eye"></span></button>-->
         </td>

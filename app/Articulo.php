@@ -186,7 +186,8 @@ class Articulo extends Model
             'productividad_id' => $idp,
             'estado' => 'Enviado',
             'puntos_aprox' => $pa,
-            'idconvocatoria' => $idc
+            'idconvocatoria' => $idc,
+            'fechasolicitud' => (date('Y-m-d'))
 
         ]);
     }

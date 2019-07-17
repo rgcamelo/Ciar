@@ -15,8 +15,8 @@ class DepartamentoSeeder extends Seeder
     {
         $facultad=Facultad::find(1);
         Departamento::create([
-            'nombre'=> 'Departamento de tecnologia',
-            'facultad_id' => $facultad->id,
+            'NombreDepartamento'=> 'Departamento de tecnologia',
+            'facultad_id' => $facultad->idfacultad,
         ]);
     }
 }

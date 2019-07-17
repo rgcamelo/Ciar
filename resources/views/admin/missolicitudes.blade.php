@@ -132,11 +132,12 @@
                                                     </div>
                                                   </div>
                                                 </div>
-                                              </div><br><br>
+                                              </div>
                                     @endif
-                                    @if ( ($sol->estado == 'Aprobado' or $sol->estado == 'No Aprobado') )
+                                    @if ( ($sol->estado == 'Aprobado' or $sol->estado == 'No Aprobado') and ( strtotime(date('Y-m-d'))-strtotime($sol->fechaCalificada) <= 20) ) 
                                             <button type="button" class="btn btn-warning btn-lg"  data-toggle="modal" data-target="#reclamo{{$sol->idproductividad}}">
-                                                <span class="fa fa-commenting"></span>
+                                            <span class="fa fa-commenting">
+                                            </span>
                                               </button>
                                               
                                               <!-- Modal -->
@@ -172,9 +173,16 @@
                                                 </form>
                                                   </div>
                                                 </div>
-                                              </div><br><br>
+                                              </div>
                                     @endif
-                                
+                                    @if ($sol->folder != null)
+                                    @if ( ($sol->estado == 'Aprobado' or $sol->estado == 'No Aprobado') ) 
+                                    <button class="btn btn-primary btn-lg" onclick="window.open('{{$sol->folder}}/{{$sol->formatorecibido}}')"> <i class="fa fa-eye"></i></button>
+                                    @else
+                                    <button class="btn btn-primary btn-lg" onclick="window.open('{{$sol->folder}}/{{$sol->formatoenviado}}')"> <i class="fa fa-eye"></i></button>
+                                    @endif
+                                    @endif
+                                    
                                 </td>
                             </tr>   
                         @endforeach

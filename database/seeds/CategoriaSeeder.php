@@ -14,7 +14,18 @@ class CategoriaSeeder extends Seeder
     public function run()
     {
         Categoria::create([
-            'Nombre' => 'Planta',
+            'NombreCategoria' => 'A1',
+        ]);
+
+        Categoria::create([
+            'NombreCategoria' => 'A2',
+        ]);
+        Categoria::create([
+            'NombreCategoria' => 'B',
+        ]);
+
+        Categoria::create([
+            'NombreCategoria' => 'C',
         ]);
 
     }

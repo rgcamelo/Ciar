@@ -87,11 +87,11 @@ class ArticuloController extends Controller
         $articulo->soportes($ejemplar,$cvlac,$gruplac,$certieditorial,$folder);
 
         $productividad=$articulo->productividad()->create([
-            'id_docente' => $d->id,
+            'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=$articulo->puntaje();
+        $pa=round($pa=$articulo->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $articulo->solicitud($productividad->idproductividad, $pa,$convocatoria->idconvocatoria);
         

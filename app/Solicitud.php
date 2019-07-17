@@ -9,6 +9,12 @@ class Solicitud extends Model
     protected $primaryKey = 'idsolicitud';
     protected $fillable = [
         'productividad_id', 'estado', 'puntos_aprox', 'puntos_asignados','observaciones',
-        'bonificacion_calculada','bonificacion_asignada','idconvocatoria'
+        'bonificacion_calculada','bonificacion_asignada','idconvocatoria','puntaje_par',
+        'fechasolicitud','fechaCalificada','formatoenviado','formatorecibido','folder'
     ];
+
+    public function Productividad(){
+        $p=Productividad::find($this->productividad_id);
+        return $p;
+    }
 }

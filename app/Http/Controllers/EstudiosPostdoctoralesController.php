@@ -23,11 +23,11 @@ class EstudiosPostdoctoralesController extends Controller
         
 
         $productividad=$estudio->productividad()->create([
-            'id_docente' => $d->id,
+            'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=$estudio->puntaje();
+        $pa=round($pa=$estudio->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $estudio->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 

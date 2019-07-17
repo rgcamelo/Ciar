@@ -13,11 +13,11 @@ class DedicacionSeeder extends Seeder
     public function run()
     {
         Dedicacion::create([
-            'Tipo' => 'Tiempo Completo',
+            'TipoDedicacion' => 'Tiempo Completo',
         ]);
 
         Dedicacion::create([
-            'Tipo' => 'Medio Tiempo',
+            'TipoDedicacion' => 'Medio Tiempo',
         ]);
 
     }

@@ -25,11 +25,11 @@ class TraduccionController extends Controller
         
 
         $productividad=$traduccion->productividad()->create([
-            'id_docente' => $d->id,
+            'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=$traduccion->puntaje();
+        $pa=round($pa=$traduccion->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $traduccion->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 

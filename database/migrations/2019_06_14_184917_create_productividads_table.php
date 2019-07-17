@@ -16,7 +16,7 @@ class CreateProductividadsTable extends Migration
         Schema::create('productividads', function (Blueprint $table) {
             $table->bigIncrements('idproductividad');
             $table->unsignedBigInteger('id_docente');
-            $table->foreign('id_docente')->references('id')->on('docentes');
+            $table->foreign('id_docente')->references('iddocente')->on('docentes');
             $table->string('titulo');
             $table->unsignedBigInteger('productividadable_id');
             $table->string('productividadable_type');

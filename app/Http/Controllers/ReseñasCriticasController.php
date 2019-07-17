@@ -24,11 +24,11 @@ class ReseñasCriticasController extends Controller
         
 
         $productividad=$reseña->productividad()->create([
-            'id_docente' => $d->id,
+            'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=$reseña->puntaje();
+        $pa=round($pa=$reseña->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $reseña->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 

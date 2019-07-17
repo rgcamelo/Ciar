@@ -57,6 +57,7 @@ class ProduccionTecnica extends Model
                 'estado' => 'Enviado',
                 'puntos_aprox' => $pa,
                 'idconvocatoria' => $idc,
+                'fechasolicitud' => (date('Y-m-d'))
             ]);
     }
 }

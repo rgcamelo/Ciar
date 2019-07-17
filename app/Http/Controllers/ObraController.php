@@ -26,11 +26,11 @@ class ObraController extends Controller
         
 
         $productividad=$obra->productividad()->create([
-            'id_docente' => $d->id,
+            'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=$obra->puntaje();
+        $pa=round($pa=$obra->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $obra->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 

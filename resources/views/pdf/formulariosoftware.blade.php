@@ -83,7 +83,7 @@
                             <strong>FECHA DE SOLICITUD</strong>
                     </td>
                     <td  colspan="13" valign="top" class="backGreen">
-                            {{$solicitud->created_at}}
+                            {{$data->first()->fechasolicitud}}
                             <strong></strong>
                     </td>
                 </tr>
@@ -94,7 +94,7 @@
                     </td>
                     <td  colspan="13" valign="top" class="backWhite">
                     
-                            <strong></strong>
+                    <strong>{{$data->first()->NombreCompleto}}</strong>
                       
                     </td>
                 </tr>
@@ -106,13 +106,17 @@
                             <strong>TIEMPO COMPLETO</strong>
                     </td>
                     <td colspan="3" valign="top" class="backGreen">
-                            <strong></strong>
+                            <strong>@if ($data->first()->TipoDedicacion == 'Tiempo Completo')
+                                X
+                            @endif</strong>
                     </td>
                     <td colspan="2" valign="top" class="backGreen">
                             <strong>MEDIO TIEMPO</strong>
                     </td>
                     <td colspan="3" valign="top" class="backGreen">
-                            <strong></strong>
+                            <strong>@if ($data->first()->TipoDedicacion == 'Medio Tiempo')
+                                X
+                            @endif</strong>
                     </td>
                 </tr>
                 <tr>
@@ -123,19 +127,23 @@
                             <strong>C.C.</strong>
                     </td>
                     <td valign="top" class="backWhite">
-                            <strong></strong>
+                            <strong>@if ($data->first()->tipoidentificacion_id == 1)
+                                X
+                            @endif</strong>
                     </td>
                     <td valign="top" class="backWhite">
                             <strong>C. EXT</strong>
                     </td>
                     <td valign="top" class="backWhite">
-                            <strong></strong>
+                            <strong>@if ($data->first()->tipoidentificacion_id == 2)
+                                X
+                            @endif</strong>
                     </td>
                     <td valign="top" colspan="2" class="backWhite">
                             <strong>NÚMERO</strong>
                     </td>
                     <td colspan="7" valign="top" class="backWhite">
-                            <strong></strong>
+                    <strong>{{$data->first()->Identificacion}}</strong>
                     </td>
                 </tr>
                 <tr>
@@ -143,7 +151,9 @@
                             <strong>FACULTAD</strong>
                     </td>
                     <td colspan="13" valign="top" class="backGreen">
-                            <strong></strong>
+                            <strong>
+                                    {{$data->first()->NombreFacultad}}
+                            </strong>
                     </td>
                 </tr>
                 <tr>
@@ -152,7 +162,7 @@
                     </td>
                     <td colspan="13" valign="top" class="backWhite">
                         <p>
-                            <strong></strong>
+                            <strong>{{$data->first()->NombreDepartamento}}</strong>
                         </p>
                     </td>
                 </tr>
@@ -161,13 +171,13 @@
                             <strong>GRUPO DE INVESTIGACIÓN AL QUE PERTENECE </strong>
                     </td>
                     <td colspan="9" valign="top" class="backGreen">
-                            <strong></strong>
+                            <strong>{{$data->first()->NombreGrupo}}</strong>
                     </td>
                     <td colspan="1" valign="top" class="backGreen">
                             <strong>CATEGORÍA</strong>
                     </td>
                     <td colspan="3" valign="top" class="backGreen">
-                            <strong></strong>
+                            <strong>{{$data->first()->NombreCategoria}}</strong>
                     </td>
                 </tr>
                 <tr>
@@ -175,7 +185,7 @@
                             <strong>CORREO ELECTRÓNICO</strong>
                     </td>
                     <td colspan="13" valign="top" class="backWhite">
-                            <strong></strong>
+                    <strong>{{$data->first()->Correo}}</strong>
                     </td>
                 </tr>
                 <tr>
@@ -191,7 +201,7 @@
                             <strong>MÓVIL</strong>
                     </td>
                     <td colspan="5" valign="top" class="backGreen">
-                        
+                        {{$data->first()->Telefono}}
                     </td>
                 </tr>
             </tbody>
@@ -212,7 +222,7 @@
                             <strong>TÍTULO DEL SOFTWARE</strong>
                     </td>
                     <td  colspan="12" valign="top" class="backGreen">
-                            <strong></strong>
+                            <strong>{{$data->first()->titulo}}</strong>
                     </td>
                 </tr>
                 <tr>
@@ -220,7 +230,7 @@
                             <strong>AUTORES:</strong>
                     </td>
                     <td colspan="12" valign="top" class="backWhite">
-                            <strong></strong>
+                            <strong>{{$data->first()->autores}}</strong>
                     </td>
                 </tr>
                 <tr>
@@ -228,7 +238,7 @@
                             <strong>TITULAR(ES) DEL SOFTWARE:</strong>
                     </td>
                     <td  colspan="12"  class="backGreen">
-                            <strong></strong>
+                            <strong>{{$data->first()->titulares}}</strong>
                     </td>
                 </tr>
                 <tr>
@@ -236,7 +246,7 @@
                             <strong>RESULTADO EVALUACIÓN DE PARES</strong>
                     </td>
                     <td colspan="12"  class="backWhite">
-                            <strong></strong>
+                            <strong>{{$data->first()->puntaje_par}}</strong>
                     </td>
                 </tr>
                 <tr>
@@ -247,13 +257,17 @@
                             <strong>SI</strong>
                     </td>
                     <td  colspan="5" class="backGreen">
-                            <strong></strong>
+                            <strong>@if ($data->first()->creditoUpc == 'si')
+                                X
+                            @endif</strong>
                     </td>
                     <td   class="backGreen">
                             <strong>NO</strong>
                     </td>
                     <td colspan="5"   class="backGreen">
-                          <strong></strong>
+                          <strong>@if ($data->first()->creditoUpc == 'no')
+                                X
+                            @endif</strong>
                     </td>
                 </tr>
                 <tr>
@@ -265,14 +279,18 @@
                             <strong>SI</strong>
                     </td>
                     <td  colspan="5" valign="top" class="backWhite">
-                            <strong></strong>
+                            <strong>@if ($data->first()->impactanivelU == 'si')
+                                X
+                            @endif</strong>
                     </td>
                     <td  class="backWhite">
                             <strong>NO</strong>
                     </td>
                     <td  colspan="5" class="backWhite">
                         <p>
-                            <strong></strong>
+                            <strong>@if ($data->first()->impactanivelU == 'no')
+                                X
+                            @endif</strong>
                         </p>
                     </td>
                 </tr>
@@ -324,13 +342,17 @@
                             <strong>SI</strong>
                     </td>
                     <td  class="backGreen">
-                            <strong></strong>
+                            <strong>@if ($data->first()->estado == 'Aprobado')
+                                X
+                            @endif</strong>
                     </td>
                     <td  class="backGreen">
                             <strong>NO</strong>
                     </td>
                     <td  class="backGreen">
-                            <strong></strong>
+                            <strong>@if ($data->first()->estado == 'No Aprobado')
+                                X
+                            @endif</strong>
                     </td>
                 </tr>
                 <tr>
@@ -341,13 +363,17 @@
                             <strong>SI</strong>
                     </td>
                     <td  class="backWhite">
-                            <strong></strong>
+                            <strong>@if ($data->first()->estado == 'Aprobado')
+                                X
+                            @endif</strong>
                     </td>
-                    <td class="backWhite"
+                    <td class="backWhite">
                             <strong>NO</strong>
                     </td>
                     <td  class="backWhite">
-                            <strong></strong>
+                            <strong>@if ($data->first()->estado == 'No Aprobado')
+                                X
+                            @endif</strong>
                     </td>
                 </tr>
                 <tr>
@@ -363,7 +389,7 @@
                             <strong>PS</strong>
                     </td>
                     <td  class="backGreen">
-                            <strong></strong>
+                    <strong>{{$data->first()->puntos_asignados}}</strong>
                     </td>
                     <td class="backGreen">
                             <strong>BO</strong>

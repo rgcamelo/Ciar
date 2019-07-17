@@ -133,7 +133,7 @@
                                         <form action="{{ url('calificarbonificacion',['solicitud' => $p->idsolicitud]) }}" method="post" id="aprobar">
                                             {!! csrf_field() !!}
                                             <div class="form-row" style="display: flex;justify-content:center">
-                                                <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="bonificacion" style="font-size: 32px" type="number" required max="{{$p->bonificacion_calculada}}" min="0"  >
+                                                <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="bonificacion" style="font-size: 32px" type="number" step="0.001" value="{{$p->bonificacion_calculada}}" required max="{{$p->bonificacion_calculada}}" min="0"  >
                                             </div>
                                             <br>
                                             <div class="form-row" style="display: flex;justify-content:center">
@@ -154,7 +154,7 @@
                                         <form action="{{ url('calificar',['solicitud' => $p->idsolicitud]) }}" method="post" id="aprobar">
                                             {!! csrf_field() !!}
                                             <div class="form-row" style="display: flex;justify-content:center">
-                                                <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="puntos_asignados" style="font-size: 32px" type="number" required max="{{$p->puntos_aprox}}" min="0"  >
+                                            <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="puntos_asignados" style="font-size: 32px" type="number" step="0.001" value="{{$p->puntos_aprox}}" required max="{{$p->puntos_aprox}}" min="0"  >
                                             </div>
                                             <br>
                                             <div class="form-row" style="display: flex;justify-content:center">
@@ -216,5 +216,5 @@
                       </div>
                     </div>
             @endif
-            <button class="btn btn-primary btn-lg"><span class="fa fa-eye"></span></button>
+            <!--<button class="btn btn-primary btn-lg"><span class="fa fa-eye"></span></button>-->
         </td>

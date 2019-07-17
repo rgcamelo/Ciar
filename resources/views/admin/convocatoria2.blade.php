@@ -1,10 +1,10 @@
 @extends('admin.dashboard')
 
 @section('content')
-<div class="container" >
-    <div class="container">
-            <div class="info-box ">
-                    <div class="container ml-2" >
+<div class="section" >
+    <div class="">
+            <div class="info-box" style="padding:10px">
+                    <div class="section" >
                             <h1 style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif">Convocatoria: {{$convocatoria->first()->titulo}}</h1>
                             <h2 style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif">
                                 Estado: <span style="font-size:16px" class="label label-success">

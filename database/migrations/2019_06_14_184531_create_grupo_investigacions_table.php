@@ -14,10 +14,12 @@ class CreateGrupoInvestigacionsTable extends Migration
     public function up()
     {
         Schema::create('grupo_investigacions', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('Nombre');
+            $table->bigIncrements('idgrupo');
+            $table->string('NombreGrupo');
             $table->unsignedBigInteger('departamento_id');
-            $table->foreign('departamento_id')->references('id')->on('departamentos');
+            $table->foreign('departamento_id')->references('iddepartamento')->on('departamentos');
+            $table->unsignedBigInteger('categoria_id');
+            $table->foreign('categoria_id')->references('idcategoria')->on('categorias');
             $table->timestamps();
         });
     }

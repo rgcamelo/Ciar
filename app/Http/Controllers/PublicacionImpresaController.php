@@ -24,11 +24,11 @@ class PublicacionImpresaController extends Controller
         
 
         $productividad=$publicacion->productividad()->create([
-            'id_docente' => $d->id,
+            'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=$publicacion->puntaje();
+        $pa=round($pa=$publicacion->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $publicacion->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 

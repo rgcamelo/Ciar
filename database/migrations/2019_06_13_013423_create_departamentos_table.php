@@ -14,10 +14,10 @@ class CreateDepartamentosTable extends Migration
     public function up()
     {
         Schema::create('departamentos', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('Nombre');
+            $table->bigIncrements('iddepartamento');
+            $table->string('NombreDepartamento');
             $table->unsignedBigInteger('facultad_id');
-            $table->foreign('facultad_id')->references('id')->on('facultad');
+            $table->foreign('facultad_id')->references('idfacultad')->on('facultad');
             $table->timestamps();
         });
     }

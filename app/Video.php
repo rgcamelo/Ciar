@@ -81,6 +81,7 @@ class Video extends Model
                 'estado' => 'Enviado',
                 'puntos_aprox' => $pa,
                 'idconvocatoria' => $idc,
+                'fechasolicitud' => (date('Y-m-d'))
             ]);
             break;
             case 'Regional':
@@ -91,6 +92,7 @@ class Video extends Model
                 'estado' => 'Enviado',
                 'bonificacion_calculada' => $pa,
                 'idconvocatoria' => $idc,
+                'fechasolicitud' => (date('Y-m-d'))
             ]);
             break;
         }

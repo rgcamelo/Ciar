@@ -14,7 +14,11 @@ class TipoIdentificacionSeeder extends Seeder
     public function run()
     {
         TipoIdentificacion::create([
-            'Tipo' => 'Cedula',
+            'TipoIdentificacion' => 'Cedula',
+        ]);
+
+        TipoIdentificacion::create([
+            'TipoIdentificacion' => 'Cedula Extranjera',
         ]);
     }
 }

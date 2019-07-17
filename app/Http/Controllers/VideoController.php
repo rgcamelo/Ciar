@@ -26,11 +26,11 @@ class VideoController extends Controller
         
 
         $productividad=$video->productividad()->create([
-            'id_docente' => $d->id,
+            'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=$video->puntaje();
+        $pa=round($pa=$video->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $video->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 
