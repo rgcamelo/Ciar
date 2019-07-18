@@ -7,7 +7,10 @@
                     $('#tabla').DataTable( {
                         "paging":   true,
                         "ordering": false,
-                        "info":     true
+                        "info":     true,
+                        "language": {
+                        "emptyTable": "<div><img style='width:200px;heigth:200px'  src='/admintle/img/mensaje2.png'></img></div>"
+                        }
                     } );
                 } );</script>
             <table id="tabla" class='display'style="width:100%">

@@ -18,5 +18,11 @@ class Productividad extends Model
     public function Tipo(){
         return $this->productividadable_type;
     }
+
+    public function Docente(){
+        $idu=auth()->user()->id_docente;
+        $d=Docente::find($idu);
+        return $d;
+    }
     
 }

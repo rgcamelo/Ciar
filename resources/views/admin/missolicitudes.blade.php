@@ -9,7 +9,7 @@
                         "ordering": false,
                         "info":     true,
                         "language": {
-                        "emptyTable": "<div><img src='/admintle/img/user2-160x160.jpg'></img></div>"
+                        "emptyTable": "<div><img style='width:200px;heigth:200px'  src='/admintle/img/mensaje1.png'></img></div>"
                         }
                     } );
                 } );</script>

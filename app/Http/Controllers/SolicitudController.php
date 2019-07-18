@@ -8,6 +8,7 @@ use App\Libro;
 use App\Software;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
+use App\DocenteProductividad;
 
 class SolicitudController extends Controller
 {
@@ -46,9 +47,155 @@ class SolicitudController extends Controller
         $solicitud->update($e);
 
         $this->pdf($solicitud);
-
+        $this->sumarproductividad($solicitud);
         //Crear notificacion
         return redirect()->route('revisarsolicitudes');
+    }
+
+    public function sumarproductividad(Solicitud $solicitud){
+        $productividad=$solicitud->Productividad();
+        $año = date('Y');
+
+        
+        $data = DB::table('docente_productividads')
+        ->where('docente_productividads.iddocente','=',$productividad->id_docente)
+        ->where('docente_productividads.año','=',$año)
+        ->get();
+
+        if( empty($data->first())){
+            $prodoc=$this->crearsuma($productividad);
+            $this->sumarp($solicitud, $prodoc);
+        }
+        else {
+            $prodoc=DocenteProductividad::find($data->first()->idprodoc);
+            $this->sumarp($solicitud, $prodoc);
+        }
+        
+    }
+
+    public function sumarp(Solicitud $solicitud, DocenteProductividad $prodoc){
+
+        switch ($solicitud->Productividad()->Tipo()) {
+            case 'App\Software':
+            $valor=$prodoc->software;
+            $e=([
+                'software' => $valor+1
+            ]);
+            $prodoc->update($e);
+            break;
+            case 'App\Libro':
+            $valor=$prodoc->libro;
+            $e=([
+                'libro' => $valor+1
+            ]);
+            $prodoc->update($e);
+            break;
+            case 'App\Articulo':
+            $valor=$prodoc->articulo;
+            $e=([
+                'articulo' => $valor+1
+            ]);
+            $prodoc->update($e);
+            break;
+            case 'App\Ponencia':
+            $valor=$prodoc->ponencia;
+            $e=([
+                'ponencia' => $valor+1
+            ]);
+            $prodoc->update($e);
+            break;
+            case 'App\Video':
+            if ($solicitud->bonificacion_calculada == null) {
+                $valor=$prodoc->videos;
+            $e=([
+                'videos' => $valor+1
+            ]);
+            $prodoc->update($e);
+            }else {
+                $valor=$prodoc->videosbon;
+            $e=([
+                'videosbon' => $valor+1
+            ]);
+            $prodoc->update($e);
+            }
+            break;
+            case 'App\Premios_Nacionales':
+            $valor=$prodoc->premios;
+            $e=([
+                'premios' => $valor+1
+            ]);
+            $prodoc->update($e);
+            break;
+            case 'App\Patente':
+            $valor=$prodoc->patentes;
+            $e=([
+                'patentes' => $valor+1
+            ]);
+            $prodoc->update($e);
+            break;
+            case 'App\Traducciones':
+            $valor=$prodoc->traducciones;
+            $e=([
+                'traducciones' => $valor+1
+            ]);
+            $prodoc->update($e);
+            break;
+            case 'App\Obra':
+            $valor=$prodoc->obras;
+            $e=([
+                'obras' => $valor+1
+            ]);
+            $prodoc->update($e);
+            break;
+            case 'App\ProduccionTecnica':
+            $valor=$prodoc->producciontecnica;
+            $e=([
+                'producciontecnica' => $valor+1
+            ]);
+            $prodoc->update($e);
+            break;
+            case 'App\EstudiosPostdoctorales':
+            $valor=$prodoc->estudios;
+            $e=([
+                'estudios' => $valor+1
+            ]);
+            $prodoc->update($e);
+            break;
+            case 'App\PublicacionImpresa':
+            $valor=$prodoc->publicacion;
+            $e=([
+                'publicacion' => $valor+1
+            ]);
+            $prodoc->update($e);
+            break;
+            case 'App\ReseñasCriticas':
+            $valor=$prodoc->reseñas;
+            $e=([
+                'reseñas' => $valor+1
+            ]);
+            $prodoc->update($e);
+            break;
+            case 'App\DireccionTesis':
+            $valor=$prodoc->direccion;
+            $e=([
+                'direccion' => $valor+1
+            ]);
+            $prodoc->update($e);
+            break;
+            default:
+                # code...
+                break;
+        }
+    }
+
+    public function crearsuma($productividad){
+        $año = date('Y');
+        $prodoc = DocenteProductividad::Create([
+            'iddoncente' => $productividad->id_docente,
+            'año' => $año
+        ]);
+
+        return $prodoc;
     }
 
     public function pdf($solicitud){
@@ -98,7 +245,7 @@ class SolicitudController extends Controller
             'observaciones' => $data['comentario']
         ]);
         $solicitud->update($e);
-        
+        $this->sumarproductividad($solicitud);
         //Crear notificacion
         return redirect()->route('revisarsolicitudes');
     }

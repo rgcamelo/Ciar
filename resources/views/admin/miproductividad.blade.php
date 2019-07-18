@@ -8,6 +8,9 @@
                         "paging":   true,
                         "ordering": false,
                         "info":     true,
+                        "language": {
+                        "emptyTable": "<div><img style='width:200px;heigth:200px'  src='/admintle/img/mensaje7.png'></img></div>"
+                        }
                     } );
                 } );</script>
             <table id="tabla" class='display table table-stripper'style="width:90%">

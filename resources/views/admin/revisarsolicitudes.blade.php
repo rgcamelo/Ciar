@@ -7,17 +7,26 @@
                     $('#tabla').DataTable( {
                         "paging":   true,
                         "ordering": false,
-                        "info":     true
+                        "info":     true,
+                        "language": {
+                        "emptyTable": "<div><img style='width:200px;heigth:200px'  src='/admintle/img/mensaje4.png'></img></div>"
+                        }
                     } );
                     $('#tabla2').DataTable( {
                         "paging":   true,
                         "ordering": false,
-                        "info":     true
+                        "info":     true,
+                        "language": {
+                        "emptyTable": "<div><img style='width:200px;heigth:200px'  src='/admintle/img/mensaje5.png'></img></div>"
+                        }
                     } );
                     $('#tabla3').DataTable( {
                         "paging":   true,
                         "ordering": false,
-                        "info":     true
+                        "info":     true,
+                        "language": {
+                        "emptyTable": "<div><img style='width:200px;heigth:200px'  src='/admintle/img/mensaje6.png'></img></div>"
+                        }
                     } );
                 } );
                 </script>
