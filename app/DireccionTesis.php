@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class DireccionTesis extends Model
 {
@@ -60,5 +61,21 @@ class DireccionTesis extends Model
                 'idconvocatoria' => $idc,
                 'fechasolicitud' => (date('Y-m-d'))
             ]);
+    }
+
+    public function ProDoc($productividad){
+
+        $año = date('Y');   
+        $data = DB::table('docente_productividads')
+        ->where('docente_productividads.iddocente','=',$productividad->id_docente)
+        ->where('docente_productividads.año','=',$año)
+        ->get();
+
+        if( empty($data->first())){
+            $prodoc = DocenteProductividad::Create([
+                'iddocente' => $productividad->id_docente,
+                'año' => $año
+            ]);
+        }
     }
 }

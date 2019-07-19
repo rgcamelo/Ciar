@@ -28,11 +28,11 @@ class DireccionTesisController extends Controller
             'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
-
+        $direccion->ProDoc($productividad);
         $pa=round($pa=$direccion->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $direccion->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('solicitudes');
     }
 }

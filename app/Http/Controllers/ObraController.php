@@ -30,10 +30,11 @@ class ObraController extends Controller
             'titulo' => $data['titulo'],
         ]); 
 
+        $obra->ProDoc($productividad);
         $pa=round($pa=$obra->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $obra->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('solicitudes');
     }
 }

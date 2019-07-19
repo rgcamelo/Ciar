@@ -113,10 +113,26 @@
     <td>
 
             @if ($p->estado == 'Enviado')
-
-                    <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
-                    <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
-            
+            @if ($p->bonificacion_calculada != null)
+                @if ($p->publicacion >= 5)
+                <div class="info-box">
+                    <div>
+                      <span class="info-box-icon bg-blue">
+                        <i class="fa fa-exclamation"></i>
+                      </span>
+                      <div class="info-box-content">
+                        <span class="info-box-text">Tope Maximo </span>
+                      </div>
+                    </div>
+                  </div>
+                @else
+                <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
+                <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
+                @endif
+            @else
+            <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
+            <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
+            @endif
                   
                   <!-- Modal -->
                   <div class="modal fade" id="calificar{{$p->idsolicitud}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

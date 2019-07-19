@@ -192,7 +192,7 @@
                                   <form action="{{ url('calificarbonificacion',['solicitud' => $p->idsolicitud]) }}" method="post" id="aprobar">
                                       {!! csrf_field() !!}
                                       <div class="form-row" style="display: flex;justify-content:center">
-                                          <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="bonificacion" style="font-size: 32px" type="number" required max="{{$p->bonificacion_calculada}}" min="0"  >
+                                          <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="bonificacion" style="font-size: 32px" type="number" required max="{{$p->bonificacion_calculada}}" value="{{$p->bonificacion_calculada}}" step="0.001" min="0"  >
                                       </div>
                                       <br>
                                       <div class="form-row" style="display: flex;justify-content:center">

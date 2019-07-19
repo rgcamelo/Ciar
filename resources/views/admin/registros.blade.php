@@ -41,7 +41,10 @@
                                                 <span class="info-box-text">Solicitudes Recibidas:</span>
                                                 <span class="info-box-number">{{$c->solicitudes}}</span>
                                                 @if ($c->estado == 'Cerrada')
-                                                <button class="btn btn-warning form-control"><i class="fa fa-file"></i> </button>       
+                                              <form action="{{url('bajaracta',['convocatoria' => $c->idconvocatoria])}} " method="POST">
+                                                {{ csrf_field() }}
+                                                <button type="submit" class="btn btn-warning form-control"><i class="fa fa-file"></i> </button>       
+                                                </form>
                                                 @endif
                                               </div>
                                               
@@ -58,8 +61,10 @@
                                                 <span class="info-box-text">Solicitudes Aprobadas:</span>
                                                 <span class="info-box-number">{{$c->aprobadas}}</span>
                                                 @if ($c->estado == 'Cerrada')
-                                                <button class="btn btn-success form-control"><i class="fa fa-file"></i> </button>       
-                                                @endif
+                                                <form action="{{url('aprobadas',['convocatoria' => $c->idconvocatoria])}} " method="POST">
+                                                    {{ csrf_field() }}
+                                                    <button type="submit" class="btn btn-success form-control"><i class="fa fa-file"></i> </button>       
+                                                    </form>                                                @endif
                                               </div>
                                             </div>
                                         </div>
@@ -74,7 +79,10 @@
                                                 <span class="info-box-text">Solicitudes Rechazadas:</span>
                                                 <span class="info-box-number">{{$c->rechazadas}}</span>
                                                 @if ($c->estado == 'Cerrada')
-                                                <button class="btn btn-danger form-control"><i class="fa fa-file"></i> </button>       
+                                                <form action="{{url('noaprobadas',['convocatoria' => $c->idconvocatoria])}} " method="POST">
+                                                    {{ csrf_field() }}
+                                                    <button type="submit" class="btn btn-danger form-control"><i class="fa fa-file"></i> </button>       
+                                                    </form>       
                                                 @endif
                                               </div>
                                             </div>

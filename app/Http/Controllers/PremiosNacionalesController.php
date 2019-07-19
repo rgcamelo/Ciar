@@ -32,6 +32,6 @@ class PremiosNacionalesController extends Controller
         $convocatoria=auth()->user()->convocatoria()->first();
         $premio->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('solicitudes');
     }
 }

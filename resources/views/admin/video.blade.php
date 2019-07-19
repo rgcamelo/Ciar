@@ -4,7 +4,7 @@
 <div class="container" >
     <div class="container">    
             <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-7 col-md-offset-2 col-sm-8 col-sm-offset-2">                    
-                <div class="panel panel-info" >
+                <div class="panel panel-success" >
                         <div class="panel-heading">
                             <div class="panel-title">Datos del Video, Cinematografía o Fonografía</div>
                             <div style="float:right; font-size: 80%; position: relative; top:-10px">Revise sus Datos sean correctos</div>
@@ -42,10 +42,22 @@
                                             <span class="input-group-addon">Impacto</span>
                                             <select class="form-control" required name="impacto">
                                                  <option value="" selected></option>
-                                                            <option value="Internacional">Internacional</option>
-                                                            <option value="Nacional">Nacional</option>
-                                                            <option value="Regional">Regional</option>
-                                                            <option value="Local">Local</option>
+                                                 @if (isset(auth()->user()->Docente()->Productividad()->videos))
+                                                    @if (auth()->user()->Docente()->Productividad()->videos <5)
+                                                        <option value="Internacional">Internacional</option>
+                                                        <option value="Nacional">Nacional</option>
+                                                    @endif
+                                                    @if (auth()->user()->Docente()->Productividad()->videosbon <5)
+                                                        <option value="Regional">Regional</option>
+                                                        <option value="Local">Local</option>
+                                                    @endif 
+                                                 @else
+                                                 <option value="Internacional">Internacional</option>
+                                                 <option value="Nacional">Nacional</option>
+                                                 <option value="Regional">Regional</option>
+                                                 <option value="Local">Local</option>
+                                                 @endif
+                                                  
                                                           </select>                                         
                                 </div> 
 
@@ -57,8 +69,16 @@
 
                                     <div style="margin-top:10px" class="form-group">
                                         <div class="col-sm-7 col-sm-offset-5  controls">
-                                          <button type="submit" class="btn btn-success">Siguiente</button>
-    
+                                        
+                                        @if (isset(auth()->user()->Docente()->Productividad()->videos))
+                                            @if (auth()->user()->Docente()->Productividad()->videos <5 or auth()->user()->Docente()->Productividad()->videosbon <5)
+                                            <button type="submit" class="btn btn-success">Siguiente</button>
+                                            @endif
+
+                                        @else
+                                            <button type="submit" class="btn btn-success">Siguiente</button>
+                                        @endif
+                                        
                                         </div>
                                     </div>
                                      

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class ReseñasCriticas extends Model
 {
@@ -45,6 +46,23 @@ class ReseñasCriticas extends Model
                 'estado' => 'Enviado',
                 'bonificacion_calculada' => $pa,
                 'idconvocatoria' => $idc,
+                'fechasolicitud' => (date('Y-m-d'))
             ]);
+    }
+
+    public function ProDoc($productividad){
+
+        $año = date('Y');   
+        $data = DB::table('docente_productividads')
+        ->where('docente_productividads.iddocente','=',$productividad->id_docente)
+        ->where('docente_productividads.año','=',$año)
+        ->get();
+
+        if( empty($data->first())){
+            $prodoc = DocenteProductividad::Create([
+                'iddocente' => $productividad->id_docente,
+                'año' => $año
+            ]);
+        }
     }
 }

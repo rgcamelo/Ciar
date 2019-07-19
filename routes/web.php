@@ -84,4 +84,6 @@ Route::post('/reseñasCriticas',"ReseñasCriticasController@crear");
 Route::post('/direccionTesis',"DireccionTesisController@crear");
 
 Route::get('/descargar/{archivo}',"Descargar@descarga");
-
+Route::post('bajaracta/{convocatoria}',"pdfController@acta");
+Route::post('aprobadas/{convocatoria}',"pdfController@aprobadas");
+Route::post('noaprobadas/{convocatoria}',"pdfController@reprobadas");

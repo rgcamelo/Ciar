@@ -33,6 +33,6 @@ class ProduccionTecnicaController extends Controller
         $convocatoria=auth()->user()->convocatoria()->first();
         $producciontecnica->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('solicitudes');
     }
 }

@@ -4,7 +4,7 @@
 <div class="container" >
     <div class="container">    
             <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-7 col-md-offset-2 col-sm-8 col-sm-offset-2">                    
-                <div class="panel panel-info" >
+                <div class="panel panel-success" >
                         <div class="panel-heading">
                             <div class="panel-title">Datos de la Publicacion Impresa Universitaria</div>
                             <div style="float:right; font-size: 80%; position: relative; top:-10px">Revise sus Datos sean correctos</div>
@@ -37,8 +37,14 @@
                                 
                                     <div style="margin-top:10px" class="form-group">
                                         <div class="col-sm-7 col-sm-offset-5  controls">
-                                          <button type="submit" class="btn btn-success">Siguiente</button>
-    
+                                                @if (isset(auth()->user()->Docente()->Productividad()->publicacion))
+                                                @if (auth()->user()->Docente()->Productividad()->publicacion <5 )
+                                                <button type="submit" class="btn btn-success">Siguiente</button>
+                                                @endif
+                                                
+                                            @else
+                                                <button type="submit" class="btn btn-success">Siguiente</button>
+                                            @endif
                                         </div>
                                     </div>
                                      

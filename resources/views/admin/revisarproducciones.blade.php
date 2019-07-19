@@ -132,7 +132,7 @@
                                   <form action="{{ url('calificar',['solicitud' => $p->idsolicitud]) }}" method="post" id="aprobar">
                                       {!! csrf_field() !!}
                                       <div class="form-row" style="display: flex;justify-content:center">
-                                          <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="puntos_asignados" style="font-size: 32px" type="number" required max="{{$p->puntos_aprox}}" min="0"  >
+                                          <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="puntos_asignados" style="font-size: 32px" type="number" required max="{{$p->puntos_aprox}}" value="{{$p->puntos_aprox}}" step="0.001" min="0"  >
                                       </div>
                                       <br>
                                       <div class="form-row" style="display: flex;justify-content:center">

@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\DB;
 class Video extends Model
 {
     protected $primaryKey = 'idvideo';
@@ -71,29 +71,87 @@ class Video extends Model
         }
     }
 
+    public function ProDoc($productividad){
+
+        $año = date('Y');   
+        $data = DB::table('docente_productividads')
+        ->where('docente_productividads.iddocente','=',$productividad->id_docente)
+        ->where('docente_productividads.año','=',$año)
+        ->get();
+
+        if( empty($data->first())){
+            $prodoc = DocenteProductividad::Create([
+                'iddocente' => $productividad->id_docente,
+                'año' => $año
+            ]);
+        }
+    }
+
     public function solicitud($idp,$pa,$idc){
+
+        $productividad=Productividad::find($idp)->Docente()->Productividad();
+
         switch ($this->impacto) {
             case 'Internacional':
             case 'Nacional':
-            
-            Solicitud::create([
-                'productividad_id' => $idp,
-                'estado' => 'Enviado',
-                'puntos_aprox' => $pa,
-                'idconvocatoria' => $idc,
-                'fechasolicitud' => (date('Y-m-d'))
-            ]);
+            if (isset(auth()->user()->Docente()->Productividad()->idprodoc)) {
+                if ($productividad->videos > 5) {
+                    Solicitud::create([
+                        'productividad_id' => $idp,
+                        'estado' => 'Tope Maximo',
+                        'puntos_aprox' => 0,
+                        'idconvocatoria' => $idc,
+                        'fechasolicitud' => (date('Y-m-d'))
+                    ]);
+                }
+                else {
+                    Solicitud::create([
+                        'productividad_id' => $idp,
+                        'estado' => 'Enviado',
+                        'puntos_aprox' => $pa,
+                        'idconvocatoria' => $idc,
+                        'fechasolicitud' => (date('Y-m-d'))
+                    ]);
+                }
+            } else {
+                Solicitud::create([
+                    'productividad_id' => $idp,
+                    'estado' => 'Enviado',
+                    'puntos_aprox' => $pa,
+                    'idconvocatoria' => $idc,
+                    'fechasolicitud' => (date('Y-m-d'))
+                ]);
+            }   
             break;
             case 'Regional':
             case 'Local':
-            
-            Solicitud::create([
-                'productividad_id' => $idp,
-                'estado' => 'Enviado',
-                'bonificacion_calculada' => $pa,
-                'idconvocatoria' => $idc,
-                'fechasolicitud' => (date('Y-m-d'))
-            ]);
+            if (isset(auth()->user()->Docente()->Productividad()->idprodoc)) {
+                if($productividad->videosbon > 5){
+                    Solicitud::create([
+                        'productividad_id' => $idp,
+                        'estado' => 'Tope Maximo',
+                        'bonificacion_calculada' => $pa,
+                        'idconvocatoria' => $idc,
+                        'fechasolicitud' => (date('Y-m-d'))
+                    ]);
+                }else {
+                    Solicitud::create([
+                        'productividad_id' => $idp,
+                        'estado' => 'Enviado',
+                        'bonificacion_calculada' => $pa,
+                        'idconvocatoria' => $idc,
+                        'fechasolicitud' => (date('Y-m-d'))
+                    ]);
+                }
+            } else {
+                Solicitud::create([
+                    'productividad_id' => $idp,
+                    'estado' => 'Enviado',
+                    'bonificacion_calculada' => $pa,
+                    'idconvocatoria' => $idc,
+                    'fechasolicitud' => (date('Y-m-d'))
+                ]);
+            }
             break;
         }
     }

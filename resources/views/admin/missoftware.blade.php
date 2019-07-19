@@ -124,5 +124,5 @@
 </div>
 </td>
 <td>
-    <button class="btn btn-primary">Modificar</button>
+    
 </td>

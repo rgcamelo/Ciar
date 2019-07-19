@@ -94,7 +94,7 @@ class LibroController extends Controller
         $convocatoria=auth()->user()->convocatoria()->first();
         $libro->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('solicitudes');
         //dd($productividad->idproductividad);
     }
 }

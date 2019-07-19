@@ -51,11 +51,15 @@
                                                 @endif 
                                                 @if ($sol->estado == 'Reclamado')
                                                   <span style="font-size:16px" class="label label-warning">{{$sol->estado}}</span>
-                                                @endif                                                  
+                                                @endif
+                                                @if ($sol->estado == 'Tope Maximo')
+                                                  <span class="label label-primary">{{$sol->estado}}</span>
+                                                @endif                                                 
                                 </td> 
                                 <td>
                                   <div class="info-box 
                                   @if($sol->estado == 'Aprobado' or $sol->estado =='Aprobado2')bg-green @endif
+                                  @if($sol->estado == 'Tope Maximo' )bg-blue @endif
                                   @if ($sol->estado == 'Enviado' or $sol->estado == 'Enviado a Pares' or $sol->estado == 'Reclamado' or $sol->estado == 'Calificado por Pares')bg-yellow @endif
                                   @if ($sol->estado == 'No Aprobado' or $sol->estado == 'Rechazado2' or $sol->estado == 'Cancelado')bg-red @endif
                                   ">
@@ -70,6 +74,7 @@
                                           @if ($sol->estado == 'Calificado por Pares' )fa fa-graduation-cap @endif
                                           @if ($sol->estado == 'No Aprobado' or $sol->estado == 'Rechazado2' or $sol->estado == 'Cancelado')fa fa-close @endif
                                           @if ($sol->estado == 'Cancelado')fa fa-minus @endif
+                                          @if ($sol->estado == 'Tope Maximo')fa fa-exclamation @endif
                                           "></i>
                                         </span>
                                         <div class="info-box-content">
@@ -91,6 +96,7 @@
                                           @if ($sol->estado == 'Calificado por Pares' )fa fa-graduation-cap @endif
                                           @if ($sol->estado == 'No Aprobado' or $sol->estado == 'Rechazado2' or $sol->estado == 'Cancelado')fa fa-close @endif
                                           @if ($sol->estado == 'Cancelado')fa fa-minus @endif
+                                          @if ($sol->estado == 'Tope Maximo')fa fa-exclamation @endif
                                         "></i>
                                       </span>
                                       <div class="info-box-content">
@@ -107,9 +113,204 @@
                                 <td>{{$sol->observaciones}}</td>
                                 <td >
                                     @if ($sol->estado == 'Enviado')
-                                        <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
+                                  
+                                    @switch($sol->productividadable_type)
+                                        @case('App\Video')
+                                          @if ($sol->bonificacion_calculada == null)
+                                          @if ($sol->videos >= 5)
+                                            <div class="info-box">
+                                                <div>
+                                                  <span class="info-box-icon bg-blue">
+                                                    <i class="fa fa-exclamation"></i>
+                                                  </span>
+                                                  <div class="info-box-content">
+                                                    <span class="info-box-text">Tope Maximo </span>
+                                                  </div>
+                                                </div>
+                                                
+                                              </div>
+                                              @else
+                                              <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
+                                                  <span class="fa fa-close"></span>
+                                                </button>
+                                            @endif
+                                          @else
+                                          @if ($sol->videosbon >= 5)
+                                          <div class="info-box">
+                                              <div>
+                                                <span class="info-box-icon bg-blue">
+                                                  <i class="fa fa-exclamation"></i>
+                                                </span>
+                                                <div class="info-box-content">
+                                                  <span class="info-box-text">Tope Maximo </span>
+                                                </div>
+                                              </div>
+                                              
+                                            </div>
+                                            @else
+                                              <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
+                                                  <span class="fa fa-close"></span>
+                                                </button>
+                                          @endif
+
+
+                                          @endif
+                                            
+                                            @break
+                                        @case('App\Traduccion')
+                                            @if ($sol->bonificacion_calculada != null)
+                                              @if ($sol->traduccionesbon >= 5)
+                                              <div class="info-box">
+                                                <div>
+                                                  <span class="info-box-icon bg-blue">
+                                                    <i class="fa fa-exclamation"></i>
+                                                  </span>
+                                                  <div class="info-box-content">
+                                                    <span class="info-box-text">Tope Maximo </span>
+                                                  </div>
+                                                </div>
+                                                
+                                              </div>
+                                              @else
+                                              <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
+                                                  <span class="fa fa-close"></span>
+                                                </button>
+                                              @endif
+                                            @else
+                                            <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
                                                 <span class="fa fa-close"></span>
                                               </button>
+                                            @endif
+                                            @break
+
+                                            @case('App\PublicacionImpresa')
+                                            @if ($sol->bonificacion_calculada != null)
+                                              @if ($sol->publicacion >= 5)
+                                              <div class="info-box">
+                                                <div>
+                                                  <span class="info-box-icon bg-blue">
+                                                    <i class="fa fa-exclamation"></i>
+                                                  </span>
+                                                  <div class="info-box-content">
+                                                    <span class="info-box-text">Tope Maximo </span>
+                                                  </div>
+                                                </div>
+                                                
+                                              </div>
+                                              @else
+                                              <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
+                                                  <span class="fa fa-close"></span>
+                                                </button>
+                                              @endif
+                                            @else
+                                            <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
+                                                <span class="fa fa-close"></span>
+                                              </button>
+                                            @endif
+                                            @break
+                                        
+                                        @break
+                                        
+                                        @case('App\ReseñasCriticas')
+                                            @if ($sol->bonificacion_calculada != null)
+                                              @if ($sol->reseñas >= 5)
+                                              <div class="info-box">
+                                                <div>
+                                                  <span class="info-box-icon bg-blue">
+                                                    <i class="fa fa-exclamation"></i>
+                                                  </span>
+                                                  <div class="info-box-content">
+                                                    <span class="info-box-text">Tope Maximo </span>
+                                                  </div>
+                                                </div>
+                                                
+                                              </div>
+                                              @else
+                                              <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
+                                                  <span class="fa fa-close"></span>
+                                                </button>
+                                              @endif
+                                            @else
+                                            <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
+                                                <span class="fa fa-close"></span>
+                                              </button>
+                                            @endif
+                                            @break
+
+                                            @case('App\DireccionTesis')
+                                            @if ($sol->bonificacion_calculada != null)
+                                              @if ($sol->direccion >= 3)
+                                              <div class="info-box">
+                                                <div>
+                                                  <span class="info-box-icon bg-blue">
+                                                    <i class="fa fa-exclamation"></i>
+                                                  </span>
+                                                  <div class="info-box-content">
+                                                    <span class="info-box-text">Tope Maximo </span>
+                                                  </div>
+                                                </div>
+                                                
+                                              </div>
+                                              @else
+                                              <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
+                                                  <span class="fa fa-close"></span>
+                                                </button>
+                                              @endif
+                                            @else
+                                            <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
+                                                <span class="fa fa-close"></span>
+                                              </button>
+                                            @endif
+                                            @break
+
+                                        @case('App\Obra')
+                                          @if ($sol->bonificacion_calculada == null)
+                                          @if ($sol->obras >= 5)
+                                            <div class="info-box">
+                                                <div>
+                                                  <span class="info-box-icon bg-blue">
+                                                    <i class="fa fa-exclamation"></i>
+                                                  </span>
+                                                  <div class="info-box-content">
+                                                    <span class="info-box-text">Tope Maximo </span>
+                                                  </div>
+                                                </div>
+                                                
+                                              </div>
+                                              @else
+                                              <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
+                                                  <span class="fa fa-close"></span>
+                                                </button>
+                                            @endif
+                                          @else
+                                          @if ($sol->obrasbon >= 5)
+                                          <div class="info-box">
+                                              <div>
+                                                <span class="info-box-icon bg-blue">
+                                                  <i class="fa fa-exclamation"></i>
+                                                </span>
+                                                <div class="info-box-content">
+                                                  <span class="info-box-text">Tope Maximo </span>
+                                                </div>
+                                              </div>
+                                              
+                                            </div>
+                                            @else
+                                              <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
+                                                  <span class="fa fa-close"></span>
+                                                </button>
+                                          @endif
+
+
+                                          @endif
+                                            
+                                            @break
+                                            @default
+                                        <button type="button" class="btn btn-danger btn-lg" title="Cancelar"  data-toggle="modal" data-target="#cancelar{{$sol->idsolicitud}}">
+                                            <span class="fa fa-close"></span>
+                                          </button>
+                                    @endswitch
+                                        
                                               
                                               <!-- Modal -->
                                             <div class="modal fade" id="cancelar{{$sol->idsolicitud}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -152,7 +353,7 @@
                                                     <div class="modal-body">
                                                             <div class="form-row" style="display: flex;justify-content:center">
                                                                     <span style="font-size: 16px">Reclamo: </span>
-                                                                    <textarea name="reclamo" rows="5" cols="60" placeholder="Escriba su reclamo"></textarea> 
+                                                                    <textarea name="reclamo" rows="5" required cols="60" placeholder="Escriba su reclamo"></textarea> 
                                                             </div>
                                                             <br>
                                                             <div class="form-row" style="display: flex;justify-content:center">

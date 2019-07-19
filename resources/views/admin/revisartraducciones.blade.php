@@ -113,9 +113,27 @@
     <td>
 
             @if ($p->estado == 'Enviado')
-
-                    <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
-                    <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
+            @if ($p->bonificacion_calculada != null)
+                @if ($p->traduccionesbon >= 5)
+                <div class="info-box">
+                    <div>
+                      <span class="info-box-icon bg-blue">
+                        <i class="fa fa-exclamation"></i>
+                      </span>
+                      <div class="info-box-content">
+                        <span class="info-box-text">Tope Maximo </span>
+                      </div>
+                    </div>
+                  </div>
+                @else
+                <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
+                <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
+                @endif
+            @else
+            <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
+            <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
+            @endif
+                    
             
                   
                   <!-- Modal -->
@@ -133,7 +151,7 @@
                                             <form action="{{ url('calificarbonificacion',['solicitud' => $p->idsolicitud]) }}" method="post" id="aprobar">
                                                 {!! csrf_field() !!}
                                                 <div class="form-row" style="display: flex;justify-content:center">
-                                                    <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="bonificacion" style="font-size: 32px" type="number" required max="{{$p->bonificacion_calculada}}" min="0"  >
+                                                    <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="bonificacion" style="font-size: 32px" type="number" required max="{{$p->bonificacion_calculada}}" value="{{$p->bonificacion_calculada}}" step="0.001" min="0"  >
                                                 </div>
                                                 <br>
                                                 <div class="form-row" style="display: flex;justify-content:center">
@@ -154,7 +172,7 @@
                                             <form action="{{ url('calificar',['solicitud' => $p->idsolicitud]) }}" method="post" id="aprobar">
                                                 {!! csrf_field() !!}
                                                 <div class="form-row" style="display: flex;justify-content:center">
-                                                    <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="puntos_asignados" style="font-size: 32px" type="number" required max="{{$p->puntos_aprox}}" min="0"  >
+                                                    <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="puntos_asignados" style="font-size: 32px" type="number" required max="{{$p->puntos_aprox}}" value="{{$p->puntos_aprox}}" step="0.001" min="0"  >
                                                 </div>
                                                 <br>
                                                 <div class="form-row" style="display: flex;justify-content:center">

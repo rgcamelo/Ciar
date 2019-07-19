@@ -29,10 +29,11 @@ class TraduccionController extends Controller
             'titulo' => $data['titulo'],
         ]); 
 
+        $traduccion->ProDoc($productividad);
         $pa=round($pa=$traduccion->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $traduccion->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('solicitudes');
     }
 }

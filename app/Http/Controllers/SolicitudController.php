@@ -111,7 +111,8 @@ class SolicitudController extends Controller
                 'videos' => $valor+1
             ]);
             $prodoc->update($e);
-            }else {
+            }
+            else {
                 $valor=$prodoc->videosbon;
             $e=([
                 'videosbon' => $valor+1
@@ -133,19 +134,37 @@ class SolicitudController extends Controller
             ]);
             $prodoc->update($e);
             break;
-            case 'App\Traducciones':
-            $valor=$prodoc->traducciones;
+            case 'App\Traduccion':
+            if ($solicitud->bonificacion_calculada == null) {
+                $valor=$prodoc->traducciones;
             $e=([
                 'traducciones' => $valor+1
             ]);
             $prodoc->update($e);
+            }
+            else {
+                $valor=$prodoc->traduccionesbon;
+            $e=([
+                'traduccionesbon' => $valor+1
+            ]);
+            $prodoc->update($e);
+            }
             break;
             case 'App\Obra':
-            $valor=$prodoc->obras;
+            if ($solicitud->bonificacion_calculada == null) {
+                $valor=$prodoc->obras;
             $e=([
                 'obras' => $valor+1
             ]);
             $prodoc->update($e);
+            }
+            else {
+                $valor=$prodoc->obrasbon;
+            $e=([
+                'obrasbon' => $valor+1
+            ]);
+            $prodoc->update($e);
+            }
             break;
             case 'App\ProduccionTecnica':
             $valor=$prodoc->producciontecnica;
@@ -191,7 +210,7 @@ class SolicitudController extends Controller
     public function crearsuma($productividad){
         $año = date('Y');
         $prodoc = DocenteProductividad::Create([
-            'iddoncente' => $productividad->id_docente,
+            'iddocente' => $productividad->id_docente,
             'año' => $año
         ]);
 
@@ -221,7 +240,7 @@ class SolicitudController extends Controller
             $pdf->save($data->first()->folder.'/FormatoRecibidoSoftware'.$solicitud->idsolicitud.'.pdf');
                 break;      
             default:
-                # code...
+                return null;
                 break;
         }
         

@@ -70,7 +70,7 @@
         </span>
         <div class="info-box-content">
             <span class="info-box-text"><strong>Titulo: </strong>{{$p->titulo}}</span>
-            <span class="info-box-text"><strong>Tipo: </strong>Ponencia</span>
+            <span class="info-box-text"><strong>Tipo: </strong>Obra Artistica</span>
             <span class="info-box-text"><strong>Puntos Calculados: </strong>{{$p->puntos_aprox}}</span>
             @if ($p->puntos_asignados != null)
             <span class="info-box-text"><strong>Puntos Asignados: </strong>{{$p->puntos_asignados}}</span>
@@ -113,11 +113,41 @@
     <td>
 
             @if ($p->estado == 'Enviado')
-
-                    <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
-                    <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
+            @if ($p->bonificacion_calculada == null)
+            @if ($p->obras < 5)
+            <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
+                  <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
+            @else
+            <div class="info-box">
+              <div>
+                <span class="info-box-icon bg-blue">
+                  <i class="fa fa-exclamation"></i>
+                </span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Tope Maximo </span>
+                </div>
+              </div>
+            </div>
+            @endif
+            @else
+            @if ($p->obrasbon < 5)
+            <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
+                  <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
+            @else
+            <div class="info-box">
+              <div>
+                <span class="info-box-icon bg-blue">
+                  <i class="fa fa-exclamation"></i>
+                </span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Tope Maximo </span>
+                </div>
+              </div>
+            @endif
             
-                  
+                
+              </div>
+              @endif
                   <!-- Modal -->
                   <div class="modal fade" id="calificar{{$p->idsolicitud}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
@@ -133,7 +163,7 @@
                                             <form action="{{ url('calificarbonificacion',['solicitud' => $p->idsolicitud]) }}" method="post" id="aprobar">
                                                 {!! csrf_field() !!}
                                                 <div class="form-row" style="display: flex;justify-content:center">
-                                                    <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="bonificacion" style="font-size: 32px" type="number" required max="{{$p->bonificacion_calculada}}" min="0"  >
+                                                    <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="bonificacion" style="font-size: 32px" type="number" required max="{{$p->bonificacion_calculada}}" value="{{$p->bonificacion_calculada}}" step="0.001" min="0"  >
                                                 </div>
                                                 <br>
                                                 <div class="form-row" style="display: flex;justify-content:center">
@@ -154,7 +184,7 @@
                                             <form action="{{ url('calificar',['solicitud' => $p->idsolicitud]) }}" method="post" id="aprobar">
                                                 {!! csrf_field() !!}
                                                 <div class="form-row" style="display: flex;justify-content:center">
-                                                    <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="puntos_asignados" style="font-size: 32px" type="number" required max="{{$p->puntos_aprox}}" min="0"  >
+                                                    <span style="font-size: 16px;margin:10px"  >Puntaje Asignado:</span> <input name="puntos_asignados" style="font-size: 32px" type="number" required max="{{$p->puntos_aprox}}" value="{{$p->puntos_aprox}}" step="0.001" min="0"  >
                                                 </div>
                                                 <br>
                                                 <div class="form-row" style="display: flex;justify-content:center">

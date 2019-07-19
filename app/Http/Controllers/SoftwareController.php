@@ -176,7 +176,7 @@ class SoftwareController extends Controller
 
         $this->pdf($folder,$s);
         
-        return redirect()->route('dashboard');
+        return redirect()->route('solicitudes');
 
         //$data=request()->all();
         //dd($data);

@@ -5,6 +5,7 @@
       <div>
           <span class="info-box-icon
           @if($p->estado == 'Aprobado' or $p->estado =='Aprobado2')bg-green @endif
+          @if($p->estado == 'Tope Maximo' )bg-blue @endif
           @if ($p->estado == 'Enviado' or $p->estado == 'Enviado a Pares' or $p->estado == 'Reclamado' or $p->estado == 'Calificado por Pares')bg-yellow @endif
           @if ($p->estado == 'No Aprobado' or $p->estado == 'Rechazado2' or $p->estado == 'Cancelado')bg-red @endif
     
@@ -17,6 +18,7 @@
           @if ($p->estado == 'Calificado por Pares' )fa fa-graduation-cap @endif
           @if ($p->estado == 'No Aprobado' or $p->estado == 'Rechazado2' or $p->estado == 'Cancelado')fa fa-close @endif
           @if ($p->estado == 'Cancelado')fa fa-minus @endif
+          @if ($p->estado == 'Tope Maximo')fa fa-exclamation @endif
             "></i>
           </span>
           <div class="info-box-content">
@@ -36,7 +38,6 @@
               @endif
               @if ($p->estado == 'Calificado por Pares')
                 <span class="label label-warning">{{$p->estado}}</span>
-             
               @endif 
               @if ($p->estado == 'Aprobado')
               <span class="label label-success">{{$p->estado}}</span>
@@ -50,6 +51,9 @@
               @if ($p->estado == 'Reclamado')
                 <span class="label label-warning">{{$p->estado}}</span>
               @endif 
+              @if ($p->estado == 'Tope Maximo')
+                <span class="label label-primary">{{$p->estado}}</span>
+              @endif 
             </span>
           </div>
         </div>
@@ -58,19 +62,21 @@
       <div>
         <span class="info-box-icon 
         @if($p->estado == 'Aprobado' or $p->estado =='Aprobado2')bg-green @endif
+        @if($p->estado == 'Tope Maximo' )bg-blue @endif
         @if ($p->estado == 'Enviado' or $p->estado == 'Enviado a Pares' or $p->estado == 'Reclamado' or $p->estado == 'Calificado por Pares')bg-yellow @endif
         @if ($p->estado == 'No Aprobado' or $p->estado == 'Rechazado2' or $p->estado == 'Cancelado')bg-red @endif
     
         ">
           <i class="
           @if($p->estado == 'Aprobado' or $p->estado =='Aprobado2')fa fa-check @endif
+          @if ($p->estado == 'Tope Maximo')fa fa-exclamation @endif
           @if ($p->estado == 'Enviado' or $p->estado == 'Enviado a Pares' or $p->estado == 'Reclamado' or $p->estado == 'Calificado por Pares')fa fa-envelope @endif
           @if ($p->estado == 'No Aprobado' or $p->estado == 'Rechazado2' or $p->estado == 'Cancelado')fa fa-close @endif
           "></i>
         </span>
         <div class="info-box-content">
             <span class="info-box-text"><strong>Titulo: </strong>{{$p->titulo}}</span>
-            <span class="info-box-text"><strong>Tipo: </strong>Ponencia</span>
+            <span class="info-box-text"><strong>Tipo: </strong>Cinematografia o Fonografia</span>
             <span class="info-box-text"><strong>Puntos Calculados: </strong>{{$p->puntos_aprox}}</span>
             @if ($p->puntos_asignados != null)
             <span class="info-box-text"><strong>Puntos Asignados: </strong>{{$p->puntos_asignados}}</span>
@@ -98,7 +104,11 @@
             @endif 
             @if ($p->estado == 'Reclamado')
               <span class="label label-warning">{{$p->estado}}</span>
-            @endif 
+            @endif
+            @if ($p->estado == 'Tope Maximo')
+                <span class="label label-primary">{{$p->estado}}</span>
+              @endif 
+             
           </span>
                                     
         </div>
@@ -113,9 +123,42 @@
     <td>
 
             @if ($p->estado == 'Enviado')
-
-                    <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
-                    <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
+            @if ($p->bonificacion_calculada == null)
+            @if ($p->videos < 5)
+            <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
+                  <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
+            @else
+            <div class="info-box">
+              <div>
+                <span class="info-box-icon bg-blue">
+                  <i class="fa fa-exclamation"></i>
+                </span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Tope Maximo </span>
+                </div>
+              </div>
+            </div>
+            @endif
+            @else
+            @if ($p->videosbon < 5)
+            <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
+                  <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
+            @else
+            <div class="info-box">
+              <div>
+                <span class="info-box-icon bg-blue">
+                  <i class="fa fa-exclamation"></i>
+                </span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Tope Maximo </span>
+                </div>
+              </div>
+            @endif
+            
+                
+              </div>
+              @endif
+                    
             
                   
                   <!-- Modal -->

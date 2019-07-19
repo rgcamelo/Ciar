@@ -95,6 +95,6 @@ class ArticuloController extends Controller
         $convocatoria=auth()->user()->convocatoria()->first();
         $articulo->solicitud($productividad->idproductividad, $pa,$convocatoria->idconvocatoria);
         
-        return redirect()->route('dashboard');
+        return redirect()->route('solicitudes');
     }
 }

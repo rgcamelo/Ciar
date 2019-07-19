@@ -4,7 +4,7 @@
 <div class="container" >
     <div class="container">    
             <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-7 col-md-offset-2 col-sm-8 col-sm-offset-2">                    
-                <div class="panel panel-info" >
+                <div class="panel panel-success" >
                         <div class="panel-heading">
                             <div class="panel-title">Datos de la Traduccion</div>
                             <div style="float:right; font-size: 80%; position: relative; top:-10px">Revise sus Datos sean correctos</div>
@@ -33,9 +33,14 @@
                                             <span class="input-group-addon">Tipo</span>
                                             <select class="form-control" required name="tipo">
                                                  <option value="" selected></option>
-                                                            <option value="De Libro">De Libro</option>
-                                                            <option value="De Articulo">De Articulo</option>
-                                                          </select>                                         
+                                                 @if (isset(auth()->user()->Docente()->Productividad()->traduccionesbon))
+                                                    @if (auth()->user()->Docente()->Productividad()->traduccionesbon <5)
+                                                       <option value="De Articulo">De Articulo</option>
+                                                    @endif
+                                                    
+                                                    @endif 
+                                                    <option value="De Libro">De Libro</option>
+                                               </select>                                         
                                 </div>  
 
                                 <div style="margin-bottom: 25px" class="input-group {{ $errors->has('noautores') ? 'has-error' : ''}}">
