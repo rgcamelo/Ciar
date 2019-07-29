@@ -15,15 +15,15 @@ class CreatePonenciasTable extends Migration
     {
         Schema::create('ponencias', function (Blueprint $table) {
             $table->bigIncrements('idponencia');
-            $table->string('nombreevento');
-            $table->date('fechaevento');
-            $table->string('lugarevento');
-            $table->string('tipoevento');
-            $table->string('idiomaponencia');
-            $table->string('noautores_ponencia');
-            $table->string('paginaevento');
-            $table->string('creditoUpc_ponencia');
-            $table->string('memorias');
+            $table->string('nombreevento')->nullable();
+            $table->date('fechaevento')->nullable();
+            $table->string('lugarevento')->nullable();
+            $table->string('tipoevento')->nullable();
+            $table->string('idiomaponencia')->nullable();
+            $table->string('noautores_ponencia')->nullable();
+            $table->string('paginaevento')->nullable();
+            $table->string('creditoUpc_ponencia')->nullable();
+            $table->string('memorias')->nullable();
             $table->string('issn')->nullable();
             $table->string('isbn')->nullable();
             $table->string('ponenciasreconocidas')->nullable();

@@ -2,7 +2,7 @@
 
 @section('content')
     
-    <div class="container">
+    <div class="section">
             <script>$(document).ready(function() {
                     $('#tabla').DataTable( {
                         "paging":   true,

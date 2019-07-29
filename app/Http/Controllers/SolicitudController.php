@@ -33,7 +33,7 @@ class SolicitudController extends Controller
     }
 
     public function calificar(Solicitud $solicitud){
-        
+        $this->sumarproductividad($solicitud);
         $data=request()->validate([
             'puntos_asignados' => '',
             'comentario' => ''
@@ -47,7 +47,7 @@ class SolicitudController extends Controller
         $solicitud->update($e);
 
         $this->pdf($solicitud);
-        $this->sumarproductividad($solicitud);
+        
         //Crear notificacion
         return redirect()->route('revisarsolicitudes');
     }

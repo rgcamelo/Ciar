@@ -17,10 +17,10 @@ class CreatePonenciaSoportesTable extends Migration
             $table->bigIncrements('idponenciasoporte');
             $table->unsignedBigInteger('idponencia');
             $table->foreign('idponencia')->references('idponencia')->on('ponencias');
-            $table->string('memoriaevento');
-            $table->string('certificadoponente');
-            $table->string('Cvlacponencia');
-            $table->string('Gruplacponencia');
+            $table->string('memoriaevento')->nullable();
+            $table->string('certificadoponente')->nullable();
+            $table->string('Cvlacponencia')->nullable();
+            $table->string('Gruplacponencia')->nullable();
             $table->string('Zipponencia');
             $table->timestamps();
         });

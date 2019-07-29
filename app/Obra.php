@@ -86,47 +86,62 @@ class Obra extends Model
         }
     }
 
-    public function solicitud($idp,$pa,$idc){
-        
+    public function solicitud($idp,$pa,$idc,$estado){
+        $productividad=Productividad::find($idp)->Docente()->Productividad();
         switch ($this->impacto) {
             case 'Internacional':
             case 'Nacional':
-            
-            Solicitud::create([
-                'productividad_id' => $idp,
-                'estado' => 'Enviado',
-                'puntos_aprox' => $pa,
-                'idconvocatoria' => $idc,
-                'fechasolicitud' => (date('Y-m-d'))
-            ]);
+            if (isset($productividad->idprodoc)){
+               if($productividad->obras <5){
+                $solicitud=Solicitud::create([
+                    'productividad_id' => $idp,
+                    'estado' => $estado,
+                    'puntos_aprox' => $pa,
+                    'idconvocatoria' => $idc,
+                    'fechasolicitud' => (date('Y-m-d'))
+                ]);
+               }
+            }
+            else {
+                $solicitud=Solicitud::create([
+                    'productividad_id' => $idp,
+                    'estado' => $estado,
+                    'puntos_aprox' => $pa,
+                    'idconvocatoria' => $idc,
+                    'fechasolicitud' => (date('Y-m-d'))
+                ]);
+                $solicitud->ProDoc();
+            }
             break;
             case 'Regional':
             case 'Local':
+            if (isset($productividad->idprodoc)){
+                if($productividad->obrasbon <5){
+                    $solicitud=Solicitud::create([
+                        'productividad_id' => $idp,
+                        'estado' => $estado,
+                        'bonificacion_calculada' => $pa,
+                        'idconvocatoria' => $idc,
+                        'fechasolicitud' => (date('Y-m-d'))
+                    ]);
+                }
+            }
+            else {
+                $solicitud=Solicitud::create([
+                    'productividad_id' => $idp,
+                    'estado' => $estado,
+                    'bonificacion_calculada' => $pa,
+                    'idconvocatoria' => $idc,
+                    'fechasolicitud' => (date('Y-m-d'))
+                ]);
+                $solicitud->ProDoc();
+            }
             
-            Solicitud::create([
-                'productividad_id' => $idp,
-                'estado' => 'Enviado',
-                'bonificacion_calculada' => $pa,
-                'idconvocatoria' => $idc,
-                'fechasolicitud' => (date('Y-m-d'))
-            ]);
+            
             break;
         }
+
+
     }
 
-    public function ProDoc($productividad){
-
-        $año = date('Y');   
-        $data = DB::table('docente_productividads')
-        ->where('docente_productividads.iddocente','=',$productividad->id_docente)
-        ->where('docente_productividads.año','=',$año)
-        ->get();
-
-        if( empty($data->first())){
-            $prodoc = DocenteProductividad::Create([
-                'iddocente' => $productividad->id_docente,
-                'año' => $año
-            ]);
-        }
-    }
 }

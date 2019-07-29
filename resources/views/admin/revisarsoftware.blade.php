@@ -389,9 +389,5 @@
                       </div>
                     </div>
             @endif
-            @if ($p->estado == 'Aprobado' and $p->estado == 'No Aprobado')
-            <button class="btn btn-primary btn-lg" onclick="window.open('{{$p->Zip}}/{{$p->formatoenviado}}')"> <i class="fa fa-eye"></i></button>
-            @else
-            <button class="btn btn-primary btn-lg" onclick="window.open('{{$p->folder}}/{{$p->formatorecibido}}')"> <i class="fa fa-eye"></i></button>
-            @endif
+
         </td>

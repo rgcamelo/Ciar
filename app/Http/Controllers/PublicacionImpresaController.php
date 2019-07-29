@@ -28,7 +28,7 @@ class PublicacionImpresaController extends Controller
             'titulo' => $data['titulo'],
         ]); 
 
-        $publicacion->ProDoc($productividad);
+        
         $pa=round($pa=$publicacion->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $publicacion->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);

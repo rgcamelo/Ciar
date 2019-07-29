@@ -90,9 +90,76 @@ class LibroController extends Controller
         ]); 
 
         $pa=round($pa=$libro->puntaje(),3);
-
         $convocatoria=auth()->user()->convocatoria()->first();
-        $libro->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
+        $libro->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Enviado');
+
+        return redirect()->route('solicitudes');
+        //dd($productividad->idproductividad);
+    }
+
+    public function guardar(){
+        $d=auth()->user()->Docente();
+        $data=request()->all();
+            //dd($data);
+        $folder = 'archivos/libro/'.$d->NombreCompleto.'_'.$d->iddocente.'_'.$data['titulo'].'_'.time();
+        File::makeDirectory($folder);
+        
+        $libro=Libro::create([
+            'fecha_publicacion' => $data['fecha'],
+            'editorial' => $data['editorial'],
+            'tipo_libro' => $data['tipolibro'],
+            'isbn' => $data['isbn'],
+            'idioma' => $data['idioma'],
+            'noautores' => $data['noautores'],
+            'creditoUpc_libro' => $data['credito'],
+        ]);
+
+        $ejemplar=null;
+        if(request()->hasFile('ejemplar'))
+        {
+            $filei = request()->file('ejemplar');
+            $ejemplar= time()."_1".'Ejemplar_'.$filei->getClientOriginalName();
+            $filei->move($folder,$ejemplar);            
+        }
+        $certilibroinves=null;
+        if(request()->hasFile('certilibroinves'))
+        {
+            $filem = request()->file('certilibroinves');
+            $certilibroinves= time()."_2".'CertificadoLibroInvestigacion_'.$filem->getClientOriginalName();
+            $filem->move($folder,$certilibroinves);            
+        }
+        $cvlac=null;
+        if(request()->hasFile('cvlac'))
+        {
+            $filecv = request()->file('cvlac');
+            $cvlac= time()."_3CvLac_".$filecv->getClientOriginalName();
+            $filecv->move($folder,$cvlac);            
+        }
+        $gruplac=null;
+        if(request()->hasFile('gruplac'))
+        {
+            $filegru = request()->file('gruplac');
+            $gruplac= time()."_4GrupLac_".$filegru->getClientOriginalName();
+            $filegru->move($folder,$gruplac);            
+        }
+        $certieditorial=null;
+        if(request()->hasFile('certieditorial'))
+        {
+            $fileimp = request()->file('certieditorial');
+            $certieditorial= time()."_6CertificadoEditorial_".$fileimp->getClientOriginalName();
+            $fileimp->move($folder,$certieditorial);            
+        }
+
+        $libro->soportes($ejemplar,$certilibroinves, $cvlac,$gruplac,$certieditorial,$folder);
+
+        $productividad=$libro->productividad()->create([
+            'id_docente' => $d->iddocente,
+            'titulo' => $data['titulo'],
+        ]); 
+
+        $pa=round($pa=$libro->puntaje(),3);
+        $convocatoria=auth()->user()->convocatoria()->first();
+        $libro->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Incompleta');
 
         return redirect()->route('solicitudes');
         //dd($productividad->idproductividad);

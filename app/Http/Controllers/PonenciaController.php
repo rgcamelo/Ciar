@@ -97,7 +97,73 @@ class PonenciaController extends Controller
 
         $pa=round($pa=$ponencia->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
-        $ponencia->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
+        $ponencia->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Enviado');
+
+        return redirect()->route('solicitudes');
+    }
+
+    public function guardar(){
+        $d=auth()->user()->Docente();
+
+        $data=request()->all();
+
+        $folder = 'archivos/ponencia/'.$d->NombreCompleto.'_'.$d->id.'_'.$data['titulo'].'_'.time();
+        File::makeDirectory($folder);
+
+        $ponencia=Ponencia::create([
+            'nombreevento' => $data['nombreevento'],
+            'fechaevento' => $data['fechaevento'],
+            'lugarevento' => $data['lugarevento'],
+            'tipoevento' => $data['tipoevento'],
+            'idiomaponencia' => $data['idioma'],
+            'noautores_ponencia' => $data['noautores'],
+            'paginaevento' => $data['paginaevento'],
+            'creditoUpc_ponencia' => $data['credito'],
+            'memorias' => $data['memoria'],
+            'issn' => $data['issn'],
+            'isbn' => $data['isbn'],
+            'ponenciasreconocidas' => $data['ponencias'],
+        ]);
+
+        $memoria=null;
+        if(request()->hasFile('memoria'))
+        {
+            $fileimp = request()->file('memoria');
+            $memoria= time()."_1Memoria_".$fileimp->getClientOriginalName();
+            $fileimp->move($folder,$memoria);            
+        }
+        $cvlac=null;
+        if(request()->hasFile('cvlac'))
+        {
+            $filecv = request()->file('cvlac');
+            $cvlac= time()."_2CvLac_".$filecv->getClientOriginalName();
+            $filecv->move($folder,$cvlac);            
+        }
+        $gruplac=null;
+        if(request()->hasFile('gruplac'))
+        {
+            $filegru = request()->file('gruplac');
+            $gruplac= time()."_3GrupLac_".$filegru->getClientOriginalName();
+            $filegru->move($folder,$gruplac);            
+        }
+        $certieponente=null;
+        if(request()->hasFile('certieponente'))
+        {
+            $fileimp = request()->file('certieponente');
+            $certieponente= time()."_4CertificadoPonente_".$fileimp->getClientOriginalName();
+            $fileimp->move($folder,$certieponente);            
+        }
+
+        $ponencia->soportes($memoria,$certieponente, $cvlac,$gruplac,$folder);
+
+        $productividad=$ponencia->productividad()->create([
+            'id_docente' => $d->iddocente,
+            'titulo' => $data['titulo'],
+        ]); 
+
+        $pa=round($pa=$ponencia->puntaje(),3);
+        $convocatoria=auth()->user()->convocatoria()->first();
+        $ponencia->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Incompleta');
 
         return redirect()->route('solicitudes');
     }

@@ -28,11 +28,10 @@ class ReseñasCriticasController extends Controller
             'titulo' => $data['titulo'],
         ]); 
 
-        $reseña->ProDoc($productividad);
         $pa=round($pa=$reseña->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $reseña->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
-
+        
         return redirect()->route('solicitudes');
     }
 }

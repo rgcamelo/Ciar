@@ -23,12 +23,14 @@ class EstudiosPostdoctorales extends Model
 
 
     public function solicitud($idp,$pa,$idc){
-            Solicitud::create([
+            $solicitud=Solicitud::create([
                 'productividad_id' => $idp,
                 'estado' => 'Enviado',
                 'bonificacion_calculada' => $pa,
                 'idconvocatoria' => $idc,
                 'fechasolicitud' => (date('Y-m-d'))
             ]);
+
+            $solicitud->ProDoc();
     }
 }

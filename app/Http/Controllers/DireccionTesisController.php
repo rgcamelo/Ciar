@@ -28,10 +28,33 @@ class DireccionTesisController extends Controller
             'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
-        $direccion->ProDoc($productividad);
         $pa=round($pa=$direccion->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
-        $direccion->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
+        $direccion->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Enviado');
+
+        return redirect()->route('solicitudes');
+    }
+
+    public function guardar(){
+        $d=auth()->user()->Docente();
+
+        $data=request()->all();
+        
+        
+    
+        $direccion=DireccionTesis::create([
+            'tipo' => $data['tipo'],
+            'noautores' => $data['noautores'],
+        ]);
+        
+
+        $productividad=$direccion->productividad()->create([
+            'id_docente' => $d->iddocente,
+            'titulo' => $data['titulo'],
+        ]); 
+        $pa=round($pa=$direccion->puntaje(),3);
+        $convocatoria=auth()->user()->convocatoria()->first();
+        $direccion->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Incompleta');
 
         return redirect()->route('solicitudes');
     }

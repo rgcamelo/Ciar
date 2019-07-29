@@ -17,11 +17,11 @@ class CreateLibroSoportesTable extends Migration
             $table->bigIncrements('id_soportelibro');
             $table->unsignedBigInteger('id_libro');
             $table->foreign('id_libro')->references('idlibro')->on('libros');
-            $table->string('ejemplar');
-            $table->string('Cvlac_libro');
-            $table->string('Gruplac_libro');
-            $table->string('Certificadolibrodeinvestigacion');
-            $table->string('Certificadoeditorial');
+            $table->string('ejemplar')->nullable();
+            $table->string('Cvlac_libro')->nullable();
+            $table->string('Gruplac_libro')->nullable();
+            $table->string('Certificadolibrodeinvestigacion')->nullable();
+            $table->string('Certificadoeditorial')->nullable();
             $table->string('Zip_libro');
             $table->timestamps();
         });

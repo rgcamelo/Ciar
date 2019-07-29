@@ -41,22 +41,6 @@ class Traduccion extends Model
         }
     }
 
-    public function ProDoc($productividad){
-
-        $año = date('Y');   
-        $data = DB::table('docente_productividads')
-        ->where('docente_productividads.iddocente','=',$productividad->id_docente)
-        ->where('docente_productividads.año','=',$año)
-        ->get();
-
-        if( empty($data->first())){
-            $prodoc = DocenteProductividad::Create([
-                'iddocente' => $productividad->id_docente,
-                'año' => $año
-            ]);
-        }
-    }
-
     public function tipo(){
         switch ($this->tipo) {
             case 'De Libro':
@@ -71,22 +55,41 @@ class Traduccion extends Model
     public function solicitud($idp,$pa,$idc){
         switch ($this->tipo) {
             case 'De Libro':
-            Solicitud::create([
+
+            $solicitud=Solicitud::create([
                 'productividad_id' => $idp,
                 'estado' => 'Enviado',
                 'puntos_aprox' => $pa,
                 'idconvocatoria' => $idc,
                 'fechasolicitud' => (date('Y-m-d'))
             ]);
+            $solicitud->ProDoc();
             break;
             case 'De Articulo':
-            Solicitud::create([
-                'productividad_id' => $idp,
-                'estado' => 'Enviado',
-                'bonificacion_calculada' => $pa,
-                'idconvocatoria' => $idc,
-                'fechasolicitud' => (date('Y-m-d'))
-            ]);
+            $productividad=Productividad::find($idp)->Docente()->Productividad();
+            if (isset($productividad->idprodoc)){
+                if($productividad->traducciones < 3){
+                    $solicitud=Solicitud::create([
+                        'productividad_id' => $idp,
+                        'estado' => 'Enviado',
+                        'bonificacion_calculada' => $pa,
+                        'idconvocatoria' => $idc,
+                        'fechasolicitud' => (date('Y-m-d'))
+                    ]);
+                    $solicitud->ProDoc();
+                }
+            }
+            else{
+                $solicitud=Solicitud::create([
+                    'productividad_id' => $idp,
+                    'estado' => 'Enviado',
+                    'bonificacion_calculada' => $pa,
+                    'idconvocatoria' => $idc,
+                    'fechasolicitud' => (date('Y-m-d'))
+                ]);
+                $solicitud->ProDoc();
+            }
+            
             break;
         }
     }

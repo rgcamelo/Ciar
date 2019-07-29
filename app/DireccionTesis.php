@@ -53,29 +53,35 @@ class DireccionTesis extends Model
         }
     }
 
-    public function solicitud($idp,$pa,$idc){
-            Solicitud::create([
+    public function solicitud($idp,$pa,$idc,$estado){
+        $productividad=Productividad::find($idp)->Docente()->Productividad();
+        if (isset($productividad->idprodoc)){
+            if($productividad->direccion <3){
+                $solicitud=Solicitud::create([
+                    'productividad_id' => $idp,
+                    'estado' => $estado,
+                    'bonificacion_calculada' => $pa,
+                    'idconvocatoria' => $idc,
+                    'fechasolicitud' => (date('Y-m-d'))
+                ]);
+            }
+        
+        }
+        else {
+            $solicitud=Solicitud::create([
                 'productividad_id' => $idp,
-                'estado' => 'Enviado',
+                'estado' => $estado,
                 'bonificacion_calculada' => $pa,
                 'idconvocatoria' => $idc,
                 'fechasolicitud' => (date('Y-m-d'))
             ]);
-    }
-
-    public function ProDoc($productividad){
-
-        $año = date('Y');   
-        $data = DB::table('docente_productividads')
-        ->where('docente_productividads.iddocente','=',$productividad->id_docente)
-        ->where('docente_productividads.año','=',$año)
-        ->get();
-
-        if( empty($data->first())){
-            $prodoc = DocenteProductividad::Create([
-                'iddocente' => $productividad->id_docente,
-                'año' => $año
-            ]);
+            $solicitud->ProDoc();
         }
-    }
+            
+
+        
+}
+
+
+
 }

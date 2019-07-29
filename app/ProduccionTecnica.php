@@ -52,12 +52,13 @@ class ProduccionTecnica extends Model
     }
 
     public function solicitud($idp,$pa,$idc){
-            Solicitud::create([
+            $solicitud=Solicitud::create([
                 'productividad_id' => $idp,
                 'estado' => 'Enviado',
                 'puntos_aprox' => $pa,
                 'idconvocatoria' => $idc,
                 'fechasolicitud' => (date('Y-m-d'))
             ]);
+            $solicitud->ProDoc();
     }
 }

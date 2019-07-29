@@ -15,7 +15,7 @@ class ArticuloController extends Controller
     public function crear(){
 
         $d=auth()->user()->Docente();
-        $data=request()->validate([
+        /*$data=request()->validate([
             'titulo' => 'required',
             'noautores' => 'required',
             'tiporevista' => 'required',
@@ -40,7 +40,9 @@ class ArticuloController extends Controller
             'puntossolicitados.required' => 'El Puntaje solicitado es un campo requerido',
             'bonificacionsolicitada.required' => 'La Bonificacion solicitada es un campo requerido'
             ]);
+        */
 
+            $data=request()->all();
             $folder = 'archivos/articulo/'.$d->NombreCompleto.'_'.$d->id.'_'.$data['titulo'].'_'.time();
             File::makeDirectory($folder);
 
@@ -93,7 +95,73 @@ class ArticuloController extends Controller
 
         $pa=round($pa=$articulo->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
-        $articulo->solicitud($productividad->idproductividad, $pa,$convocatoria->idconvocatoria);
+        $articulo->solicitud($productividad->idproductividad, $pa,$convocatoria->idconvocatoria,'Enviado');
+        
+        return redirect()->route('solicitudes');
+    }
+
+    public function guardar(){
+
+        
+        $d=auth()->user()->Docente();
+
+            $data=request()->all();
+            $folder = 'archivos/articulo/'.$d->NombreCompleto.'_'.$d->iddocente.'_'.$data['titulo'].'_'.time();
+            File::makeDirectory($folder);
+            
+            $articulo=Articulo::create([
+                'fechapublicacion_articulo' => $data['fechaarticulo'],
+                'tiporevista' => $data['tiporevista'],
+                'tipo_publicacion' => $data['tipoarticulo'],
+                'nombrerevista' => $data['revista'] ,
+                'issn' => $data['issn'] ,
+                'idioma_articulo' => $data['idioma'] ,
+                'noautores_articulo' => $data['noautores'] ,
+                'evidenciafiliacionUpc' => $data['filiacion'] ,
+                'puntos_solicitados' => $data['puntossolicitados'] ,
+                'bonificacion_solicitada' => $data['bonificacionsolicitada']
+            ]);
+            $ejemplar=null;
+            if(request()->hasFile('ejemplar'))
+        {
+            $filei = request()->file('ejemplar');
+            $ejemplar= time()."_2".'Ejemplar_'.$filei->getClientOriginalName();
+            $filei->move($folder,$ejemplar);            
+        }
+        
+        $cvlac=null;
+        if(request()->hasFile('cvlac'))
+        {
+            $filecv = request()->file('cvlac');
+            $cvlac= time()."_4CvLac_".$filecv->getClientOriginalName();
+            $filecv->move($folder,$cvlac);            
+        }
+        $gruplac=null;
+        if(request()->hasFile('gruplac'))
+        {
+            $filegru = request()->file('gruplac');
+            $gruplac= time()."_5GrupLac_".$filegru->getClientOriginalName();
+            $filegru->move($folder,$gruplac);            
+        }
+        $certieditorial=null;
+        if(request()->hasFile('certieditorial'))
+        {
+            $filem = request()->file('certieditorial');
+            $certieditorial= time()."_3".'CertificadoEditorial_'.$filem->getClientOriginalName();
+            $filem->move($folder,$certieditorial);            
+        }
+
+        
+        $articulo->soportes($ejemplar,$cvlac,$gruplac,$certieditorial,$folder);
+
+        $productividad=$articulo->productividad()->create([
+            'id_docente' => $d->iddocente,
+            'titulo' => $data['titulo'],
+        ]); 
+
+        $pa=round($pa=$articulo->puntaje(),3);
+        $convocatoria=auth()->user()->convocatoria()->first();
+        $articulo->solicitud($productividad->idproductividad, $pa,$convocatoria->idconvocatoria,'Incompleta');
         
         return redirect()->route('solicitudes');
     }

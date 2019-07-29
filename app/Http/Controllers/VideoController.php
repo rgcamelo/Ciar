@@ -30,7 +30,7 @@ class VideoController extends Controller
             'titulo' => $data['titulo'],
         ]); 
 
-        $video->ProDoc($productividad);
+
         $pa=round($pa=$video->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         $video->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);

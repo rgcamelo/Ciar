@@ -181,14 +181,16 @@ class Articulo extends Model
         }
     }
 
-    public function solicitud($idp,$pa,$idc){
-        Solicitud::create([
+    public function solicitud($idp,$pa,$idc,$estado){
+        $solicitud=Solicitud::create([
             'productividad_id' => $idp,
-            'estado' => 'Enviado',
+            'estado' => $estado,
             'puntos_aprox' => $pa,
             'idconvocatoria' => $idc,
             'fechasolicitud' => (date('Y-m-d'))
 
         ]);
+
+        $solicitud->Prodoc();
     }
 }

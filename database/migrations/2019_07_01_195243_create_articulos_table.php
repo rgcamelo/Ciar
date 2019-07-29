@@ -16,15 +16,15 @@ class CreateArticulosTable extends Migration
         Schema::create('articulos', function (Blueprint $table) {
             $table->bigIncrements('id_articulo');
             $table->string('tipo_publicacion');
-            $table->date('fechapublicacion_articulo');
-            $table->string('nombrerevista');
+            $table->date('fechapublicacion_articulo')->nullable();
+            $table->string('nombrerevista')->nullable();
             $table->string('tiporevista');
-            $table->string('issn');
+            $table->string('issn')->nullable();
             $table->string('idioma_articulo');
             $table->string('noautores_articulo');
             $table->string('evidenciafiliacionUpc');
-            $table->string('puntos_solicitados');
-            $table->string('bonificacion_solicitada');
+            $table->string('puntos_solicitados')->nullable();
+            $table->string('bonificacion_solicitada')->nullable();
             $table->timestamps();
         });
     }

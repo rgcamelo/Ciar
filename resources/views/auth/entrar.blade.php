@@ -12,7 +12,7 @@
                </div>
                <div class="panel-body">
                <form method="POST" action="{{route('login')}}">
-                 {{ csrf_field() }}
+                {{ csrf_field() }}
                <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
                            <label for="email">Correo</label>
                <input value="{{ old('email')}}" class="form-control" type="email" name="email" placeholder="Ingresar tu correo">

@@ -30,10 +30,35 @@ class ObraController extends Controller
             'titulo' => $data['titulo'],
         ]); 
 
-        $obra->ProDoc($productividad);
         $pa=round($pa=$obra->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
-        $obra->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
+        $obra->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Enviado');
+
+        return redirect()->route('solicitudes');
+    }
+
+    public function guardar(){
+        $d=auth()->user()->Docente();
+
+        $data=request()->all();
+
+        //dd($data);
+        
+        $obra=Obra::create([
+            'tipo' => $data['tipo'],
+            'impacto' => $data['impacto'],
+            'noautores' => $data['noautores'],
+        ]);
+        
+
+        $productividad=$obra->productividad()->create([
+            'id_docente' => $d->iddocente,
+            'titulo' => $data['titulo'],
+        ]); 
+
+        $pa=round($pa=$obra->puntaje(),3);
+        $convocatoria=auth()->user()->convocatoria()->first();
+        $obra->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Incompleta');
 
         return redirect()->route('solicitudes');
     }

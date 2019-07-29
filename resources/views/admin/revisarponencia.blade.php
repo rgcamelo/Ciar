@@ -173,9 +173,23 @@
     <td>
 
             @if ($p->estado == 'Enviado')
+            @if ($p->publicacion >= 3)
+                <div class="info-box">
+                    <div>
+                      <span class="info-box-icon bg-blue">
+                        <i class="fa fa-exclamation"></i>
+                      </span>
+                      <div class="info-box-content">
+                        <span class="info-box-text">Tope Maximo </span>
+                      </div>
+                    </div>
+                  </div>
+                @else
+                <button class="btn btn-primary btn-lg"><span class="fa fa-eye"></span></button>
+                <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
+                <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
+                @endif
 
-                    <button class="btn btn-success btn-lg" title="Aceptar" type="button" data-toggle="modal" data-target="#calificar{{$p->idsolicitud}}"><span class="fa fa-check"></span></button>
-                    <button class="btn btn-danger btn-lg" title="Rechazar" type="button" data-toggle="modal" data-target="#reprobar{{$p->idsolicitud}}"><span class="fa fa-close"></span></button>
             
                   
                   <!-- Modal -->
@@ -251,5 +265,5 @@
                       </div>
                     </div>
             @endif
-            <button class="btn btn-primary btn-lg"><span class="fa fa-eye"></span></button>
+            
         </td>

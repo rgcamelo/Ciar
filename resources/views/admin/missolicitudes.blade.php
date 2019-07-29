@@ -2,7 +2,7 @@
 
 @section('content')
     
-    <div class="container  col-md-10 col-md-offset-1 col-sm-9 col-sm-offset-1">
+    <div class="section">
             <script>$(document).ready(function() {
                     $('#tabla').DataTable( {
                         "paging":   true,
@@ -52,14 +52,14 @@
                                                 @if ($sol->estado == 'Reclamado')
                                                   <span style="font-size:16px" class="label label-warning">{{$sol->estado}}</span>
                                                 @endif
-                                                @if ($sol->estado == 'Tope Maximo')
-                                                  <span class="label label-primary">{{$sol->estado}}</span>
+                                                @if ($sol->estado == 'Incompleta')
+                                                  <span style="font-size:16px" class="label label-primary">Guardado</span>
                                                 @endif                                                 
                                 </td> 
                                 <td>
                                   <div class="info-box 
                                   @if($sol->estado == 'Aprobado' or $sol->estado =='Aprobado2')bg-green @endif
-                                  @if($sol->estado == 'Tope Maximo' )bg-blue @endif
+                                  @if($sol->estado == 'Incompleta' )bg-blue @endif
                                   @if ($sol->estado == 'Enviado' or $sol->estado == 'Enviado a Pares' or $sol->estado == 'Reclamado' or $sol->estado == 'Calificado por Pares')bg-yellow @endif
                                   @if ($sol->estado == 'No Aprobado' or $sol->estado == 'Rechazado2' or $sol->estado == 'Cancelado')bg-red @endif
                                   ">
@@ -74,7 +74,7 @@
                                           @if ($sol->estado == 'Calificado por Pares' )fa fa-graduation-cap @endif
                                           @if ($sol->estado == 'No Aprobado' or $sol->estado == 'Rechazado2' or $sol->estado == 'Cancelado')fa fa-close @endif
                                           @if ($sol->estado == 'Cancelado')fa fa-minus @endif
-                                          @if ($sol->estado == 'Tope Maximo')fa fa-exclamation @endif
+                                          @if ($sol->estado == 'Incompleta')fa fa-paperclip @endif
                                           "></i>
                                         </span>
                                         <div class="info-box-content">
@@ -96,7 +96,7 @@
                                           @if ($sol->estado == 'Calificado por Pares' )fa fa-graduation-cap @endif
                                           @if ($sol->estado == 'No Aprobado' or $sol->estado == 'Rechazado2' or $sol->estado == 'Cancelado')fa fa-close @endif
                                           @if ($sol->estado == 'Cancelado')fa fa-minus @endif
-                                          @if ($sol->estado == 'Tope Maximo')fa fa-exclamation @endif
+                                          @if ($sol->estado == 'Incompleta')fa fa-paperclip @endif
                                         "></i>
                                       </span>
                                       <div class="info-box-content">

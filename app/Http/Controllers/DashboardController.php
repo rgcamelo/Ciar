@@ -36,6 +36,7 @@ class DashboardController extends Controller
 
             
             $solicitudes=$solicitudes->sortByDesc('idsolicitud');
+            
         }
         
 
@@ -74,14 +75,15 @@ class DashboardController extends Controller
             ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('reclamos', 'reclamos.id_solicitud', '=', 'solicituds.idsolicitud')
             ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
+            ->join('docente_productividads','docentes.iddocente','=','docente_productividads.iddocente')
             ->select('solicituds.*', 'productividads.*','reclamos.*')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
             $reclamos=$reclamos->sortByDesc('idsolicitud');
     
-        return view ('admin.revisarreclamos',compact('reclamos'));
+        
         }
-            
+        return view ('admin.revisarreclamos',compact('reclamos'));  
     }
 
     public function productividades(){
@@ -124,7 +126,7 @@ class DashboardController extends Controller
             ->select('productividads.*','solicituds.*','videos.*')->where('productividads.id_docente','=',auth()->user()->docente()->iddocente)->where('productividads.productividadable_type','=','App\Video')
             
             ->get();
-        
+            
         $Premios= DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('premios_nacionales', 'premios_nacionales.idpremio', '=', 'productividads.productividadable_id')
@@ -283,9 +285,10 @@ class DashboardController extends Controller
         $Ponencias = DB::table('productividads')
             ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
+            ->join('docente_productividads','docentes.iddocente','=','docente_productividads.iddocente')
             ->join('ponencias', 'ponencias.idponencia', '=', 'productividads.productividadable_id')
             ->join('ponencia_soportes', 'ponencia_soportes.idponencia',"=", 'ponencias.idponencia')
-            ->select('productividads.*','solicituds.*','ponencias.*','ponencia_soportes.*','docentes.*')->where('productividads.productividadable_type','=','App\Ponencia')
+            ->select('productividads.*','solicituds.*','ponencias.*','ponencia_soportes.*','docentes.*','docente_productividads.*')->where('productividads.productividadable_type','=','App\Ponencia')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->get();
 
@@ -311,6 +314,7 @@ class DashboardController extends Controller
             ->join('premios_nacionales', 'premios_nacionales.idpremio', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','premios_nacionales.*')->where('productividads.productividadable_type','=','App\Premios_Nacionales')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->where('solicituds.estado','!=','Incompleta')
             ->get();
         
         $Patentes= DB::table('productividads')
@@ -458,41 +462,5 @@ class DashboardController extends Controller
         return view ('admin.registros',compact('convocatorias'));
     }
 
-    public function revision($c){
-        $Videos = DB::table('productividads')
-            ->join('solicituds', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
-            ->join('docentes', 'docentes.iddocente', '=','productividads.id_docente')
-            ->join('docente_productividads','docentes.iddocente','=','docente_productividads.iddocente')
-            ->join('videos', 'videos.idvideo', '=', 'productividads.productividadable_id')
-            ->select('productividads.*','solicituds.*','videos.*','docente_productividads.*')->where('productividads.productividadable_type','=','App\Video')
-            ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
-            ->get();
-        
-        foreach($Videos as $v){
-                $solicitud=Solicitud::find($v->idsolicitud);
-                if ($v->estado != 'Aprobado' or $v->estado != 'No Aprobado' or $v->estado != 'Reclamado') {
-                    if ($v->bonificacion_calculada == null) {
-                        if ($v->videos >= 5) {
-                            $e=([
-                                'estado'=> 'Tope Maximo',
-                            ]);
-        
-                            $solicitud->update($e);
-                        }
-                    }
-                    else {
-                        if ($v->videosbon >= 5) {
-                            $e=([
-                                'estado'=> 'Toper Maximo',
-                            ]);
-        
-                            $solicitud->update($e);
-                        }
-                    }
-                }
-                
-            }   
-            
-        return $Videos;
-    }
+    
 }

@@ -17,10 +17,10 @@ class CreateArticuloSoportesTable extends Migration
             $table->bigIncrements('idsoportearticulo');
             $table->unsignedBigInteger('idarticulo');
             $table->foreign('idarticulo')->references('id_articulo')->on('articulos');
-            $table->string('ejemplar_articulo');
-            $table->string('Cvlac_articulo');
-            $table->string('Gruplac_articulo');
-            $table->string('Evidenciarevista');
+            $table->string('ejemplar_articulo')->nullable();
+            $table->string('Cvlac_articulo')->nullable();
+            $table->string('Gruplac_articulo')->nullable();
+            $table->string('Evidenciarevista')->nullable();
             $table->string('Zip_articulo');
             $table->timestamps();
         });

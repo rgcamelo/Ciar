@@ -17,8 +17,8 @@ class CreateLibrosTable extends Migration
             $table->bigIncrements('idlibro');
             $table->string('tipo_libro');
             $table->date('fecha_publicacion');
-            $table->string('editorial');
-            $table->string('isbn');
+            $table->string('editorial')->nullable();
+            $table->string('isbn')->nullable();
             $table->string('idioma');
             $table->string('noautores');
             $table->string('resultadoPares')->nullable();

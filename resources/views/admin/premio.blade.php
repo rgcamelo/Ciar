@@ -1,9 +1,73 @@
 @extends('admin.dashboard')
 
 @section('content')
-<div class="container" >
-    <div class="container">    
-            <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-7 col-md-offset-2 col-sm-8 col-sm-offset-2">                    
+<script>
+
+$(document).ready(inicio);
+
+    function inicio()
+    {
+        $("#boton").click(function(){
+            if( validar() == false){
+                $('#alerta').addClass("alert alert-danger");
+                $('#alerta').text('Campos Incompletos');
+            }
+            else{
+                $("#boton").attr("type","submit");
+                $("#loginform").attr("action","{{ url('/premiosnacionales') }}");
+            }
+        });
+
+        $("#boton2").click(function() {
+            $("#boton").attr("type","submit");
+            $("#loginform").attr("action","{{ url('/guardarpremiosnacionales') }}");
+        })
+    }
+        
+    function validar(){
+                var valido = true;
+                var titulo = $("#titulo").val();
+                var noautores = $("#noautores").val();
+                if( titulo == null || titulo.length == 0 || /^\s+$/.test(titulo)){
+                    $('#iconotitulo').remove()
+                    $("#titulo-group").attr("class","has-error input-group");
+                    $("#titulo-group").append("<span id='iconotitulo' class='fa fa-close form-control-feedback'></span>");
+                    $("#titulo").attr("placeholder","Debe Añadir un titulo");
+                    valido=false;
+                }else{
+                    $('#iconotitulo').remove()
+                    $("#titulo-group").attr("class","has-success input-group");
+                    $("#titulo-group").append("<span id='iconotitulo' class='fa fa-check form-control-feedback'></span>");
+                    valido = true;
+                }
+
+                if( noautores == null || noautores.length == 0 || /^\s+$/.test(noautores)){
+                    $('#iconoautores').remove()
+                    $("#autores-group").attr("class","has-error input-group");
+                    $("#autores-group").append("<span id='iconoautores' class='fa fa-close form-control-feedback'></span>");
+                    $("#noautores").attr("placeholder","Debe Añadir el numero de autores");
+                    valido=false;
+                }else{
+                    $('#iconoautores').remove()
+                    $("#autores-group").attr("class","has-success input-group");
+                    $("#autores-group").append("<span id='iconoautores' class='fa fa-check form-control-feedback'></span>");
+                    valido = true;
+                }
+
+
+
+            return valido;
+    	}	
+            
+</script>
+<div class="section" >
+    <div> 
+        <center>
+                <div id="alerta" style="width:700px" class="text-center">
+                    </div> 
+        </center>
+          
+            <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-8 col-md-offset-2">                    
                 <div class="panel panel-success" >
                         <div class="panel-heading">
                             <div class="panel-title">Datos del Premio Nacional</div>
@@ -22,31 +86,33 @@
                                    </ul>
                             </div>
                             @endif
-                            <form id="loginform" method="post" action="{{ url("/premiosnacionales") }}" class="form-horizontal" role="form" enctype="multipart/form-data">
+                            <form id="loginform" method="post" action="" class="form-horizontal" role="form">
                                     {!! csrf_field() !!}
-                                <div style="margin-bottom: 25px" class="input-group {{ $errors->has('titulo') ? 'has-error' : ''}}">
-                                            <span class="input-group-addon">Titulo</span>
-                                <input id="titulo" type="text" class="form-control" required name="titulo" value="{{old('titulo')}}">                                   
-                                        </div>
+                               <div id="titulo-group" style="margin-bottom: 25px" class="input-group">
+                                            <span  class="input-group-addon">Titulo</span>
+                                <input id="titulo"  type="text" class="form-control" required name="titulo" value="{{old('titulo')}}">                      
+                                </div>
 
-                                <div style="margin-bottom: 25px" class="input-group {{ $errors->has('noautores') ? 'has-error' : ''}}">
+                                
+                                           
+                                <div id="autores-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('noautores') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">Numero de Autores</span>
-                                <input id="noautores" type="number" class="form-control" required name="noautores" min="1" value="{{old('noautores')}}">
+                                <input id="noautores" type="number" class="form-control"  name="noautores" required min="1" value="{{old('noautores')}}">
                                 
                                 </div>
+                                <center>
+                                    <div class="text center" style="justify-content:center">
+                                        <button id="boton" type="button" class="btn btn-success mr-4">Siguiente</button>
+                                        <button id="boton2" type="submit" class="btn btn-primary">Guardar</button>
+                                      </div>
+                                </center>
                                 
-                                    <div style="margin-top:10px" class="form-group">
-                                        <div class="col-sm-7 col-sm-offset-5  controls">
-                                          <button type="submit" class="btn btn-success">Siguiente</button>
-    
-                                        </div>
-                                    </div>
-                                     
                                 </form>       
                             </div>
-                             
+
                         </div>  
             </div>
         </div>
+
 </div>
 @endsection

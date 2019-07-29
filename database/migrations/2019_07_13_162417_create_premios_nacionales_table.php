@@ -15,7 +15,7 @@ class CreatePremiosNacionalesTable extends Migration
     {
         Schema::create('premios_nacionales', function (Blueprint $table) {
             $table->bigIncrements('idpremio');
-            $table->string('noautores');
+            $table->string('noautores')->nullable();
             $table->timestamps();
         });
     }

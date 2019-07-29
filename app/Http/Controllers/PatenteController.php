@@ -30,8 +30,33 @@ class PatenteController extends Controller
 
         $pa=round($pa=$patente->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
-        $patente->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria);
+        $patente->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Enviado');
 
         return redirect()->route('solicitudes');
     }
+
+    public function guardar(){
+        $d=auth()->user()->Docente();
+
+        $data=request()->all();
+
+        //dd($data);
+       
+        $patente=Patente::create([
+            'noautores' => $data['noautores'],
+        ]);
+        
+
+        $productividad=$patente->productividad()->create([
+            'id_docente' => $d->iddocente,
+            'titulo' => $data['titulo'],
+        ]); 
+
+        $pa=round($pa=$patente->puntaje(),3);
+        $convocatoria=auth()->user()->convocatoria()->first();
+        $patente->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Incompleta');
+
+        return redirect()->route('solicitudes');
+    }
+    
 }

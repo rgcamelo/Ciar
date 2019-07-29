@@ -66,14 +66,31 @@ class Ponencia extends Model
         }
     }
 
-    public function solicitud($idp,$pa,$idc){
-        Solicitud::create([
-            'productividad_id' => $idp,
-            'estado' => 'Enviado',
-            'bonificacion_calculada' => $pa,
-            'idconvocatoria' => $idc,
-            'fechasolicitud' => (date('Y-m-d'))
-        ]);
+    public function solicitud($idp,$pa,$idc,$estado){
+        $productividad=Productividad::find($idp)->Docente()->Productividad();
+        if (isset($productividad->idprodoc)){
+            if($productividad->ponencia < 3){
+                $solicitud=Solicitud::create([
+                    'productividad_id' => $idp,
+                    'estado' => $estado,
+                    'bonificacion_calculada' => $pa,
+                    'idconvocatoria' => $idc,
+                    'fechasolicitud' => (date('Y-m-d'))
+                ]);
+            }
+        }
+        else {
+            $solicitud=Solicitud::create([
+                'productividad_id' => $idp,
+                'estado' => $estado,
+                'bonificacion_calculada' => $pa,
+                'idconvocatoria' => $idc,
+                'fechasolicitud' => (date('Y-m-d'))
+            ]);
+            $solicitud->ProDoc();
+        }
+        
+        
     }
 
 }
