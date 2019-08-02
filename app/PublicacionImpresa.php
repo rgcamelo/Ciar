@@ -39,13 +39,13 @@ class PublicacionImpresa extends Model
         }
     }
 
-    public function solicitud($idp,$pa,$idc){
+    public function solicitud($idp,$pa,$idc,$estado){
         $productividad=Productividad::find($idp)->Docente()->Productividad();
         if (isset($productividad->idprodoc)){
             if($productividad->publicacion < 5){
                 $solicitud=Solicitud::create([
                     'productividad_id' => $idp,
-                    'estado' => 'Enviado',
+                    'estado' => $estado,
                     'bonificacion_calculada' => $pa,
                     'idconvocatoria' => $idc,
                     'fechasolicitud' => (date('Y-m-d'))
@@ -55,7 +55,7 @@ class PublicacionImpresa extends Model
         else {
             $solicitud=Solicitud::create([
                 'productividad_id' => $idp,
-                'estado' => 'Enviado',
+                'estado' => $estado,
                 'bonificacion_calculada' => $pa,
                 'idconvocatoria' => $idc,
                 'fechasolicitud' => (date('Y-m-d'))

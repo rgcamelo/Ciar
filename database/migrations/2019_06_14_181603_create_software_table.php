@@ -15,13 +15,13 @@ class CreateSoftwareTable extends Migration
     {
         Schema::create('software', function (Blueprint $table) {
             $table->bigIncrements('idsoftware');
-            $table->integer('noautores');
-            $table->string('autores');
-            $table->string('titulares');
-            $table->string('resultadoPares')->nullable();
-            $table->string('creditoUpc');
-            $table->string('impactanivelU');
-            $table->string('codigo');
+            $table->integer('noautores')->nullable();
+            $table->string('autores')->nullable();
+            $table->string('titulares')->nullable();
+            $table->string('resultadoPares')->nullable()->nullable();
+            $table->string('creditoUpc')->nullable();
+            $table->string('impactanivelU')->nullable();
+            $table->string('codigo')->nullable();
             $table->timestamps();
         });
     }

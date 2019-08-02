@@ -15,14 +15,14 @@ class CreateLibrosTable extends Migration
     {
         Schema::create('libros', function (Blueprint $table) {
             $table->bigIncrements('idlibro');
-            $table->string('tipo_libro');
-            $table->date('fecha_publicacion');
+            $table->string('tipo_libro')->nullable();
+            $table->date('fecha_publicacion')->nullable();
             $table->string('editorial')->nullable();
             $table->string('isbn')->nullable();
-            $table->string('idioma');
-            $table->string('noautores');
+            $table->string('idioma')->nullable();
+            $table->string('noautores')->nullable();
             $table->string('resultadoPares')->nullable();
-            $table->string('creditoUpc_libro');
+            $table->string('creditoUpc_libro')->nullable();
             $table->timestamps();
         });
     }

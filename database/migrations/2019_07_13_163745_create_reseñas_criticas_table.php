@@ -15,7 +15,7 @@ class CreateReseñasCriticasTable extends Migration
     {
         Schema::create('reseñas_criticas', function (Blueprint $table) {
             $table->bigIncrements('idreseña');
-            $table->string('noautores');
+            $table->string('noautores')->nullable();
             $table->timestamps();
         });
     }

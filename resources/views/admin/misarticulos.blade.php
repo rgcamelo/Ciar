@@ -23,6 +23,9 @@
                                         @if ($p->estado == 'Reclamado')
                                                   <span style="font-size:16px" class="label label-warning">{{$p->estado}}</span>
                                                 @endif 
+                                        @if ($p->estado == 'Incompleta')
+                                                  <span style="font-size:16px" class="label label-primary">Guardada</span>
+                                        @endif 
                                     </td>
                                     <td >
                                         <div class="box box-default box-solid collapsed-box" >
@@ -44,7 +47,9 @@
                                                                 <strong>Ejemplar:</strong>
                                                             </div>
                                                             <div class="col-md-3">
-                                                               <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip_articulo}}/{{$p->ejemplar_articulo}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                              @if (isset($p->ejemplar_articulo))
+                                                              <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip_articulo}}/{{$p->ejemplar_articulo}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                              @endif
                                                                </div>
                                                            </div> 
                                                            <br>
@@ -53,7 +58,9 @@
                                                      <strong>Cvlac:</strong>
                                                  </div>
                                                  <div class="col-md-3">
-                                                    <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip_articulo}}/{{$p->Cvlac_articulo}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                   @if (isset($p->Cvlac_articulo))
+                                                   <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip_articulo}}/{{$p->Cvlac_articulo}}')"  style="width:50px"><i class="fa fa-eye"></i></a> 
+                                                   @endif
                                                     </div>
                                                 </div> 
                                                 <br>
@@ -62,7 +69,9 @@
                                                             <strong>Gruplac:</strong>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip_articulo}}/{{$p->Gruplac_articulo}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                          @if (isset($p->Gruplac_articulo))
+                                                          <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip_articulo}}/{{$p->Gruplac_articulo}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                          @endif
                                                            </div>
                                                        </div>  
                                                 <br>
@@ -71,7 +80,9 @@
                                                      <strong>Evidencia de la indexacion de la Revista:</strong>
                                                  </div>
                                                  <div class="col-md-3">
-                                                    <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip_articulo}}/{{$p->Evidenciarevista}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                   @if (isset($p->Evidenciarevista))
+                                                  <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip_articulo}}/{{$p->Evidenciarevista}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                   @endif
                                                     </div>
                                                 </div>  
                                                                                         
@@ -81,12 +92,21 @@
         
                                               <form action="{{ url('descargarziparticulo',[ 'ruta' => $p->idsoportearticulo]) }}" method="post">
                                                 {!! csrf_field() !!}
-                                                <button type="submit" style="margin-top:4px;margin-bottom:4px" class="btn btn-success btn-block"><i class="fa fa-download"></i></button>
+                                                @if ((isset($p->Evidenciarevista)) || (isset($p->Gruplac_articulo))  || (isset($p->Cvlac_articulo))  || (isset($p->ejemplar_articulo)))
+                                                    <button type="submit" style="margin-top:4px;margin-bottom:4px" class="btn btn-success btn-block"><i class="fa fa-download"></i></button>
+                                                @endif
+                                                
                                               </form>
                                      
                                     </div>
                                     </div>
                                     </td>
                                     <td>
+                                    <form action="{{ url('/editararticulo',['solicitud' => $p->idsolicitud,'articulo' => $p->id_articulo])}}" method="post">
+                                      {!! csrf_field() !!}
+                                      @if ($p->estado == 'Incompleta')
+                                      <button type="submit" class="btn btn-primary"> Modificar </button>
+                                      @endif
+                                      </form>
                                         
                                     </td>

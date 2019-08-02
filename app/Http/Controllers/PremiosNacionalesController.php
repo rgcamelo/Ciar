@@ -38,7 +38,7 @@ class PremiosNacionalesController extends Controller
     public function guardar(){
         $d=auth()->user()->Docente();
         $data=request()->all();
-        
+
         $premio=Premios_Nacionales::create([
             'noautores' => $data['noautores'],
         ]);
@@ -48,11 +48,10 @@ class PremiosNacionalesController extends Controller
             'titulo' => $data['titulo'],
         ]); 
         
-        $pa=round($pa=$premio->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
         
-        $premio->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Incompleta');
+        $premio->solicitud($productividad->idproductividad, 0, $convocatoria->idconvocatoria,'Incompleta');
         
-        return redirect()->route('solicitudes');
+        return redirect()->route('productividades');
     }
 }

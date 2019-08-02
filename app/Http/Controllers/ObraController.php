@@ -42,10 +42,14 @@ class ObraController extends Controller
 
         $data=request()->all();
 
-        //dd($data);
         
+        $tipo=null;
+            if(isset($data['tipo'])){
+            $tipo=$data['tipo'];
+            }
+
         $obra=Obra::create([
-            'tipo' => $data['tipo'],
+            'tipo' => $tipo,
             'impacto' => $data['impacto'],
             'noautores' => $data['noautores'],
         ]);
@@ -56,10 +60,8 @@ class ObraController extends Controller
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=round($pa=$obra->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
-        $obra->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Incompleta');
-
-        return redirect()->route('solicitudes');
+        $obra->solicitud($productividad->idproductividad, 0, $convocatoria->idconvocatoria,'Incompleta');
+        return redirect()->route('productividades');
     }
 }

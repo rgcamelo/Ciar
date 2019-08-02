@@ -71,7 +71,7 @@ class Video extends Model
         }
     }
 
-    public function solicitud($idp,$pa,$idc){
+    public function solicitud($idp,$pa,$idc,$estado){
 
         $productividad=Productividad::find($idp)->Docente()->Productividad();
 
@@ -83,10 +83,10 @@ class Video extends Model
                     // Decirle al usuario que no puede registrar mas esta productividad
                 }
                 else {
-                    $solicitud=$this->hacersolicitudpuntos($idp,$pa,$idc,'Enviado');
+                    $solicitud=$this->hacersolicitudpuntos($idp,$pa,$idc,$estado);
                 }
             } else {
-                $solicitud=$this->hacersolicitudpuntos($idp,$pa,$idc,'Enviado');
+                $solicitud=$this->hacersolicitudpuntos($idp,$pa,$idc,$estado);
                 $solicitud->ProDoc();
             }   
             break;
@@ -96,10 +96,10 @@ class Video extends Model
                 if($productividad->videosbon > 5){
                     // Decirle al usuario que no puede registrar mas esta productividad
                 }else {
-                    $solicitud=$this->hacersolicitud($idp,$pa,$idc,'Enviado');
+                    $solicitud=$this->hacersolicitud($idp,$pa,$idc,$estado);
                 }
             } else {
-                $solicitud=$this->hacersolicitud($idp,$pa,$idc,'Enviado');
+                $solicitud=$this->hacersolicitud($idp,$pa,$idc,$estado);
                 $solicitud->ProDoc();
             }
             break;

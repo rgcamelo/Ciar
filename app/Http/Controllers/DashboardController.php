@@ -262,6 +262,7 @@ class DashboardController extends Controller
         ->join('soporte_software', 'soporte_software.id_software','=','software.idsoftware')
         ->select('productividads.*', 'software.*', 'soporte_software.*','solicituds.*','docentes.*')->where('productividads.productividadable_type','=','App\Software')
         ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+        ->where('solicituds.estado','!=','Incompleta')
         ->get();
 
         $libros = DB::table('productividads')
@@ -271,6 +272,7 @@ class DashboardController extends Controller
             ->join('libro_soportes', 'libro_soportes.id_libro',"=", 'libros.idlibro')
             ->select('productividads.*','solicituds.*','libros.*','libro_soportes.*','docentes.*')->where('productividads.productividadable_type','=','App\Libro')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->where('solicituds.estado','!=','Incompleta')
             ->get();
 
         $Articulos = DB::table('productividads')
@@ -280,6 +282,7 @@ class DashboardController extends Controller
             ->join('articulo_soportes', 'articulo_soportes.idarticulo',"=", 'articulos.id_articulo')
             ->select('productividads.*','solicituds.*','articulos.*','articulo_soportes.*','docentes.*')->where('productividads.productividadable_type','=','App\Articulo')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->where('solicituds.estado','!=','Incompleta')
             ->get();
 
         $Ponencias = DB::table('productividads')
@@ -290,6 +293,7 @@ class DashboardController extends Controller
             ->join('ponencia_soportes', 'ponencia_soportes.idponencia',"=", 'ponencias.idponencia')
             ->select('productividads.*','solicituds.*','ponencias.*','ponencia_soportes.*','docentes.*','docente_productividads.*')->where('productividads.productividadable_type','=','App\Ponencia')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->where('solicituds.estado','!=','Incompleta')
             ->get();
 
         //$Videos=$this->videos($c);
@@ -301,6 +305,7 @@ class DashboardController extends Controller
             ->join('videos', 'videos.idvideo', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','videos.*','docente_productividads.*')->where('productividads.productividadable_type','=','App\Video')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->where('solicituds.estado','!=','Incompleta')
             ->get();
         
         
@@ -315,6 +320,7 @@ class DashboardController extends Controller
             ->select('productividads.*','solicituds.*','premios_nacionales.*')->where('productividads.productividadable_type','=','App\Premios_Nacionales')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
             ->where('solicituds.estado','!=','Incompleta')
+            
             ->get();
         
         $Patentes= DB::table('productividads')
@@ -323,6 +329,7 @@ class DashboardController extends Controller
             ->join('patentes', 'patentes.idpatente', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','patentes.*')->where('productividads.productividadable_type','=','App\Patente')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->where('solicituds.estado','!=','Incompleta')
             ->get();
 
         $Traducciones= DB::table('productividads')
@@ -332,6 +339,7 @@ class DashboardController extends Controller
             ->join('traduccions', 'traduccions.idtraduccion', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','traduccions.*','docente_productividads.*')->where('productividads.productividadable_type','=','App\Traduccion')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->where('solicituds.estado','!=','Incompleta')
             ->get();    
         
         $Obras= DB::table('productividads')
@@ -341,6 +349,7 @@ class DashboardController extends Controller
             ->join('obras', 'obras.idobra', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','obras.*','docente_productividads.*')->where('productividads.productividadable_type','=','App\Obra')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->where('solicituds.estado','!=','Incompleta')
             ->get();  
 
         $Produccion= DB::table('productividads')
@@ -349,6 +358,7 @@ class DashboardController extends Controller
             ->join('produccion_tecnicas', 'produccion_tecnicas.idproducciontecnica', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','produccion_tecnicas.*')->where('productividads.productividadable_type','=','App\ProduccionTecnica')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->where('solicituds.estado','!=','Incompleta')
             ->get();  
 
         $Estudios= DB::table('productividads')
@@ -357,6 +367,7 @@ class DashboardController extends Controller
             ->join('estudios_postdoctorales', 'estudios_postdoctorales.idestudiopost', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','estudios_postdoctorales.*')->where('productividads.productividadable_type','=','App\EstudiosPostdoctorales')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->where('solicituds.estado','!=','Incompleta')
             ->get();  
 
         $Publicacion= DB::table('productividads')
@@ -366,6 +377,7 @@ class DashboardController extends Controller
             ->join('publicacion_impresas', 'publicacion_impresas.idpublicacionimpresa', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','publicacion_impresas.*','docente_productividads.*')->where('productividads.productividadable_type','=','App\PublicacionImpresa')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->where('solicituds.estado','!=','Incompleta')
             ->get(); 
 
         $Reseña= DB::table('productividads')
@@ -375,6 +387,7 @@ class DashboardController extends Controller
             ->join('reseñas_criticas', 'reseñas_criticas.idreseña', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','reseñas_criticas.*','docente_productividads.*')->where('productividads.productividadable_type','=','App\ReseñasCriticas')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->where('solicituds.estado','!=','Incompleta')
             ->get(); 
 
         $Direccion= DB::table('productividads')
@@ -384,6 +397,7 @@ class DashboardController extends Controller
             ->join('direccion_teses', 'direccion_teses.iddireccion', '=', 'productividads.productividadable_id')
             ->select('productividads.*','solicituds.*','direccion_teses.*','docente_productividads.*')->where('productividads.productividadable_type','=','App\DireccionTesis')
             ->where('solicituds.idconvocatoria','=',$c->idconvocatoria)
+            ->where('solicituds.estado','!=','Incompleta')
             ->get(); 
         //$=array($libros,$Software);
 

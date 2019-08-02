@@ -22,7 +22,10 @@
                                                 @endif     
                                             @if ($p->estado == 'Reclamado')
                                                   <span style="font-size:16px" class="label label-warning">{{$p->estado}}</span>
-                                                @endif    
+                                                @endif  
+                                            @if ($p->estado == 'Incompleta')
+                                                <span style="font-size:16px" class="label label-primary">Guardada</span>
+                                            @endif   
                                         </td>
                                     <td >
                                         <div class="box box-default box-solid collapsed-box" >
@@ -44,7 +47,9 @@
                                                                 <strong>Memoria del Evento:</strong>
                                                             </div>
                                                             <div class="col-md-3">
-                                                               <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zipponencia}}/{{$p->memoriaevento}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                              @if ( isset($p->memoriaevento))
+                                                              <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zipponencia}}/{{$p->memoriaevento}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                              @endif
                                                                </div>
                                                            </div> 
                                                            <br>
@@ -53,7 +58,9 @@
                                                      <strong>Cvlac:</strong>
                                                  </div>
                                                  <div class="col-md-3">
-                                                    <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zipponencia}}/{{$p->Cvlacponencia}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                    @if ( isset($p->Cvlacponencia))
+                                                    <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zipponencia}}/{{$p->Cvlacponencia}}')"  style="width:50px"><i class="fa fa-eye"></i></a> 
+                                                    @endif
                                                     </div>
                                                 </div> 
                                                 <br>
@@ -62,7 +69,9 @@
                                                             <strong>Gruplac:</strong>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zipponencia}}/{{$p->Gruplacponencia}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                          @if ( isset($p->Gruplacponencia))
+                                                          <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zipponencia}}/{{$p->Gruplacponencia}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                          @endif
                                                            </div>
                                                        </div>  
                                                 <br>
@@ -71,7 +80,9 @@
                                                      <strong>Evidencia de la indexacion de la Revista:</strong>
                                                  </div>
                                                  <div class="col-md-3">
-                                                    <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zipponencia}}/{{$p->certificadoponente}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                                                   @if ( isset($p->certificadoponente))
+                                                   <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zipponencia}}/{{$p->certificadoponente}}')"  style="width:50px"><i class="fa fa-eye"></i></a> 
+                                                   @endif
                                                     </div>
                                                 </div>  
                                                                                         
@@ -81,7 +92,10 @@
         
                                               <form action="{{ url('descargarzipponencia',[ 'ruta' => $p->idponenciasoporte]) }}" method="post">
                                                 {!! csrf_field() !!}
+                                                @if ( ( isset($p->certificadoponente)) ||  ( isset($p->Gruplacponencia)) ||  ( isset($p->Cvlacponencia)) || ( isset($p->memoriaevento))  )
                                                 <button type="submit" style="margin-top:4px;margin-bottom:4px" class="btn btn-success btn-block"><i class="fa fa-download"></i></button>
+                                                @endif
+                                                
                                               </form>
                                      
                                     </div>

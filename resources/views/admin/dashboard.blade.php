@@ -54,6 +54,7 @@
                     </div>
                     <div class="pull-right">
                     <form method="POST" action="{{ route('logout') }}">
+                      {{ method_field('PUT') }}  
                         {{ csrf_field() }}
                         <button class="btn btn-danger">Cerrar Sesion</button>
                       </form>
@@ -104,7 +105,7 @@
                       <li><a href="/video">Cinematografias o Fonografias</a></li>
                       <li><a href="/premiosnacionales">Premios Nacionales</a></li>
                       <li><a href="/patente">Patente</a></li>
-                      <li><a href="/traduccion">Traduccion</a></li>
+                      <li><a href="/traduccion">Traduccion de Articulos</a></li>
                       <li><a href="/obra">Obras Artisticas</a></li>
                       <li><a href="/produccionTecnica">Produccion Tecnica</a></li>
                       <li><a href="/estudiosPostdoctorales">Estudios PostDoctorales</a></li>
@@ -124,11 +125,11 @@
             @endif
             
             @if ( auth()->user()->tipo == 'Administrador')
-            @if ( isset( auth()->user()->convocatoria()->first()->estado))
-            <li class="active"><a href="/laconvocatoria"><i class="fa fa-calendar"></i> <span>Convocatoria</span></a></li>
-            @else
-            <li class="active"><a href="/nuevaconvocatoria"><i class="fa fa-calendar"></i> <span>Convocatoria</span></a></li>
-            @endif
+              @if ( isset( auth()->user()->convocatoria()->first()->estado))
+                <li class="active"><a href="/laconvocatoria"><i class="fa fa-calendar"></i> <span>Convocatoria</span></a></li>
+                @else
+                <li class="active"><a href="/nuevaconvocatoria"><i class="fa fa-calendar"></i> <span>Convocatoria</span></a></li>
+                @endif
             <li class="active"><a href="/revisarsolicitudes"><i class="fa fa-envelope"></i> <span>Solicitudes</span></a></li>
             <li class="active"><a href="/revisarreclamos"><i class="fa fa-commenting"></i> <span>Reclamos</span></a></li>
             <li class="active"><a href="/registros"><i class="fa fa-archive"></i> <span>Registros</span></a></li>

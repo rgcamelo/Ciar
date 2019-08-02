@@ -284,6 +284,10 @@
         </script>
 <div class="section" >
     <div>    
+            <center>
+                    <div id="alerta" style="width:700px" class="text-center">
+                        </div> 
+            </center>
             <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-7 col-md-offset-2 col-sm-8 col-sm-offset-2">                    
                 <div class="panel panel-success" >
                         <div class="panel-heading">
@@ -317,7 +321,7 @@
                                         
                                 <div id="fecha-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('fechaevento') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">Fecha del evento</span>
-                                <input id="fecha" type="date" class="form-control" required name="fechaevento" value="{{old('fechaevento')}}">
+                                <input id="fecha" type="date" class="form-control"  name="fechaevento" value="{{old('fechaevento')}}">
                                 
                                 </div>
 
@@ -330,7 +334,7 @@
 
                                 <div id="tipo-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('tipoevento') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">Tipo de Evento</span>
-                                            <select id="tipo" class="form-control" required name="tipoevento">
+                                            <select id="tipo" class="form-control"  name="tipoevento">
                                                  <option disabled value="" selected>Seleccione un tipo de evento</option>
                                                             <option value="Internacional">Internacional</option>
                                                             <option value="Nacional">Nacional</option>
@@ -340,7 +344,7 @@
 
                                 <div id="idioma-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('idioma') ? 'has-error' : ''}}">
                                         <span class="input-group-addon">Idioma</span>
-                                        <select id="idioma" class="form-control" required name="idioma" value="{{old('idioma')}}">
+                                        <select id="idioma" class="form-control"  name="idioma" value="{{old('idioma')}}">
                                              <option disabled value="" selected>Seleccione un Idioma</option>
                                                         <option value="Español">Español</option>
                                                         <option value="Inglés">Inglés</option>
@@ -355,7 +359,7 @@
 
                                 <div id="noautores-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('noautores') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">Numero de Autores</span>
-                                <input id="noautores_ponencia" type="number" class="form-control" required name="noautores" min="1" value="{{old('noautores')}}">
+                                <input id="noautores_ponencia" type="number" class="form-control"  name="noautores" min="1" value="{{old('noautores')}}">
                                 
                                 </div>
 
@@ -366,7 +370,7 @@
 
                                 <div id="credito-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('credito') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">¿Evidencia credito a la UPC?</span>
-                                            <select id="credito" class="form-control" required name="credito">
+                                            <select id="credito" class="form-control"  name="credito">
                                                  <option disabled value="" selected>Seleccione una opcion</option>
                                                             <option value="Si">Si</option>
                                                             <option value="No">No</option>
@@ -375,7 +379,7 @@
 
                                 <div id="memorias-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('memoria') ? 'has-error' : ''}}">
                                             <span id="memorias" class="input-group-addon">¿Presenta memorias?</span>
-                                            <select class="form-control" required name="memoria">
+                                            <select class="form-control"  name="memoria">
                                                  <option disabled value="" selected>Seleccione una opcion</option>
                                                             <option value="Si">Si</option>
                                                             <option value="No">No</option>

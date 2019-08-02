@@ -1,9 +1,94 @@
 @extends('admin.dashboard')
 
 @section('content')
-<div class="container" >
-    <div class="container">    
-            <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-7 col-md-offset-2 col-sm-8 col-sm-offset-2">                    
+<script>
+
+    $(document).ready(inicio);
+    
+        function inicio()
+        {
+            $("#boton").click(function(){
+                if( validar() == false){
+                    $('#alerta').addClass("alert alert-danger");
+                    $('#alerta').text('Campos Incompletos');
+                }
+                else{
+                    $("#boton").attr("type","submit");
+                    $("#loginform").attr("action","{{ url('/produccionTecnica') }}");
+                }
+            });
+    
+            $("#boton2").click(function() {
+                limpiar();
+                $("#loginform").attr("action","{{ url('/guardarproduccionTecnica') }}");
+            })
+        }
+        function limpiar() { 
+            $('#iconotitulo').remove();
+            $('#iconotipo').remove();
+            $('#icononoautores').remove();
+
+
+         }    
+        function validar(){
+                    var valido = true;
+                    var titulo = $("#titulo").val();
+                    var noautores = $("#noautores_produccion").val();
+                    var tipo = $("#tipo").val();
+
+                    if( titulo == null || titulo.length == 0 || /^\s+$/.test(titulo)){
+                        $('#iconotitulo').remove();
+                        $("#titulo-group").attr("class","has-error input-group");
+                        $("#titulo-group").append("<span id='iconotitulo' class='fa fa-close form-control-feedback'></span>");
+                        $("#titulo").attr("placeholder","Debe Añadir un titulo");
+                        valido=false;
+                    }else{
+                        $('#iconotitulo').remove();
+                        $("#titulo-group").attr("class","has-success input-group");
+                        $("#titulo-group").append("<span id='iconotitulo' class='fa fa-check form-control-feedback'></span>");
+                        valido = true;
+                    }
+
+                    if( tipo == null || tipo.length == 0 || /^\s+$/.test(tipo)){
+                        $('#iconotipo').remove();
+                        $("#tipo-group").attr("class","has-error input-group");
+                        $("#tipo-group").append("<span id='iconotipo' class='fa fa-close form-control-feedback'></span>");
+                        $("#tipo").attr("placeholder","Debe Añadir un tipo");
+                        valido=false;
+                    }else{
+                        $('#iconotipo').remove();
+                        $("#tipo-group").attr("class","has-success input-group");
+                        $("#tipo-group").append("<span id='iconotipo' class='fa fa-check form-control-feedback'></span>");
+                        valido = true;
+                    }
+
+
+                    if( noautores == null || noautores.length == 0 || /^\s+$/.test(noautores)){
+                        $('#icononoautores').remove();
+                        $("#noautores-group").attr("class","has-error input-group");
+                        $("#noautores-group").append("<span id='icononoautores' class='fa fa-close form-control-feedback'></span>");
+                        $("#noautores_produccion").attr("placeholder","Ingrese el numero de autores");
+                        valido=false;
+                    }else{
+                        $('#icononoautores').remove();
+                        $("#noautores-group").attr("class","has-success input-group");
+                        $("#noautores-group").append("<span id='icononoautores' class='fa fa-check form-control-feedback'></span>");
+                        valido = true;
+                    }
+
+    
+    
+                return valido;
+          }	
+                
+    </script>
+<div class="section" >
+    <div >    
+            <center>
+                    <div id="alerta" style="width:700px" class="text-center">
+                        </div> 
+            </center>
+            <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-8 col-md-offset-2 ">                    
                 <div class="panel panel-success" >
                         <div class="panel-heading">
                             <div class="panel-title">Datos de la Produccion Tecnica</div>
@@ -22,31 +107,36 @@
                                    </ul>
                             </div>
                             @endif
-                            <form id="loginform" method="post" action="{{ url("/produccionTecnica") }}" class="form-horizontal" role="form" enctype="multipart/form-data">
+                            <form id="loginform" method="post" action="" class="form-horizontal" role="form" enctype="multipart/form-data">
                                     {!! csrf_field() !!}
-                                <div style="margin-bottom: 25px" class="input-group {{ $errors->has('titulo') ? 'has-error' : ''}}">
+                                <div id="titulo-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('titulo') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">Titulo</span>
                                 <input id="titulo" type="text" class="form-control" required name="titulo" value="{{old('titulo')}}">                                   
                                         </div>
 
-                                <div style="margin-bottom: 25px" class="input-group {{ $errors->has('tipo') ? 'has-error' : ''}}">
+                                <div id="tipo-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('tipo') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">Tipo</span>
-                                            <select class="form-control" required name="tipo">
-                                                 <option value="" selected></option>
+                                            <select id='tipo' class="form-control" name="tipo">
+                                                 <option disabled value="" selected>Seleccione un tipo</option>
                                                             <option value="Innovacion">Innovacion</option>
                                                             <option value="Adaptacion">Adaptacion</option>
                                                           </select>                                         
                                 </div>  
 
-                                <div style="margin-bottom: 25px" class="input-group {{ $errors->has('noautores') ? 'has-error' : ''}}">
+                                <div id="noautores-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('noautores') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">Numero de Autores</span>
-                                <input id="noautores_ponencia" type="number" class="form-control" required name="noautores" min="1" value="{{old('noautores')}}">
+                                <input id="noautores_produccion" type="number" class="form-control" name="noautores" min="1" value="{{old('noautores')}}">
                                 
                                 </div>
                                 
                                     <div style="margin-top:10px" class="form-group">
-                                        <div class="col-sm-7 col-sm-offset-5  controls">
-                                          <button type="submit" class="btn btn-success">Siguiente</button>
+                                        <div class="">
+                                            <center>
+                                                <div class="text center" style="justify-content:center">
+                                                    <button id="boton" type="button" class="btn btn-success mr-4">Siguiente</button>
+                                                    <button id="boton2" type="submit" class="btn btn-primary">Guardar</button>
+                                                  </div>
+                                            </center>
     
                                         </div>
                                     </div>

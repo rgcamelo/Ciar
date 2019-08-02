@@ -18,8 +18,10 @@ class Articulo extends Model
         return $this->morphOne(Productividad::class,'productividadable');
     }
 
+    
     public function soportes($ej, $cvlac, $gruplac, $ce, $z){
-        Articulo_Soporte::create([
+        
+        $s=Articulo_Soporte::create([
             'idarticulo' => $this->id_articulo,         
             'ejemplar_articulo' => $ej,
             'Cvlac_articulo' => $cvlac,
@@ -27,6 +29,8 @@ class Articulo extends Model
             'Evidenciarevista' => $ce,
             'Zip_articulo' => $z
         ]);
+
+        return $s;
     }
 
     public function puntaje(){       
@@ -192,5 +196,10 @@ class Articulo extends Model
         ]);
 
         $solicitud->Prodoc();
+    }
+
+    public function miSoportes(){
+      $s=Articulo_Soporte::where('idarticulo', '=', $this->id_articulo)->firstOrFail();
+        return $s;
     }
 }

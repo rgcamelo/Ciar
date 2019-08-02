@@ -52,11 +52,10 @@ class PatenteController extends Controller
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=round($pa=$patente->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
-        $patente->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Incompleta');
+        $patente->solicitud($productividad->idproductividad, 0, $convocatoria->idconvocatoria,'Incompleta');
 
-        return redirect()->route('solicitudes');
+        return redirect()->route('productividades');
     }
     
 }

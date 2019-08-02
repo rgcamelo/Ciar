@@ -262,24 +262,25 @@
                                 
                                 <div id="tipo-group" style="margin-bottom: 25px" class="input-group">
                                             <span class="input-group-addon">Tipo de Libro</span>
-                                            <select id="tipo" class="form-control" required id="tipolibro" name="tipolibro">
+                                            <select id="tipo" class="form-control"  id="tipolibro" name="tipolibro">
                                                  <option value="" disabled selected>Seleccione un tipo de libro</option>
                                                             <option value="Libro de texto">Libro de texto</option>
                                                             <option value="Libro resultado de un labor de investigacion">Libro resultado de un labor de investigacion</option>
-                                                            <option value="Libro de ensayo">Libro de ensayo</option>                                                                  
+                                                            <option value="Libro de ensayo">Libro de ensayo</option>
+                                                            <option value="Traduccion de Libro">Traduccion de Libro</option>                                                                       
                                                           </select>                                         
                                     </div>
                                 
                                 <div id="noautores-group" style="margin-bottom: 25px" class="input-group">
                                             <span class="input-group-addon">Numero de Autores</span>
-                                <input id="noautores_libro" type="number" class="form-control" required name="noautores" min="1" value="{{old('noautores')}}">
+                                <input id="noautores_libro" type="number" class="form-control"  name="noautores" min="1" value="{{old('noautores')}}">
                                 
                                         </div>
 
 
                                 <div id="fecha-group" style="margin-bottom: 25px" class="input-group">
                                             <span class="input-group-addon">Fecha de publicacion</span>
-                                <input id="fecha" type="date" class="form-control" required name="fecha" value="{{old('fecha')}}">
+                                <input id="fecha" type="date" class="form-control"  name="fecha" value="{{old('fecha')}}">
                                 
                                         </div>
 
@@ -295,7 +296,7 @@
 
                                 <div id="idioma-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('idioma') ? 'has-error' : ''}}">
                                         <span class="input-group-addon">Idioma</span>
-                                        <select id="idioma" class="form-control" required name="idioma" value="{{old('idioma')}}">
+                                        <select id="idioma" class="form-control"  name="idioma" value="{{old('idioma')}}">
                                              <option value="" disabled selected>Seleccione un idioma</option>
                                                         <option value="Español">Español</option>
                                                         <option value="Inglés">Inglés</option>
@@ -309,7 +310,7 @@
                                 
                                 <div id="credito-group" style="margin-bottom: 25px" class="input-group">
                                             <span class="input-group-addon">¿Se evidencia credito a la UPC?</span>
-                                            <select class="form-control" required id="credito" name="credito">
+                                            <select class="form-control"  id="credito" name="credito">
                                                  <option value="" disabled selected> Seleccion una opcion </option>
                                                             <option value="si">Si</option>
                                                             <option value="no">No</option>                                                                

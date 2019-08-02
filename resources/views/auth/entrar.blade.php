@@ -6,12 +6,13 @@
            <div class="panel panel-success">
                <div class="panel-heading">
                  <div style="display: flex;justify-content:center">
-                    <img style="width:160px;height:160px" src="/admintle/img/ciarp.png" alt="">
+                    <img style="width:240px;height:120px" src="/admintle/img/logo.png" alt="">
                  </div>
                     
                </div>
                <div class="panel-body">
                <form method="POST" action="{{route('login')}}">
+                {{ method_field('PUT') }}  
                 {{ csrf_field() }}
                <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
                            <label for="email">Correo</label>

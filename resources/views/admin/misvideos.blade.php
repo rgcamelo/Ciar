@@ -22,7 +22,10 @@
                                                 @endif     
                                             @if ($p->estado == 'Reclamado')
                                                   <span style="font-size:16px" class="label label-warning">{{$p->estado}}</span>
-                                                @endif    
+                                                @endif 
+                                            @if ($p->estado == 'Incompleta')
+                                                  <span style="font-size:16px" class="label label-primary">Guardada</span>
+                                            @endif    
                                         </td>
                                     <td >
                                         

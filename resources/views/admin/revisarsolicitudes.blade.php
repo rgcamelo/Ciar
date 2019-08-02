@@ -9,7 +9,7 @@
                         "ordering": false,
                         "info":     true,
                         "language": {
-                        "emptyTable": "<div><img style='width:200px;heigth:200px'  src='/admintle/img/mensaje4.png'></img></div>"
+                        "emptyTable": "<div><img style='width:300px;heigth:300px'  src='/admintle/img/logo1.png'></img></div>"
                         }
                     } );
                     $('#tabla2').DataTable( {
@@ -17,7 +17,7 @@
                         "ordering": false,
                         "info":     true,
                         "language": {
-                        "emptyTable": "<div><img style='width:200px;heigth:200px'  src='/admintle/img/mensaje5.png'></img></div>"
+                        "emptyTable": "<div><img style='width:300px;heigth:300px'  src='/admintle/img/logo1.png'></img></div>"
                         }
                     } );
                     $('#tabla3').DataTable( {
@@ -25,7 +25,7 @@
                         "ordering": false,
                         "info":     true,
                         "language": {
-                        "emptyTable": "<div><img style='width:200px;heigth:200px'  src='/admintle/img/mensaje6.png'></img></div>"
+                        "emptyTable": "<div><img style='width:300px;heigth:300px'  src='/admintle/img/logo1.png'></img></div>"
                         }
                     } );
                 } );

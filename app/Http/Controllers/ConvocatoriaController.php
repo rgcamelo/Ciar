@@ -12,10 +12,10 @@ class ConvocatoriaController extends Controller
     }
     function convocatoria(){
         $c=auth()->user()->convocatoria()->first();
-
+        $co=Convocatoria::find($c->idconvocatoria)->Reclamos();
         $convocatoria = DB::table('convocatorias')
             ->where('convocatorias.estado','=','Actual')
-            ->take(1)->get();
+            ->take(1)->get();   
         $solicituds = DB::table('solicituds')
         ->join('convocatorias','solicituds.idconvocatoria','=','convocatorias.idconvocatoria')
             ->where('convocatorias.idconvocatoria','=',$c->idconvocatoria)
@@ -34,7 +34,7 @@ class ConvocatoriaController extends Controller
             ->count();
 
         //dd($convocatoria);
-        return view('admin.convocatoria2',compact('convocatoria','reprobado','aprobado','solicituds'));
+        return view('admin.convocatoria2',compact('convocatoria','reprobado','aprobado','solicituds','co'));
     }
 
     public function crear(){

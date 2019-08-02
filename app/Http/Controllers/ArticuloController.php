@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Articulo;
 use Illuminate\Support\Facades\File;
+use App\Solicitud;
 
 class ArticuloController extends Controller
 {
@@ -43,7 +44,7 @@ class ArticuloController extends Controller
         */
 
             $data=request()->all();
-            $folder = 'archivos/articulo/'.$d->NombreCompleto.'_'.$d->id.'_'.$data['titulo'].'_'.time();
+            $folder = 'archivos/articulo/'.$d->NombreCompleto.'_'.$d->iddocente.'_'.$data['titulo'].'_'.time();
             File::makeDirectory($folder);
 
             
@@ -101,26 +102,51 @@ class ArticuloController extends Controller
     }
 
     public function guardar(){
-
-        
         $d=auth()->user()->Docente();
 
             $data=request()->all();
+
             $folder = 'archivos/articulo/'.$d->NombreCompleto.'_'.$d->iddocente.'_'.$data['titulo'].'_'.time();
             File::makeDirectory($folder);
-            
+
+            $tipo=null;
+            if(isset($data['tipoarticulo'])){
+            $tipo=$data['tipoarticulo'];
+            }
+
+            $tiporevista=null;
+            if(isset($data['tiporevista'])){
+            $tiporevista=$data['tiporevista'];
+            }
+
+            $idioma=null;
+            if(isset($data['idioma'])){
+            $idioma=$data['idioma'];
+            }
+
+            $filiacion=null;
+            if(isset($data['filiacion'])){
+            $filiacion=$data['filiacion'];
+            }
+
+            $tiporevista=null;
+            if(isset($data['tiporevista'])){
+            $tiporevista=$data['tiporevista'];
+            }
+
             $articulo=Articulo::create([
                 'fechapublicacion_articulo' => $data['fechaarticulo'],
-                'tiporevista' => $data['tiporevista'],
-                'tipo_publicacion' => $data['tipoarticulo'],
+                'tiporevista' => $tiporevista,
+                'tipo_publicacion' => $tipo,
                 'nombrerevista' => $data['revista'] ,
                 'issn' => $data['issn'] ,
-                'idioma_articulo' => $data['idioma'] ,
+                'idioma_articulo' => $idioma,
                 'noautores_articulo' => $data['noautores'] ,
-                'evidenciafiliacionUpc' => $data['filiacion'] ,
+                'evidenciafiliacionUpc' => $filiacion ,
                 'puntos_solicitados' => $data['puntossolicitados'] ,
                 'bonificacion_solicitada' => $data['bonificacionsolicitada']
             ]);
+
             $ejemplar=null;
             if(request()->hasFile('ejemplar'))
         {
@@ -152,17 +178,258 @@ class ArticuloController extends Controller
         }
 
         
-        $articulo->soportes($ejemplar,$cvlac,$gruplac,$certieditorial,$folder);
-
+        $soportes=$articulo->soportes($ejemplar,$cvlac,$gruplac,$certieditorial,$folder);
         $productividad=$articulo->productividad()->create([
             'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=round($pa=$articulo->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
-        $articulo->solicitud($productividad->idproductividad, $pa,$convocatoria->idconvocatoria,'Incompleta');
+        $articulo->solicitud($productividad->idproductividad, 0,$convocatoria->idconvocatoria,'Incompleta');
         
-        return redirect()->route('solicitudes');
+        return redirect()->route('productividades');
+    }
+
+    public function editar(Solicitud $solicitud, Articulo $articulo ){
+        $productividad=$solicitud->Productividad();
+        $soportes=$articulo->miSoportes();
+        return view('admin.articuloedit',['solicitud' => $solicitud, 'articulo' => $articulo, 'productividad' => $productividad, 'soportes' => $soportes]);
+    }
+
+
+    public function actualizar(Solicitud $solicitud, Articulo $articulo ){
+        $productividad=$solicitud->Productividad();
+        $soportes=$articulo->miSoportes();
+        $data=request()->all();
+        $tipo=null;
+            if(isset($data['tipoarticulo'])){
+            $tipo=$data['tipoarticulo'];
+            }
+
+            $tiporevista=null;
+            if(isset($data['tiporevista'])){
+            $tiporevista=$data['tiporevista'];
+            }
+
+            $idioma=null;
+            if(isset($data['idioma'])){
+            $idioma=$data['idioma'];
+            }
+
+            $filiacion=null;
+            if(isset($data['filiacion'])){
+            $filiacion=$data['filiacion'];
+            }
+
+            $tiporevista=null;
+            if(isset($data['tiporevista'])){
+            $tiporevista=$data['tiporevista'];
+            }
+
+            $productividad->update([
+                'titulo' => $data['titulo']
+            ]);
+
+            $articulo->update([
+                'fechapublicacion_articulo' => $data['fechaarticulo'],
+                'tiporevista' => $tiporevista,
+                'tipo_publicacion' => $tipo,
+                'nombrerevista' => $data['revista'] ,
+                'issn' => $data['issn'] ,
+                'idioma_articulo' => $idioma,
+                'noautores_articulo' => $data['noautores'] ,
+                'evidenciafiliacionUpc' => $filiacion ,
+                'puntos_solicitados' => $data['puntossolicitados'] ,
+                'bonificacion_solicitada' => $data['bonificacionsolicitada']
+            ]);
+
+        $ejemplar=null;
+        if(isset($soportes->ejemplar_articulo)){
+            $ejemplar=$soportes->ejemplar_articulo;
+        }
+        if(request()->hasFile('ejemplar'))
+        {
+            if(isset($soportes->ejemplar_articulo)){
+                unlink("$soportes->Zip_articulo/$soportes->ejemplar_articulo");
+            }
+            $filei = request()->file('ejemplar');
+            $ejemplar= time()."_2".'Ejemplar_'.$filei->getClientOriginalName();
+            $filei->move($soportes->Zip_articulo,$ejemplar);            
+        }
+        
+
+        $cvlac=null;
+        if(isset($soportes->Cvlac_articulo)){
+            $cvlac=$soportes->Cvlac_articulo;
+        }
+        if(request()->hasFile('cvlac'))
+        {
+            if(isset($soportes->Cvlac_articulo)){
+                unlink("$soportes->Zip_articulo/$soportes->Cvlac_articulo");
+            }
+            $filecv = request()->file('cvlac');
+            $cvlac= time()."_4CvLac_".$filecv->getClientOriginalName();
+            $filecv->move($soportes->Zip_articulo,$cvlac);            
+        }
+        
+        $gruplac=null;
+        if(isset($soportes->Gruplac_articulo)){
+            $gruplac=$soportes->Gruplac_articulo;
+        }
+        if(request()->hasFile('gruplac'))
+        {
+            if(isset($soportes->Gruplac_articulo)){
+                unlink("$soportes->Zip_articulo/$soportes->Gruplac_articulo");
+            }
+            $filegru = request()->file('gruplac');
+            $gruplac= time()."_5GrupLac_".$filegru->getClientOriginalName();
+            $filegru->move($soportes->Zip_articulo,$gruplac);            
+        }
+
+
+        $certieditorial=null;
+        if(isset($soportes->Evidenciarevista)){
+            $certieditorial=$soportes->Evidenciarevista;
+        }
+        if(request()->hasFile('certieditorial'))
+        {
+            if(isset($soportes->Evidenciarevista)){
+                unlink("$soportes->Zip_articulo/$soportes->Evidenciarevista");
+            }
+            $filem = request()->file('certieditorial');
+            $certieditorial= time()."_3".'CertificadoEditorial_'.$filem->getClientOriginalName();
+            $filem->move($soportes->Zip_articulo,$certieditorial);            
+        }
+
+        $soportes->update([
+            'ejemplar_articulo' => $ejemplar,
+            'Cvlac_articulo' => $cvlac,
+            'Gruplac_articulo'=> $gruplac,
+            'Evidenciarevista' => $certieditorial
+        ]);
+
+        return redirect()->route('productividades');
+    }
+
+    public function enviar(Solicitud $solicitud, Articulo $articulo ){
+        $productividad=$solicitud->Productividad();
+        $soportes=$articulo->miSoportes();
+
+        $data=request()->all();
+        $tipo=null;
+            if(isset($data['tipoarticulo'])){
+            $tipo=$data['tipoarticulo'];
+            }
+
+            $tiporevista=null;
+            if(isset($data['tiporevista'])){
+            $tiporevista=$data['tiporevista'];
+            }
+
+            $idioma=null;
+            if(isset($data['idioma'])){
+            $idioma=$data['idioma'];
+            }
+
+            $filiacion=null;
+            if(isset($data['filiacion'])){
+            $filiacion=$data['filiacion'];
+            }
+
+            $tiporevista=null;
+            if(isset($data['tiporevista'])){
+            $tiporevista=$data['tiporevista'];
+            }
+
+            $productividad->update([
+                'titulo' => $data['titulo']
+            ]);
+
+            $articulo->update([
+                'fechapublicacion_articulo' => $data['fechaarticulo'],
+                'tiporevista' => $tiporevista,
+                'tipo_publicacion' => $tipo,
+                'nombrerevista' => $data['revista'] ,
+                'issn' => $data['issn'] ,
+                'idioma_articulo' => $idioma,
+                'noautores_articulo' => $data['noautores'] ,
+                'evidenciafiliacionUpc' => $filiacion ,
+                'puntos_solicitados' => $data['puntossolicitados'] ,
+                'bonificacion_solicitada' => $data['bonificacionsolicitada']
+            ]);
+
+        $ejemplar=null;
+        if(isset($soportes->ejemplar_articulo)){
+            $ejemplar=$soportes->ejemplar_articulo;
+        }
+        if(request()->hasFile('ejemplar'))
+        {
+            if(isset($soportes->ejemplar_articulo)){
+                unlink("$soportes->Zip_articulo/$soportes->ejemplar_articulo");
+            }
+            $filei = request()->file('ejemplar');
+            $ejemplar= time()."_2".'Ejemplar_'.$filei->getClientOriginalName();
+            $filei->move($soportes->Zip_articulo,$ejemplar);            
+        }
+        
+
+        $cvlac=null;
+        if(isset($soportes->Cvlac_articulo)){
+            $cvlac=$soportes->Cvlac_articulo;
+        }
+        if(request()->hasFile('cvlac'))
+        {
+            if(isset($soportes->Cvlac_articulo)){
+                unlink("$soportes->Zip_articulo/$soportes->Cvlac_articulo");
+            }
+            $filecv = request()->file('cvlac');
+            $cvlac= time()."_4CvLac_".$filecv->getClientOriginalName();
+            $filecv->move($soportes->Zip_articulo,$cvlac);            
+        }
+        
+        $gruplac=null;
+        if(isset($soportes->Gruplac_articulo)){
+            $gruplac=$soportes->Gruplac_articulo;
+        }
+        if(request()->hasFile('gruplac'))
+        {
+            if(isset($soportes->Gruplac_articulo)){
+                unlink("$soportes->Zip_articulo/$soportes->Gruplac_articulo");
+            }
+            $filegru = request()->file('gruplac');
+            $gruplac= time()."_5GrupLac_".$filegru->getClientOriginalName();
+            $filegru->move($soportes->Zip_articulo,$gruplac);            
+        }
+
+
+        $certieditorial=null;
+        if(isset($soportes->Evidenciarevista)){
+            $certieditorial=$soportes->Evidenciarevista;
+        }
+        if(request()->hasFile('certieditorial'))
+        {
+            if(isset($soportes->Evidenciarevista)){
+                unlink("$soportes->Zip_articulo/$soportes->Evidenciarevista");
+            }
+            $filem = request()->file('certieditorial');
+            $certieditorial= time()."_3".'CertificadoEditorial_'.$filem->getClientOriginalName();
+            $filem->move($soportes->Zip_articulo,$certieditorial);            
+        }
+
+        $pa=round($pa=$articulo->puntaje(),3);
+        $soportes->update([
+            'ejemplar_articulo' => $ejemplar,
+            'Cvlac_articulo' => $cvlac,
+            'Gruplac_articulo'=> $gruplac,
+            'Evidenciarevista' => $certieditorial
+        ]);
+
+        $solicitud->update([
+            'estado' => 'Enviado',
+            'fechasolicitud' => (date('Y-m-d')),
+            'puntos_aprox' => $pa
+        ]);
+
+        return redirect()->route('productividades');
     }
 }

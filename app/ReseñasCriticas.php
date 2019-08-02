@@ -40,13 +40,13 @@ class ReseñasCriticas extends Model
         }
     }
 
-    public function solicitud($idp,$pa,$idc){
+    public function solicitud($idp,$pa,$idc,$estado){
         $productividad=Productividad::find($idp)->Docente()->Productividad();
         if (isset($productividad->idprodoc)){
             if($productividad->reseñas < 5){
                 $solicitud=Solicitud::create([
                     'productividad_id' => $idp,
-                    'estado' => 'Enviado',
+                    'estado' => $estado,
                     'bonificacion_calculada' => $pa,
                     'idconvocatoria' => $idc,
                     'fechasolicitud' => (date('Y-m-d'))
@@ -56,7 +56,7 @@ class ReseñasCriticas extends Model
         else {
             $solicitud=Solicitud::create([
                 'productividad_id' => $idp,
-                'estado' => 'Enviado',
+                'estado' => $estado,
                 'bonificacion_calculada' => $pa,
                 'idconvocatoria' => $idc,
                 'fechasolicitud' => (date('Y-m-d'))

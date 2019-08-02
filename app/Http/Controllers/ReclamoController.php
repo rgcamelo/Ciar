@@ -7,16 +7,17 @@ use App\Solicitud;
 use App\Reclamo;
 use App\Productividad;
 use Illuminate\Support\Facades\File;
+use App\DocenteProductividad;
 
 class ReclamoController extends Controller
 {
     public function reclamar (Solicitud $solicitud, Productividad $productividad){
-        
+        //dd($solicitud);
         $d=auth()->user()->Docente();
-        $prodoc=DocenteProductividad::find($d->Productividad());
+        $prodoc=DocenteProductividad::find($d->Productividad()->idprodoc);
         $data=request()->all();
 
-        $folder = 'archivos/reclamos/'.$d->NombreCompleto.'_'.$d->id.'_'.$productividad['titulo'].'_'.time();
+        $folder = 'archivos/reclamos/'.$d->NombreCompleto.'_'.$d->iddocente.'_'.$productividad['titulo'].'_'.time();
         File::makeDirectory($folder);
 
         $soportereclamo=null;

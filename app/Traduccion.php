@@ -19,9 +19,8 @@ class Traduccion extends Model
 
     public function puntaje(){
         $a=$this->autores();
-        $t=$this->tipo();
 
-        $p=($t)/$a;
+        $p=(36)/$a;
         return $p;
     }
 
@@ -41,37 +40,15 @@ class Traduccion extends Model
         }
     }
 
-    public function tipo(){
-        switch ($this->tipo) {
-            case 'De Libro':
-                return 15;
-                break;
-            case 'De Articulo':
-                return 36;
-                break;
-        }
-    }
 
-    public function solicitud($idp,$pa,$idc){
-        switch ($this->tipo) {
-            case 'De Libro':
 
-            $solicitud=Solicitud::create([
-                'productividad_id' => $idp,
-                'estado' => 'Enviado',
-                'puntos_aprox' => $pa,
-                'idconvocatoria' => $idc,
-                'fechasolicitud' => (date('Y-m-d'))
-            ]);
-            $solicitud->ProDoc();
-            break;
-            case 'De Articulo':
+    public function solicitud($idp,$pa,$idc,$estado){
             $productividad=Productividad::find($idp)->Docente()->Productividad();
             if (isset($productividad->idprodoc)){
                 if($productividad->traducciones < 3){
                     $solicitud=Solicitud::create([
                         'productividad_id' => $idp,
-                        'estado' => 'Enviado',
+                        'estado' => $estado,
                         'bonificacion_calculada' => $pa,
                         'idconvocatoria' => $idc,
                         'fechasolicitud' => (date('Y-m-d'))
@@ -89,8 +66,6 @@ class Traduccion extends Model
                 ]);
                 $solicitud->ProDoc();
             }
-            
-            break;
-        }
+
     }
 }

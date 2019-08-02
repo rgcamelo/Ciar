@@ -110,16 +110,35 @@ class PonenciaController extends Controller
         $folder = 'archivos/ponencia/'.$d->NombreCompleto.'_'.$d->id.'_'.$data['titulo'].'_'.time();
         File::makeDirectory($folder);
 
+        $tipo=null;
+            if(isset($data['tipoevento'])){
+            $tipo=$data['tipoevento'];
+            }
+
+        $idioma=null;
+            if(isset($data['idioma'])){
+            $idioma=$data['idioma'];
+            }
+
+        $credito=null;
+            if(isset($data['credito'])){
+            $credito=$data['credito'];
+            }
+
+        $memorias=null;
+            if(isset($data['memorias'])){
+            $memorias=$data['memorias'];
+            }
         $ponencia=Ponencia::create([
             'nombreevento' => $data['nombreevento'],
             'fechaevento' => $data['fechaevento'],
             'lugarevento' => $data['lugarevento'],
-            'tipoevento' => $data['tipoevento'],
-            'idiomaponencia' => $data['idioma'],
+            'tipoevento' => $tipo,
+            'idiomaponencia' => $idioma,
             'noautores_ponencia' => $data['noautores'],
             'paginaevento' => $data['paginaevento'],
-            'creditoUpc_ponencia' => $data['credito'],
-            'memorias' => $data['memoria'],
+            'creditoUpc_ponencia' => $credito,
+            'memorias' => $memorias,
             'issn' => $data['issn'],
             'isbn' => $data['isbn'],
             'ponenciasreconocidas' => $data['ponencias'],
@@ -161,11 +180,10 @@ class PonenciaController extends Controller
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=round($pa=$ponencia->puntaje(),3);
         $convocatoria=auth()->user()->convocatoria()->first();
-        $ponencia->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Incompleta');
+        $ponencia->solicitud($productividad->idproductividad, 0, $convocatoria->idconvocatoria,'Incompleta');
 
-        return redirect()->route('solicitudes');
+        return redirect()->route('productividades');
     }
 
 }

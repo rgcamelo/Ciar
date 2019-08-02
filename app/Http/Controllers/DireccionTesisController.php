@@ -40,10 +40,14 @@ class DireccionTesisController extends Controller
 
         $data=request()->all();
         
+        $tipo=null;
+            if(isset($data['tipo'])){
+            $tipo=$data['tipo'];
+            }
         
     
         $direccion=DireccionTesis::create([
-            'tipo' => $data['tipo'],
+            'tipo' => $tipo,
             'noautores' => $data['noautores'],
         ]);
         
@@ -52,10 +56,10 @@ class DireccionTesisController extends Controller
             'id_docente' => $d->iddocente,
             'titulo' => $data['titulo'],
         ]); 
-        $pa=round($pa=$direccion->puntaje(),3);
-        $convocatoria=auth()->user()->convocatoria()->first();
-        $direccion->solicitud($productividad->idproductividad, $pa, $convocatoria->idconvocatoria,'Incompleta');
 
-        return redirect()->route('solicitudes');
+        $convocatoria=auth()->user()->convocatoria()->first();
+        $direccion->solicitud($productividad->idproductividad, 0, $convocatoria->idconvocatoria,'Incompleta');
+
+        return redirect()->route('productividades');
     }
 }

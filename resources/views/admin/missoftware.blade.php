@@ -22,7 +22,10 @@
         @endif     
         @if ($p->estado == 'Reclamado')
           <span style="font-size:16px" class="label label-warning">{{$p->estado}}</span>
-        @endif   
+        @endif
+        @if ($p->estado == 'Incompleta')
+          <span style="font-size:16px" class="label label-primary">Guardada</span>
+        @endif    
         
 </td>
 <td style="width:400pxs">
@@ -45,7 +48,9 @@
                             <strong>Codigo Fuente:</strong>
                         </div>
                         <div class="col-md-3">
-                           <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->codigo}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                          @if ( isset($p->codigo))
+                          <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->codigo}}')"  style="width:50px"><i class="fa fa-eye"></i></a> 
+                          @endif
                            </div>
                        </div> 
                        <br>
@@ -54,7 +59,9 @@
                  <strong>Instrucciones:</strong>
              </div>
              <div class="col-md-3">
-                <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->instrucciones}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+               @if ( isset($p->instrucciones))
+               <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->instrucciones}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+               @endif
                 </div>
             </div> 
             <br>
@@ -63,7 +70,9 @@
                         <strong>Manual de usuario:</strong>
                     </div>
                     <div class="col-md-3">
-                        <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->manualusuario}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                      @if ( isset($p->manualusuario))
+                      <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->manualusuario}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                      @endif
                        </div>
                    </div>  
             <br>
@@ -72,7 +81,9 @@
                  <strong>Ejecutable:</strong>
              </div>
              <div class="col-md-3">
-                <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->ejecutable}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+               @if ( isset($p->ejecutable))
+               <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->ejecutable}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+               @endif
                 </div>
             </div>  
             <br>
@@ -81,7 +92,9 @@
                         <strong>Certificado de Software</strong>
                     </div>
                     <div class="col-md-3">
-                        <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->certificado_software}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                      @if ( isset($p->certificado_software))
+                      <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->certificado_software}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                      @endif
                        </div>
             </div> 
             <br>     
@@ -90,7 +103,9 @@
                         <strong>Cvlac:</strong>
                     </div>
                     <div class="col-md-3">
-                        <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->CvLac}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                      @if (isset($p->CvLac))
+                      <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->CvLac}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                      @endif
                        </div>
             </div>
             <br>
@@ -99,7 +114,9 @@
                         <strong>GrupLac:</strong>
                     </div>
                     <div class="col-md-3">
-                        <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->GrupLac}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                      @if (isset($p->GrupLac))
+                      <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->GrupLac}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                      @endif
                        </div>
             </div>
             <br>
@@ -108,7 +125,9 @@
                         <strong>Certificado impacto:</strong>
                     </div>
                     <div class="col-md-3">
-                        <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->Certificado_impacto}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                      @if (isset($p->Certificado_impacto))
+                      <a class="btn btn-primary btn-sm" href="#" onclick="window.open('{{$p->Zip}}/{{$p->Certificado_impacto}}')"  style="width:50px"><i class="fa fa-eye"></i></a>
+                      @endif
                        </div>
             </div>                                              
         
@@ -117,12 +136,19 @@
 
           <form action="{{ url('descargarzip',[ 'ruta' => $p->idsoporte]) }}" method="post">
             {!! csrf_field() !!}
+            @if ( (isset($p->Certificado_impacto)) || (isset($p->GrupLac)) || (isset($p->CvLac)) || ( isset($p->certificado_software)) || ( isset($p->ejecutable)) || ( isset($p->manualusuario)) || ( isset($p->instrucciones)) || ( isset($p->codigo)) )
             <button type="submit" style="margin-top:4px;margin-bottom:4px" class="btn btn-success btn-block"><i class="fa fa-download"></i></button>
+            @endif
           </form>
  
 </div>
 </div>
 </td>
 <td>
-    
+    <form action="{{ url('/editarsoftware',['solicitud' => $p->idsolicitud,'software' => $p->idsoftware])}}" method="post">
+      {!! csrf_field() !!}
+      @if ($p->estado == 'Incompleta')
+      <button type="submit" class="btn btn-primary"> Modificar </button>
+      @endif
+      </form>   
 </td>

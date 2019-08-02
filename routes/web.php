@@ -15,8 +15,8 @@ use App\Http\Controllers\Descargar;
 
 Route::get('/', 'Auth\LoginController@showLoginForm');
 
-Route::post('login', 'Auth\LoginController@login')->name('login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::put('login', 'Auth\LoginController@login')->name('login');
+Route::put('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::post('descargarzip/{ruta}','Descargar@comprimirDescargar')->name('comprimirDescargar');
 Route::post('descargarziparticulo/{ruta}','Descargar@comprimirDescargarArticulo')->name('comprimirDescargararticulo');
@@ -27,6 +27,12 @@ Route::get ('nuevaconvocatoria', "ConvocatoriaController@nuevo")->name('convocat
 Route::get ('laconvocatoria', "ConvocatoriaController@convocatoria")->name('convocatoria.convocatoria');
 Route::post('convocatoria', "ConvocatoriaController@crear");
 Route::post('cerrarconvocatoria/{convocatoria}', "ConvocatoriaController@cerrar");
+
+Route::get ('nuevafechareclamos', "FechaReclamoController@nuevo")->name('fechareclamo.nuevo');
+Route::post('fechareclamos', "FechaReclamoController@crear");
+Route::get ('lafechareclamos', "FechaReclamo@convocatoria")->name('fechareclamo.fechareclamo');
+Route::post('cerrarfechareclamos/{fechareclamo}', "FechaReclamo@cerrar");
+
 
 Route::post('enviarpares/{solicitud}', "SolicitudController@pares");
 Route::post('cancelar/{solicitud}', "SolicitudController@cancelar");
@@ -102,3 +108,48 @@ Route::post('/guardarestudiosPostdoctorales',"EstudiosPostdoctoralesController@g
 Route::post('/guardarpublicacionImpresa',"PublicacionImpresaController@guardar");
 Route::post('/guardarreseñasCriticas',"ReseñasCriticasController@guardar");
 Route::post('/guardardireccionTesis',"DireccionTesisController@guardar");
+
+Route::post('/editarpremiosnacionales',"PremiosnacionalesController@editar");
+Route::post('/editararticulo/{solicitud}/{articulo}',"ArticuloController@editar");
+Route::post('/editarsoftware/{solicitud}/{software}',"SoftwareController@editar");
+Route::post('/editarlibro/{solicitud}/{libro}',"LibroController@editar");
+Route::post('/editarponencia/{solicitud}/{ponencia}',"PonenciaController@editar");
+Route::post('/editarvideo',"VideoController@editar");
+Route::post('/editarpatente',"PatenteController@editar");
+Route::post('/editartraduccion',"TraduccionController@editar");
+Route::post('/editarobra',"ObraController@editar");
+Route::post('/editarproduccionTecnica',"ProduccionTecnicaController@editar");
+Route::post('/editarestudiosPostdoctorales',"EstudiosPostdoctoralesController@editar");
+Route::post('/editarpublicacionImpresa',"PublicacionImpresaController@editar");
+Route::post('/editarreseñasCriticas',"ReseñasCriticasController@editar");
+Route::post('/editardireccionTesis',"DireccionTesisController@editar");
+
+Route::put('actualizarpremiosnacionales',"PremiosnacionalesController@actualizar");
+Route::put('actualizararticulo/{solicitud}/{articulo}',"ArticuloController@actualizar");
+Route::put('actualizarsoftware/{solicitud}/{software}',"SoftwareController@actualizar");
+Route::put('actualizarlibro/{solicitud}/{libro}',"LibroController@actualizar");
+Route::put('actualizarponencia/{solicitud}/{ponencia}',"PonenciaController@actualizar");
+Route::put('actualizarvideo',"VideoController@actualizar");
+Route::put('actualizarpatente',"PatenteController@actualizar");
+Route::put('actualizartraduccion',"TraduccionController@actualizar");
+Route::put('actualizarobra',"ObraController@actualizar");
+Route::put('actualizarproduccionTecnica',"ProduccionTecnicaController@actualizar");
+Route::put('actualizarestudiosPostdoctorales',"EstudiosPostdoctoralesController@actualizar");
+Route::put('actualizarpublicacionImpresa',"PublicacionImpresaController@actualizar");
+Route::put('actualizarreseñasCriticas',"ReseñasCriticasController@actualizar");
+Route::put('actualizardireccionTesis',"DireccionTesisController@actualizar");
+
+Route::put('enviararticulo/{solicitud}/{articulo}',"ArticuloController@enviar");
+Route::put('enviarsoftware/{solicitud}/{software}',"SoftwareController@enviar");
+Route::put('enviarlibro/{solicitud}/{libro}',"LibroController@enviar");
+Route::put('enviarponencia/{solicitud}/{ponencia}',"PonenciaController@enviar");
+Route::put('enviarvideo',"VideoController@enviar");
+Route::put('enviarpremiosnacionales',"PremiosnacionalesController@enviar");
+Route::put('enviarpatente',"PatenteController@enviar");
+Route::put('enviartraduccion',"TraduccionController@enviar");
+Route::put('enviarobra',"ObraController@enviar");
+Route::put('enviarproduccionTecnica',"ProduccionTecnicaController@enviar");
+Route::put('enviarestudiosPostdoctorales',"EstudiosPostdoctoralesController@enviar");
+Route::put('enviarpublicacionImpresa',"PublicacionImpresaController@enviar");
+Route::put('enviarreseñasCriticas',"ReseñasCriticasController@enviar");
+Route::put('enviardireccionTesis',"DireccionTesisController@enviar");

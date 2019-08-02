@@ -10,4 +10,9 @@ class Convocatoria extends Model
     protected $fillable=[
         'titulo','fecha_inicio','fecha_final','estado','solicitudes','aprobadas','rechazadas'
     ];
+
+    public function Reclamos(){
+        $f=FechaReclamo::where('idconvocatoria','=',$this->idconvocatoria)->where('estado','=','Actual')->firstOrFail();
+        return $f;
+    }
 }

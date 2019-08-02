@@ -15,14 +15,14 @@ class CreateArticulosTable extends Migration
     {
         Schema::create('articulos', function (Blueprint $table) {
             $table->bigIncrements('id_articulo');
-            $table->string('tipo_publicacion');
+            $table->string('tipo_publicacion')->nullable();
             $table->date('fechapublicacion_articulo')->nullable();
             $table->string('nombrerevista')->nullable();
-            $table->string('tiporevista');
+            $table->string('tiporevista')->nullable();
             $table->string('issn')->nullable();
-            $table->string('idioma_articulo');
-            $table->string('noautores_articulo');
-            $table->string('evidenciafiliacionUpc');
+            $table->string('idioma_articulo')->nullable();
+            $table->string('noautores_articulo')->nullable();
+            $table->string('evidenciafiliacionUpc')->nullable();
             $table->string('puntos_solicitados')->nullable();
             $table->string('bonificacion_solicitada')->nullable();
             $table->timestamps();

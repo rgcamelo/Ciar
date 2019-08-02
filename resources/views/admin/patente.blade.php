@@ -68,7 +68,11 @@
                     
         </script>
 <div class="section" >
-    <div class="">    
+    <div class="">  
+            <center>
+                    <div id="alerta" style="width:700px" class="text-center">
+                        </div> 
+            </center>  
             <div id="loginbox" style="margin-top:10px;" class="mainbox col-md-8 col-md-offset-2 ">                    
                 <div class="panel panel-success" >
                         <div class="panel-heading">
@@ -97,7 +101,7 @@
 
                                 <div id="noautores-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('noautores') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">Numero de Autores</span>
-                                <input id="noautores_patente" type="number" class="form-control" required name="noautores" min="1" value="{{old('noautores')}}">
+                                <input id="noautores_patente" type="number" class="form-control" name="noautores" min="1" value="{{old('noautores')}}">
                                 
                                 </div>
                                 

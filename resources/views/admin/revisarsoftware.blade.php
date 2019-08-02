@@ -216,6 +216,13 @@
               </div>    
         </td>      
         <td>
+            @if ($p->folder != null)
+            @if ( ($p->estado == 'Aprobado' or $p->estado == 'No Aprobado') ) 
+            <button class="btn btn-primary btn-lg" onclick="window.open('{{$p->folder}}/{{$p->formatorecibido}}')"> <i class="fa fa-eye"></i></button>
+            @else
+            <button class="btn btn-primary btn-lg" onclick="window.open('{{$p->folder}}/{{$p->formatoenviado}}')"> <i class="fa fa-eye"></i></button>
+            @endif
+            @endif
             @if ($p->estado == 'Enviado')
             <button type="button" class="btn btn-warning btn-lg" title="Enviar a Pares" data-toggle="modal" data-target="#pares{{$p->idsolicitud}}">
                 <span class="fa fa-arrow-left"></span>

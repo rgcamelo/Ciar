@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class Software extends Model
 {
@@ -15,11 +17,11 @@ class Software extends Model
         return $this->morphOne(Productividad::class,'productividadable');
     }
 
-    public function solicitud($idp,$pa,$idc){
+    public function solicitud($idp,$pa,$idc,$estado){
         $solicitud=Solicitud::create([
             'productividad_id' => $idp,
-            'estado' => 'Enviado',
-            'bonificacion_calculada' => $pa,
+            'estado' => $estado,
+            'puntos_aprox' => $pa,
             'idconvocatoria' => $idc,
             'fechasolicitud' => (date('Y-m-d'))
         ]);
@@ -52,5 +54,10 @@ class Software extends Model
             'folder' => $folder
         ]);
         $solicitud->update($e);
+    }
+
+    public function miSoportes(){
+        $a=Soporte_Software::where('id_software','=',$this->idsoftware)->firstOrFail();
+        return $a;
     }
 }

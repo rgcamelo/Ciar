@@ -7,7 +7,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="\admintle\bower_components\bootstrap\dist\css\bootstrap.min.css">
 </head>
-<body background="/admintle/img/Fondo1-01.jpg">
+<body >
     <div class="container">
         <hr>
         @if (session()->has('flash'))

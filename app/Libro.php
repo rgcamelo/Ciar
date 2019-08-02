@@ -32,6 +32,7 @@ class Libro extends Model
         
         switch($this->tipo_libro){
             case 'Libro de texto':
+            case 'Traduccion de Libro':
             if($this->noautores <= 3){
                 return 15;               
             }
@@ -79,5 +80,10 @@ class Libro extends Model
         ]);
 
         $solicitud->ProDoc();
+    }
+
+    public function miSoportes(){
+        $l=Libro_Soportes::where('id_libro', '=', $this->idlibro)->firstOrFail();
+        return $l;
     }
 }

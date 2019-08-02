@@ -22,6 +22,8 @@
                 limpiar();
                 $("#loginform").attr("action","{{ url('/guardararticulo') }}");
             })
+
+            
         }
         function limpiar() { 
             $('#iconotitulo').remove();
@@ -286,12 +288,12 @@
                                     {!! csrf_field() !!}
                                 <div id="titulo-group" style="margin-bottom: 25px" class="input-group">
                                             <span class="input-group-addon">Titulo</span>
-                                <input id="titulo" type="text" class="form-control" required name="titulo" value="{{old('titulo')}}">                                   
+                                <input id="titulo" type="text" class="form-control" required  name="titulo" value="{{old('titulo')}}">                                   
                                         </div>
                                 
                                 <div id="tipo-group" style="margin-bottom: 25px" class="input-group">
                                             <span class="input-group-addon">Tipo de publicacion</span>
-                                            <select id="tipo" class="form-control"  name="tipoarticulo" required>
+                                            <select id="tipo" class="form-control"  name="tipoarticulo" >
                                                  <option value="" disabled selected> Seleccione un tipo de articulo</option>
                                                             <option value="Articulo Tradicional">Articulo Tradicional</option>
                                                             <option value="Articulo Corto">Articulo Corto</option>
@@ -306,7 +308,7 @@
 
                                 <div id="tiporevista-group" style="margin-bottom: 25px" class="input-group">
                                             <span class="input-group-addon">Tipo de revista</span>
-                                            <select id="tiporevista" required class="form-control"  name="tiporevista">
+                                            <select id="tiporevista"  class="form-control"  name="tiporevista">
                                                  <option value="" disabled selected> Seleccione el tipo de revista</option>
                                                             <option value="A1">A1</option>
                                                             <option value="A2">A2</option>
@@ -321,7 +323,7 @@
 
                                 <div id="fecha-group"  style="margin-bottom: 25px" class="input-group">
                                             <span class="input-group-addon">Fecha de publicacion</span>
-                                <input id="fecha" type="date" class="form-control" required  name="fechaarticulo" value="{{old('fechaarticulo')}}">
+                                <input id="fecha" type="date" class="form-control"   name="fechaarticulo" value="{{old('fechaarticulo')}}">
                                 
                                 </div>
 
@@ -337,7 +339,7 @@
 
                                 <div id="idioma-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('idioma') ? 'has-error' : ''}}">
                                         <span class="input-group-addon">Idioma</span>
-                                        <select id="idioma" class="form-control" required name="idioma" value="{{old('idioma')}}">
+                                        <select id="idioma" class="form-control"  name="idioma" value="{{old('idioma')}}">
                                              <option value="" disabled selected>Seleccione un idioma</option>
                                                         <option value="Español">Español</option>
                                                         <option value="Inglés">Inglés</option>
@@ -351,13 +353,13 @@
 
                                 <div id="noautores-group" style="margin-bottom: 25px" class="input-group">
                                             <span class="input-group-addon">Numero de Autores</span>
-                                <input id="noautores_articulo" type="number" class="form-control" required name="noautores" min="1" value="{{old('noautores')}}">
+                                <input id="noautores_articulo" type="number" class="form-control"  name="noautores" min="1" value="{{old('noautores')}}">
                                 
                                 </div>
 
                                 <div id="filiacion-group" style="margin-bottom: 25px" class="input-group">
                                             <span class="input-group-addon">¿Evidencia filiacion de la UPC?</span>
-                                            <select id="filiacion" required class="form-control" name="filiacion">
+                                            <select id="filiacion"  class="form-control" name="filiacion">
                                                  <option value="" disabled selected> Seleccion una opcion</option>
                                                             <option value="Si">Si</option>
                                                             <option value="No">No</option>

@@ -129,7 +129,7 @@
 
                                 <div id="tipo-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('tipo') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">Tipo</span>
-                                            <select id="tipo" class="form-control" required name="tipo">
+                                            <select id="tipo" class="form-control"  name="tipo">
                                                  <option disabled value="" selected> Seleccion un tipo de Obra</option>
                                                             <option value="Original">Original</option>
                                                             <option value="Complementaria">Complementaria</option>
@@ -161,7 +161,7 @@
 
                                 <div id="noautores-group" style="margin-bottom: 25px" class="input-group {{ $errors->has('noautores') ? 'has-error' : ''}}">
                                             <span class="input-group-addon">Numero de Autores</span>
-                                <input id="noautores_obra" type="number" class="form-control" required name="noautores" min="1" value="{{old('noautores')}}">
+                                <input id="noautores_obra" type="number" class="form-control"  name="noautores" min="1" value="{{old('noautores')}}">
                                 
                                 </div>
                                 

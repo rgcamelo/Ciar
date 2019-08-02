@@ -15,7 +15,7 @@ class CreatePublicacionImpresasTable extends Migration
     {
         Schema::create('publicacion_impresas', function (Blueprint $table) {
             $table->bigIncrements('idpublicacionimpresa');
-            $table->string('noautores');
+            $table->string('noautores')->nullable();
             $table->timestamps();
         });
     }
