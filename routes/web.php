@@ -30,8 +30,9 @@ Route::post('cerrarconvocatoria/{convocatoria}', "ConvocatoriaController@cerrar"
 
 Route::get ('nuevafechareclamos', "FechaReclamoController@nuevo")->name('fechareclamo.nuevo');
 Route::post('fechareclamos', "FechaReclamoController@crear");
-Route::get ('lafechareclamos', "FechaReclamo@convocatoria")->name('fechareclamo.fechareclamo');
-Route::post('cerrarfechareclamos/{fechareclamo}', "FechaReclamo@cerrar");
+Route::get ('lafechareclamos', "FechaReclamoController@convocatoria")->name('fechareclamo.fechareclamo');
+Route::post('cerrarfechareclamos', "FechaReclamoController@cerrar");
+
 
 
 Route::post('enviarpares/{solicitud}', "SolicitudController@pares");

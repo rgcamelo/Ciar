@@ -144,15 +144,7 @@ class SoftwareController extends Controller
             'titulo' => $data['titulo'],
         ]); 
 
-        if($data['noautores'] <= 3){
-            $pa=15;
-        }
-        elseif($data['noautores'] <= 5){
-            $pa=15/2;
-        }
-        else{
-            $pa=15/($data['noautores']/2);
-        }
+        $pa= $software->puntaje();
 
         $pa=round($pa,3);
         $convocatoria=auth()->user()->convocatoria()->first();
@@ -719,6 +711,7 @@ class SoftwareController extends Controller
         else{
             $pa=15/($data['noautores']/2);
         }
+
 
         $pa=round($pa,3);
 

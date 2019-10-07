@@ -60,4 +60,16 @@ class Software extends Model
         $a=Soporte_Software::where('id_software','=',$this->idsoftware)->firstOrFail();
         return $a;
     }
+
+    public function puntaje(){
+        if($this->noautores <= 3){
+            return 15;
+        }
+        elseif($this->noautores <= 5){
+            return 15/2;
+        }
+        else{
+            return 15/($this->noautores/2);
+        }
+    }
 }

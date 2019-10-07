@@ -94,7 +94,10 @@ class ArticuloController extends Controller
             'titulo' => $data['titulo'],
         ]); 
 
-        $pa=round($pa=$articulo->puntaje(),3);
+        $pa=$articulo->puntaje2();
+        dd($pa);
+        $pa=round($pa,3);
+        
         $convocatoria=auth()->user()->convocatoria()->first();
         $articulo->solicitud($productividad->idproductividad, $pa,$convocatoria->idconvocatoria,'Enviado');
         

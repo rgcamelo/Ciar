@@ -11,7 +11,9 @@ class ConvocatoriaController extends Controller
             return view('admin.convocatoria');
     }
     function convocatoria(){
+        
         $c=auth()->user()->convocatoria()->first();
+        
         $co=Convocatoria::find($c->idconvocatoria)->Reclamos();
         $convocatoria = DB::table('convocatorias')
             ->where('convocatorias.estado','=','Actual')
@@ -33,7 +35,7 @@ class ConvocatoriaController extends Controller
             ->orWhere('solicituds.estado','=','Rechazado2')
             ->count();
 
-        //dd($convocatoria);
+
         return view('admin.convocatoria2',compact('convocatoria','reprobado','aprobado','solicituds','co'));
     }
 

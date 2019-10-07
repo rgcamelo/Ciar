@@ -10,6 +10,7 @@ use Dompdf\Dompdf;
 use App\Video;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Collection as IlluminateCollection;
+use App\Convocatoria;
 
 class DashboardController extends Controller
 {
@@ -23,10 +24,11 @@ class DashboardController extends Controller
     }
 
     public function solicitudes(){
-        $c=auth()->user()->convocatoria()->first();
-
+        $c=auth()->user()->convocatoria()->first();  
+        
         $solicitudes= collect();
         if(isset($c)){
+            $co=Convocatoria::find($c->idconvocatoria)->Reclamos();
             $solicitudes = DB::table('solicituds')
             ->join('productividads', 'solicituds.productividad_id', '=', 'productividads.idproductividad')
             ->join('docente_productividads','productividads.id_docente','=','docente_productividads.iddocente')
@@ -35,12 +37,13 @@ class DashboardController extends Controller
             ->get();
 
             
+
             $solicitudes=$solicitudes->sortByDesc('idsolicitud');
             
         }
         
 
-        return view ('admin.missolicitudes',compact('solicitudes'));
+        return view ('admin.missolicitudes',compact('solicitudes','co'));
 
         
         

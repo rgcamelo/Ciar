@@ -335,11 +335,18 @@
                                                 </div>
                                               </div>
                                     @endif
+                                                   
                                     @if ( ($sol->estado == 'Aprobado' or $sol->estado == 'No Aprobado') and ( strtotime(date('Y-m-d'))-strtotime($sol->fechaCalificada) <= 20) ) 
-                                            <button type="button" class="btn btn-warning btn-lg"  data-toggle="modal" data-target="#reclamo{{$sol->idproductividad}}">
-                                            <span class="fa fa-commenting">
-                                            </span>
-                                              </button>
+                                    @if (isset($co->estado))
+                                    @if ( ( strtotime(date('Y-m-d')) >= $co->fecha_inicio) and strtotime(date('Y-m-d')) <= strtotime($co->fecha_final) )
+                                    <button type="button" class="btn btn-warning btn-lg"  data-toggle="modal" data-target="#reclamo{{$sol->idproductividad}}">
+                                      <span class="fa fa-commenting">
+                                      </span>
+                                        </button>
+                                    @endif    
+                                    @endif
+                                    
+                                            
                                               
                                               <!-- Modal -->
                                               <div class="modal fade" id="reclamo{{$sol->idproductividad}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

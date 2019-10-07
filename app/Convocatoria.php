@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Convocatoria extends Model
 {
@@ -12,7 +13,12 @@ class Convocatoria extends Model
     ];
 
     public function Reclamos(){
-        $f=FechaReclamo::where('idconvocatoria','=',$this->idconvocatoria)->where('estado','=','Actual')->firstOrFail();
-        return $f;
+        $data = DB::table('fecha_reclamos')->
+            where('idconvocatoria','=',$this->idconvocatoria)
+            ->where('estado','=','Actual')
+                ->get();
+            return $data->first();
     }
+        
+
 }

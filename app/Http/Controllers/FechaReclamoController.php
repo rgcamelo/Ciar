@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\FechaReclamo;
+use App\Convocatoria;
 
 class FechaReclamoController extends Controller
 {
@@ -24,4 +25,18 @@ class FechaReclamoController extends Controller
         
         return view('admin.dashboard');
     }
+
+    public function cerrar(){
+        
+        $convocatoria=auth()->user()->convocatoria()->first();
+        $reclamo=Convocatoria::find($convocatoria->idconvocatoria)->Reclamos();
+        $r=FechaReclamo::find($reclamo->idfechareclamo);
+        $r->update([
+            'estado' => 'Finalizado',
+        ]);
+
+        return view('admin.dashboard');
+    }
+
+    
 }

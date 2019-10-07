@@ -65,9 +65,13 @@
                                         </div>
                                         <div class="section">
                                                 <div class="section">
-                                                        <button type="button" class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#reclamo">
-                                                                Iniciar Plazo de Reclamo
-                                                              </button>
+                                                    @if (isset($co->estado) == null)
+                                                    <button type="button" class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#reclamo">
+                                                            Iniciar Plazo de Reclamo
+                                                          </button> <br>  <br>
+                                                    @endif
+                                                    
+                                                        
                                                               
                                                               <!-- Modal -->
                                                               <div class="modal fade" id="reclamo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -113,15 +117,18 @@
                                                                 </form>
                                                                   </div>
                                                                 </div>
-                                                              </div><br><br>
+                                                              </div>
                                                         </div>
                                                 <div >
                                                     @if (isset($co->estado))
-                                                    a
+                                                    <form action="{{ url("cerrarfechareclamos") }}" method="post">
+                                                        {!! csrf_field() !!}
+                                                        <button class="btn btn-danger btn-lg" > Cerrar etapa de reclamos</button>
+                                                    </form>
                                                     @else
                                                     <form action="{{ url("cerrarconvocatoria/{$convocatoria->first()->idconvocatoria}") }}" method="post">
                                                         {!! csrf_field() !!}
-                                                        <button class="btn btn-danger" > Cerrar Convocatoria</button>
+                                                        <button class="btn btn-danger btn-lg" > Cerrar Convocatoria</button>
                                                     </form>
                                                     @endif
                                                     

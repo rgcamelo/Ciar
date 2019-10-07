@@ -27,41 +27,52 @@ class Ponencia extends Model
         ]);
     }
 
+    public function PuntajeInternacional(){
+        if($this->noautores_ponencia <= 3){
+            return 84;               
+        }
+        elseif($this->noautores_ponencia <= 5){
+           return 84/2; 
+        }
+        else{
+            return 84/($this->noautores_ponencia/2);   
+        }
+    }
+
+    public function PuntajeNacional(){
+        if($this->noautores_ponencia <= 3){
+            return 48;               
+        }
+        elseif($this->noautores_ponencia <= 5){
+           return 48/2; 
+        }
+        else{
+            return 48/($this->noautores_ponencia/2);   
+        }
+    }
+
+    public function PuntajeRegional(){
+        if($this->noautores_ponencia <= 3){
+            return 24;               
+        }
+        elseif($this->noautores_ponencia <= 5){
+           return 24/2; 
+        }
+        else{
+            return 24/($this->noautores_ponencia/2);   
+        }
+    }
     public function puntaje(){
 
         switch($this->tipoevento){
             case 'Internacional':
-            if($this->noautores <= 3){
-                return 84;               
-            }
-            elseif($this->noautores <= 5){
-               return 84/2; 
-            }
-            else{
-                return 84/($this->noautores/2);   
-            }
+             return $this->PuntajeInternacional();
             break;
             case 'Nacional':
-            if($this->noautores <= 3){
-                return 48;               
-            }
-            elseif($this->noautores <= 5){
-               return 48/2; 
-            }
-            else{
-                return 48/($this->noautores/2);   
-            }
+             return $this->PuntajeNacional();
             break;
             case 'Regional':
-            if($this->noautores <= 3){
-                return 24;               
-            }
-            elseif($this->noautores <= 5){
-               return 24/2; 
-            }
-            else{
-                return 24/($this->noautores/2);   
-            }
+             return $this->PuntajeRegional();
             break;
         }
     }
